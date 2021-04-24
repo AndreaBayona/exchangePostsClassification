@@ -10,4 +10,11 @@ router.get('/', (req, res)=>{
   );
 });
 
+router.get('/getByUserName', (req, res)=>{
+  const userName =  req.body.userName;
+  db.getQuestionsByUserName(userName).then((questions)=>{
+    res.send(questions);
+  });
+})
+
 module.exports = router;
