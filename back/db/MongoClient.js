@@ -1,10 +1,9 @@
 const MongoClient = require("mongodb").MongoClient
-const url = process.env.MONGO_DB;
-
+require('dotenv').config();
 
 const MongoUtils = () => {
     const MyMongoLib = this || {};
-    const url = process.env.MONGO_DB || "mongodb://localhost:27017";
+    const url = process.env.MONGO_DB;
     const dbName = process.env.DB_NAME;
     let db;
 
