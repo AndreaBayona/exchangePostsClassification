@@ -6,6 +6,7 @@ export const Container = styled.div`
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  color: black;
 `;
 
 export {};

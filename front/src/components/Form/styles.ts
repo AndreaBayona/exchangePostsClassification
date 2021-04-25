@@ -27,7 +27,7 @@ export const FormInput = styled.span`
   display: flex;
   text-align: start;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   padding: 20px;
 `;
 

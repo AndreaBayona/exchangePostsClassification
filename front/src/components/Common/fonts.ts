@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Title = styled.h3<{inheritColor?: boolean}>`
+export const Title = styled.h4<{inheritColor?: boolean}>`
   text-align: start;
   color: ${({inheritColor}) => !!inheritColor ? `inherit` : `black`};
   margin: 0;
