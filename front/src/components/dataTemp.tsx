@@ -12,4 +12,15 @@ export const QAns = {
     url: "https://ai.stackexchange.com/questions/22197",
     type: 'accepted',
     classified: true,
+    classification: {
+        isRelevant: 'Yes',
+        typeOfLearning: 'Supervised',
+        typeOfArchitecture: 'Deep',
+        processingModel: 'Batch',
+        mlPipeline: 'Data collection',
+        goodPractice: 'goodPractice',
+        pitfall: 'pitfall',
+        externalReferences: 'references',
+        interesting: 'Yes',
+    },
 };

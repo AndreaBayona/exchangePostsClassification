@@ -26,8 +26,14 @@ function getFormItem(formItemValue: { onChange: (e: any) => void; value: string 
         <select value={formItemValue.value} onChange={formItemValue.onChange}>
             <option value="">--Please choose an option--</option>
             {FORM_QUESTIONS[indexQuestion].options.map(
-                (value, index) =>
-                    <option key={"q-"+indexQuestion+"-"+index} value={value}>{value}</option>
+                (valueOption, index) =>
+                    <option
+                        key={"q-"+indexQuestion+"-"+index}
+                        value={valueOption}
+                        selected={valueOption === formItemValue.value}
+                    >
+                        {valueOption}
+                    </option>
             )}
         </select>
     </FormItem>;

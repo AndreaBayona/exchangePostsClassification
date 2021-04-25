@@ -13,12 +13,12 @@ export type AnswerInfo = {
     url: string;
     type: string;
     classified: boolean;
+    classification?: Classification;
 };
 
 type Props = {
     answer: AnswerInfo;
     type: string;
-    classification?: Classification;
 };
 
 const Submit = (classification: Classification) => {
@@ -27,20 +27,9 @@ const Submit = (classification: Classification) => {
     return true;
 };
 
-export const Answer: React.FunctionComponent<Props> = ({answer, type, classification}) => {
+export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
 
-    const [read, setRead] = React.useState(false);
     const [edit, setEdit ] = React.useState(false);
-
-    const manageRead = () => {
-        if(edit) {setEdit(false)};
-        setRead(!read);
-    }
-
-    const manageEdit = () => {
-        if(read) {setRead(false)};
-        setEdit(!edit);
-    }
 
     return (<Container>
         <Title>{type}</Title>
@@ -52,18 +41,12 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type, classifica
             <a href={answer.url}>Original answer URL</a>
         </Url>
         <Options>
-            {answer.classified &&
-            <Button onClick={manageRead}>
-                <Text inheritColor>Read classification</Text>
-            </Button>
-            }
-            <Button onClick={manageEdit}>
+            <Button onClick={()=> setEdit(!edit)}>
                 <Text inheritColor>Classify / edit</Text>
             </Button>
         </Options>
         <div>
-            {edit && <Form classifiedAns={classification} submitForm={Submit}/>}
-            {read && <p>classify</p>}
+            {edit && <Form classifiedAns={answer.classification} submitForm={Submit}/>}
         </div>
     </Container>)
 };
