@@ -9,4 +9,10 @@ export const Container = styled.div`
   color: black;
 `;
 
-export {};
+export const LinkOverride = styled.div`
+  
+  >a{
+    color: white;
+  }
+
+`;
