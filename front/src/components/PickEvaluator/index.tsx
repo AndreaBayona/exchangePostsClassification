@@ -1,8 +1,11 @@
 import React from "react";
 import { Dropdown, DropdownButton, Button } from "react-bootstrap";
-import { Container } from "./styles";
-const options = ["Valerie", "Ana", "Andrea"];
-const defaultOption = "";
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+
+import {PickAnswersSet} from '../PickAnswersSet/index';
+
+import { Container, LinkOverride } from "./styles";
+
 const PickEvaluator = () => {
   const [evaluator, setEvaluator] = React.useState("Select one option");
   return (
@@ -36,7 +39,16 @@ const PickEvaluator = () => {
         </Dropdown.Item>
       </DropdownButton>
       <br></br>
-      <Button variant="info">Seleccionar</Button>{" "}
+
+      <Button variant="info">
+          <LinkOverride>
+              <Link to="/pickAnswers">Go</Link>
+          </LinkOverride>
+
+       </Button>{" "}
+        <Route path="/pickAnswers">
+            <PickAnswersSet/>
+        </Route>
     </Container>
   );
 };
