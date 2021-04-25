@@ -5,7 +5,7 @@ import {Text, Title} from "../Common/fonts";
 import {Container, Divider, Header, Url} from './styles';
 
 export type QuestionInfo = {
-    id: number
+    id: number;
     title: string;
     bodyText: string;
     score: number;
@@ -14,12 +14,11 @@ export type QuestionInfo = {
 
 type Props = {
     question: QuestionInfo;
-    acceptedAnswer: AnswerInfo;
-    mostVotedAnswer?: AnswerInfo;
+    answer: AnswerInfo;
     classifierName: string
 };
 
-export const Question: React.FunctionComponent<Props> = ({question, acceptedAnswer, mostVotedAnswer, classifierName}) => {
+export const Question: React.FunctionComponent<Props> = ({question, answer, classifierName}) => {
 
     return (
         <Container>
@@ -37,13 +36,7 @@ export const Question: React.FunctionComponent<Props> = ({question, acceptedAnsw
                 <a href={question.url}>Original question URL</a>
             </Url>
             <Divider/>
-            <Answer answer={acceptedAnswer} type="Accepted answer"/>
-            {mostVotedAnswer &&
-                <>
-                    <Divider/>
-                    <Answer answer={mostVotedAnswer} type="Most voted answer"/>
-                </>
-            }
+            <Answer answer={answer} type={answer.type === 'accepted' ? 'Accepted answer' : 'Most voted answer'}/>
         </Container>
     )
 };

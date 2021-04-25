@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {Text, Title} from "../Common/fonts";
 import {Button} from "../Common/buttons";
+import {Form} from "../Form";
 
 import {Container, Option, Options, Url} from "./styles";
 
@@ -17,6 +18,13 @@ type Props = {
     answer: AnswerInfo;
     type: string;
 };
+
+const Submit = (inputs: string[]) => {
+
+    console.log("INPUTS", inputs);
+    return true;
+};
+
 
 export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
 
@@ -53,7 +61,7 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
             </Button>
         </Options>
         <div>
-            {read && <p>Read</p>}
+            {read && <Form answers={["a", "b", "c", "d", "e", "f"]} classified={false} submitForm={Submit}/>}
             {edit && <p>classify</p>}
         </div>
     </Container>)
