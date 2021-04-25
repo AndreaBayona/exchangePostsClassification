@@ -33,10 +33,7 @@ router.get("/getByUserName", (req, res) => {
 router.put("/update", (req, res) => {
   const classification = req.body.classification;
   const id = req.body.id;
-  console.log(classification);
-  console.log(id);
   db.updateAnswer(classification, id).then((err) => {
-    console.log(err);
     if (err) {
       res.status(500).json({ error: err });
     }
@@ -44,6 +41,11 @@ router.put("/update", (req, res) => {
   });
 });
 
-router.get;
+router.get("/findById", (req, res) => {
+  const id = req.body.id;
+  db.getAnswer(id).then((answer) => {
+    res.send(answer);
+  });
+});
 
 module.exports = router;

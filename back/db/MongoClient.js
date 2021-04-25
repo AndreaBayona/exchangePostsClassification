@@ -108,6 +108,17 @@ const MongoUtils = () => {
         .finally(() => client.close());
     });
   };
+
+  MyMongoLib.getAnswer = (id) => {
+    return MyMongoLib.connect(url).then((client) =>
+      client
+        .db(dbName)
+        .collection("answers")
+        .findOne({ AID: id })
+        .finally(() => client.close())
+    );
+  };
+
   return MyMongoLib;
 };
 
