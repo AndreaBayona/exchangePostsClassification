@@ -2,6 +2,8 @@ const MongoClient = require("mongodb").MongoClient;
 const { ObjectId } = require("mongodb");
 require("dotenv").config();
 
+const answers = "answers";
+
 const MongoUtils = () => {
   const MyMongoLib = this || {};
   const url = process.env.MONGO_DB;
@@ -17,7 +19,54 @@ const MongoUtils = () => {
     return client.connect();
   };
 
-  MyMongoLib.insertOneQuestion = (doc, dbCollection) => {
+  MyMongoLib.unclassifiedAnswers = (user) => {
+    return MyMongoLib.connect(url).then((client) =>
+      client
+        .db(dbName)
+        .collection("answers")
+        .aggregate([
+          { $project: { classification: 0 } },
+          { $match: { user: user } },
+          {
+            $lookup: {
+              from: "questions",
+              localField: "QID",
+              foreignField: "QID",
+              as: "question",
+            },
+          },
+        ])
+        .limit(600)
+        .toArray()
+        .finally(() => client.close())
+    );
+  };
+
+  MyMongoLib.classifiedAnswers = (user) => {
+    return MyMongoLib.connect(url).then((client) =>
+      client
+        .db(dbName)
+        .collection("answers")
+        .aggregate([
+          { $match: { user: user } },
+          { $project: { classification: 1 } },
+          { $unwind: "$classification" },
+          {
+            $lookup: {
+              from: "questions",
+              localField: "QID",
+              foreignField: "QID",
+              as: "question",
+            },
+          },
+        ])
+        .limit(600)
+        .toArray()
+        .finally(() => client.close())
+    );
+  };
+
+  MyMongoLib.insertOneQuestion = (doc) => {
     return MyMongoLib.connect(url).then((client) =>
       client
         .db(dbName)

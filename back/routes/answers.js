@@ -9,6 +9,20 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/unclassifiedAnswers", (req, res) => {
+  const user = req.body.user;
+  db.unclassifiedAnswers(user).then((questions) => {
+    res.send(questions);
+  });
+});
+
+router.get("/classifiedAnswers", (req, res) => {
+  const user = req.body.user;
+  db.classifiedAnswers(user).then((questions) => {
+    res.send(questions);
+  });
+});
+
 router.get("/getByUserName", (req, res) => {
   const userName = req.body.userName;
   db.getQuestionsByUserName(userName).then((questions) => {
