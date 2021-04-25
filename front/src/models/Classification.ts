@@ -1,5 +1,5 @@
 export type Classification = {
-  cisRelevant: string;
+  isRelevant: string;
   typeOfLearning: string;
   typeOfArchitecture: string;
   processingModel: string;

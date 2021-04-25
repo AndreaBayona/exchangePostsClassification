@@ -1,10 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Answer } from "../models/Answer";
 import { ClassificationRequest } from "../services";
-import { AppStyle, Header } from "./AppStyles";
 import PickEvaluator from "./PickEvaluator/index";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
+import { AppStyle, Header } from "./AppStyles";
+import { PickAnswersSet } from "./PickAnswersSet/index";
 import {
   getClassifiedAnswers,
   getUnclassifiedAnswers,
@@ -55,16 +57,22 @@ function App() {
       console.log(ans);
     });
   });
-
   return (
-    <AppStyle>
-      <Header>
-        <Router>
+    <Router>
+      <AppStyle>
+        <Header>
           <Link to="/">Home</Link>
-          <Route path="/" component={PickEvaluator} />
-        </Router>
-      </Header>
-    </AppStyle>
+        </Header>
+        <Switch>
+          <Route exact path="/" component={PickEvaluator} />
+          <Route
+            exact
+            path="/pickAnswers/:username"
+            component={PickAnswersSet}
+          />
+        </Switch>
+      </AppStyle>
+    </Router>
   );
 }
 

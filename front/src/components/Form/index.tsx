@@ -1,12 +1,12 @@
 import * as React from "react";
-import {Text, Title} from "../Common/fonts";
+import {Title} from "../Common/fonts";
 import {FORM_QUESTIONS} from "./FormQuestions";
+import {Classification} from "../../models/Classification";
 import {Container, FormWrapper, FormItem, Label, FreeText, Input, FormInput} from "./styles";
 
 type Props = {
-    answers: string[];
-    classified: boolean;
-    submitForm: (inputs: string[]) => boolean;
+    classifiedAns?: Classification;
+    submitForm: (classifiedAns: Classification) => boolean;
 };
 
 const useFormInputField = (initialValue: string = "") => {
@@ -26,30 +26,45 @@ function getFormItem(formItemValue: { onChange: (e: any) => void; value: string 
         <select value={formItemValue.value} onChange={formItemValue.onChange}>
             <option value="">--Please choose an option--</option>
             {FORM_QUESTIONS[indexQuestion].options.map(
-                (value, index) =>
-                    <option key={"q-"+indexQuestion+"-"+index} value={value}>{value}</option>
+                (valueOption, index) =>
+                    <option
+                        key={"q-"+indexQuestion+"-"+index}
+                        value={valueOption}
+                        selected={valueOption === formItemValue.value}
+                    >
+                        {valueOption}
+                    </option>
             )}
         </select>
     </FormItem>;
 }
 
-export const Form: React.FunctionComponent<Props> = ({answers, classified, submitForm}) => {
-    const relevant = useFormInputField(answers[0]);
-    const learnings = useFormInputField(answers[1]);
-    const architecture = useFormInputField(answers[2]);
-    const processing = useFormInputField(answers[3]);
-    const stages = useFormInputField(answers[4]);
-    const interesting = useFormInputField(answers[5]);
-    const goodPractice = useFormInputField(answers[6]);
-    const pitfall = useFormInputField(answers[7]);
-    const references = useFormInputField(answers[8]);
+export const Form: React.FunctionComponent<Props> = ({classifiedAns, submitForm}) => {
+
+    const relevant = useFormInputField(classifiedAns? classifiedAns.isRelevant : "");
+    const learnings = useFormInputField(classifiedAns? classifiedAns.typeOfLearning : "");
+    const architecture = useFormInputField(classifiedAns? classifiedAns.typeOfArchitecture : "");
+    const processing = useFormInputField(classifiedAns? classifiedAns.processingModel : "");
+    const mlPipeline = useFormInputField(classifiedAns? classifiedAns.mlPipeline : "");
+    const interesting = useFormInputField(classifiedAns? classifiedAns.interesting : "");
+    const goodPractice = useFormInputField(classifiedAns? classifiedAns.goodPractice : "");
+    const pitfall = useFormInputField(classifiedAns? classifiedAns.pitfall : "");
+    const references = useFormInputField(classifiedAns? classifiedAns.externalReferences : "");
 
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        let classification = [relevant.value, learnings.value, architecture.value, processing.value,
-        stages.value, goodPractice.value, pitfall.value, references.value, interesting.value
-        ];
+        let classification = {
+            isRelevant: relevant.value,
+            typeOfLearning: learnings.value,
+            typeOfArchitecture: architecture.value,
+            processingModel: processing.value,
+            mlPipeline: mlPipeline.value,
+            goodPractice: goodPractice.value,
+            pitfall: pitfall.value,
+            externalReferences: references.value,
+            interesting: interesting.value,
+        };
         submitForm(classification);
     };
     return (
@@ -61,7 +76,7 @@ export const Form: React.FunctionComponent<Props> = ({answers, classified, submi
                     {getFormItem(learnings, 1)}
                     {getFormItem(architecture, 2)}
                     {getFormItem(processing, 3)}
-                    {getFormItem(stages, 4)}
+                    {getFormItem(mlPipeline, 4)}
                     {getFormItem(interesting, 5)}
                 </FormWrapper>
                 <FreeText>
