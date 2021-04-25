@@ -1,13 +1,12 @@
 import React from "react";
 import { Dropdown, DropdownButton, Button } from "react-bootstrap";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
-import {PickAnswersSet} from '../PickAnswersSet/index';
-
-import { Container, LinkOverride } from "./styles";
+import { Container } from "./styles";
 
 const PickEvaluator = () => {
   const [evaluator, setEvaluator] = React.useState("Select one option");
+    const history = useHistory();
   return (
     <Container>
       <div>Selecciona un evaluador</div> <br></br>
@@ -40,15 +39,10 @@ const PickEvaluator = () => {
       </DropdownButton>
       <br></br>
 
-      <Button variant="info">
-          <LinkOverride>
-              <Link to="/pickAnswers">Go</Link>
-          </LinkOverride>
-
+      <Button variant="info" onClick={() => history.push(`/pickAnswers/${evaluator}`)}>
+            Go
        </Button>{" "}
-        <Route path="/pickAnswers">
-            <PickAnswersSet/>
-        </Route>
+
     </Container>
   );
 };

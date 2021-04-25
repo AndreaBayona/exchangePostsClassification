@@ -1,9 +1,12 @@
 import React from "react";
 import {Container} from "../PickEvaluator/styles";
 import {Button, Dropdown, DropdownButton} from "react-bootstrap";
+import { useParams } from 'react-router-dom';
 
 export const PickAnswersSet = () => {
     const [answers, setAnswers] = React.useState("Select one option");
+    const { username } : any = useParams();
+    console.log(username);
     return (
         <Container>
             <div>Select a set of answers</div> <br></br>
