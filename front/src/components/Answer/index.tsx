@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {Text, Title} from "../Common/fonts";
+import {Button} from "../Common/buttons";
 
 import {Container, Option, Options, Url} from "./styles";
 
@@ -10,8 +11,6 @@ export type AnswerInfo = {
     url: string;
     type: string;
     classified: boolean;
-    read: () => JSX.Element;
-    classify: () => JSX.Element;
 };
 
 type Props = {
@@ -45,17 +44,17 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
         </Url>
         <Options>
             {answer.classified &&
-            <Option open={read} onClick={manageRead}>
+            <Button onClick={manageRead}>
                 <Text inheritColor>Read classification</Text>
-            </Option>
+            </Button>
             }
-            <Option open={edit} onClick={manageEdit}>
-                <Text inheritColor>Classify</Text>
-            </Option>
+            <Button onClick={manageEdit}>
+                <Text inheritColor>Classify / edit</Text>
+            </Button>
         </Options>
         <div>
-            {read && <>{answer.read()}</>}
-            {edit && <>{answer.classify()}</>}
+            {read && <p>Read</p>}
+            {edit && <p>classify</p>}
         </div>
     </Container>)
 };
