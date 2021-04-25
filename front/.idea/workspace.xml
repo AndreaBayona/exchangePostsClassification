@@ -20,24 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="573b0e27-5ec7-4a42-8a80-51a8733c2390" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../back/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../back/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Answer/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Answer/styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AppStyles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Common/buttons.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Common/fonts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Form/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Form/styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Question/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Question/styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/dataTemp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +45,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/components/Question/styles.ts" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1rXFc8xFXKetBtM2rqleBYXrrrk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -56,7 +58,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/moviles repoo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -65,13 +67,14 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Users\monic\Documents\Universidad\Classification\front\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\monic\Documents\Universidad\Classification\front\public" />
       <recent name="C:\Users\monic\Documents\Universidad\Classification\front\src\components" />
+      <recent name="C:\Users\monic\Documents\Universidad\Classification\front\public" />
       <recent name="C:\Users\monic\Documents\Universidad\Classification\front\src\css" />
       <recent name="C:\Users\monic\Documents\Universidad\Classification\front\src" />
     </key>
@@ -100,7 +103,8 @@
       <option name="presentableId" value="Default" />
       <updated>1619114603385</updated>
       <workItem from="1619114604459" duration="5080000" />
-      <workItem from="1619237269777" duration="4439000" />
+      <workItem from="1619237269777" duration="5167000" />
+      <workItem from="1619283049805" duration="16481000" />
     </task>
     <servers />
   </component>
@@ -124,25 +128,34 @@
       <screen x="64" y="0" width="1216" height="720" />
     </state>
     <state x="403" y="108" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/64.0.1216.720@64.0.1216.720" timestamp="1619280204591" />
-    <state x="453" y="116" key="FileChooserDialogImpl" timestamp="1619146062701">
+    <state x="453" y="116" key="FileChooserDialogImpl" timestamp="1619283045322">
       <screen x="64" y="0" width="1216" height="720" />
     </state>
     <state x="453" y="116" key="FileChooserDialogImpl/64.0.1216.720/-120.1080.2160.1080@64.0.1216.720" timestamp="1619146062701" />
-    <state width="1195" height="114" key="GridCell.Tab.0.bottom" timestamp="1619281801872">
+    <state x="453" y="116" key="FileChooserDialogImpl/64.0.1216.720@64.0.1216.720" timestamp="1619283045322" />
+    <state width="1195" height="27" key="GridCell.Tab.0.bottom" timestamp="1619309331040">
       <screen x="64" y="0" width="1216" height="720" />
     </state>
-    <state width="1195" height="114" key="GridCell.Tab.0.bottom/64.0.1216.720@64.0.1216.720" timestamp="1619281801872" />
-    <state width="1195" height="114" key="GridCell.Tab.0.center" timestamp="1619281801871">
+    <state width="1195" height="27" key="GridCell.Tab.0.bottom/64.0.1216.720@64.0.1216.720" timestamp="1619309331040" />
+    <state width="1195" height="27" key="GridCell.Tab.0.center" timestamp="1619309331039">
       <screen x="64" y="0" width="1216" height="720" />
     </state>
-    <state width="1195" height="114" key="GridCell.Tab.0.center/64.0.1216.720@64.0.1216.720" timestamp="1619281801871" />
-    <state width="1195" height="114" key="GridCell.Tab.0.left" timestamp="1619281801871">
+    <state width="1195" height="27" key="GridCell.Tab.0.center/64.0.1216.720@64.0.1216.720" timestamp="1619309331039" />
+    <state width="1195" height="27" key="GridCell.Tab.0.left" timestamp="1619309331039">
       <screen x="64" y="0" width="1216" height="720" />
     </state>
-    <state width="1195" height="114" key="GridCell.Tab.0.left/64.0.1216.720@64.0.1216.720" timestamp="1619281801871" />
-    <state width="1195" height="114" key="GridCell.Tab.0.right" timestamp="1619281801871">
+    <state width="1195" height="27" key="GridCell.Tab.0.left/64.0.1216.720@64.0.1216.720" timestamp="1619309331039" />
+    <state width="1195" height="27" key="GridCell.Tab.0.right" timestamp="1619309331040">
       <screen x="64" y="0" width="1216" height="720" />
     </state>
-    <state width="1195" height="114" key="GridCell.Tab.0.right/64.0.1216.720@64.0.1216.720" timestamp="1619281801871" />
+    <state width="1195" height="27" key="GridCell.Tab.0.right/64.0.1216.720@64.0.1216.720" timestamp="1619309331040" />
+    <state x="174" y="6" key="SettingsEditor" timestamp="1619287767708">
+      <screen x="64" y="0" width="1216" height="720" />
+    </state>
+    <state x="174" y="6" key="SettingsEditor/64.0.1216.720@64.0.1216.720" timestamp="1619287767708" />
+    <state x="335" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1619299514357">
+      <screen x="64" y="0" width="1216" height="720" />
+    </state>
+    <state x="335" y="41" width="672" height="678" key="search.everywhere.popup/64.0.1216.720@64.0.1216.720" timestamp="1619299514357" />
   </component>
 </project>
