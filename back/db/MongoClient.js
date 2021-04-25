@@ -25,8 +25,7 @@ const MongoUtils = () => {
         .db(dbName)
         .collection("answers")
         .aggregate([
-          { $project: { classification: 0 } },
-          { $match: { user: user } },
+          { $match: { user: user, classified: null } },
           {
             $lookup: {
               from: "questions",
@@ -48,9 +47,7 @@ const MongoUtils = () => {
         .db(dbName)
         .collection("answers")
         .aggregate([
-          { $match: { user: user } },
-          { $project: { classification: 1 } },
-          { $unwind: "$classification" },
+          { $match: { user: user, classified: true } },
           {
             $lookup: {
               from: "questions",
@@ -62,16 +59,6 @@ const MongoUtils = () => {
         ])
         .limit(600)
         .toArray()
-        .finally(() => client.close())
-    );
-  };
-
-  MyMongoLib.insertOneQuestion = (doc) => {
-    return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection(process.env.DB_COLLECTION)
-        .insertOne(doc)
         .finally(() => client.close())
     );
   };
@@ -104,49 +91,17 @@ const MongoUtils = () => {
     );
   };
 
-  MyMongoLib.getQuestionsByUserName = (userName) => {
-    return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection(process.env.DB_COLLECTION)
-        .find({ userName: userName })
-        .sort([["_id", -1]])
-        .limit(600)
-        .toArray()
-        .finally(() => client.close())
-    );
-  };
-
-  MyMongoLib.updateQuestion = (
-    id,
-    isRelevant,
-    typeOfLearning,
-    typeOfArchitecture,
-    processingModel,
-    mlPipeline,
-    goodPractice,
-    pitfall,
-    externalReferences,
-    interesting
-  ) => {
+  MyMongoLib.updateAnswer = (classification, id) => {
     return MyMongoLib.connect(url).then((client) => {
       client
         .db(dbName)
-        .collection(process.env.DB_COLLECTION)
+        .collection(answers)
         .findOneAndUpdate(
           { _id: ObjectId(id) },
           {
             $set: {
-              isRelevant: isRelevant,
-              typeOfLearning: typeOfLearning,
-              typeOfArchitecture: typeOfArchitecture,
-              processingModel: processingModel,
-              mlPipeline: mlPipeline,
-              goodPractice: goodPractice,
-              pitfall: pitfall,
-              externalReferences: externalReferences,
-              interesting: interesting,
-              answered: true,
+              classification: classification,
+              classified: true,
             },
           }
         )

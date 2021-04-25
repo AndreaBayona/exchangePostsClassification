@@ -30,35 +30,17 @@ router.get("/getByUserName", (req, res) => {
   });
 });
 
-router.put("/updateQuestion", (req, res) => {
-  const isRelevant = req.body.isRelevant;
-  const typeOfLearning = req.body.typeOfLearning;
-  const typeOfArchitecture = req.body.typeOfArchitecture;
-  const processingModel = req.body.processingModel;
-  const mlPipeline = req.body.mlPipeline;
-  const goodPractice = req.body.goodPractice;
-  const pitfall = req.body.pitfall;
-  const externalReferences = req.body.externalReferences;
-  const interesting = req.body.interesting;
+router.put("/update", (req, res) => {
+  const classification = req.body.classification;
   const id = req.body.id;
-
-  db.updateQuestion(
-    id,
-    isRelevant,
-    typeOfLearning,
-    typeOfArchitecture,
-    processingModel,
-    mlPipeline,
-    goodPractice,
-    pitfall,
-    externalReferences,
-    interesting
-  ).then((err) => {
+  console.log(classification);
+  console.log(id);
+  db.updateAnswer(classification, id).then((err) => {
     console.log(err);
     if (err) {
       res.status(500).json({ error: err });
     }
-    res.send();
+    res.status(200).end();
   });
 });
 
