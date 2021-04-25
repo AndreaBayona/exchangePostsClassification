@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Text, Title} from "../Common/fonts";
 import {Button} from "../Common/buttons";
 import {Form} from "../Form";
+import {Classification} from "../../models/Classification";
 
 import {Container, Option, Options, Url} from "./styles";
 
@@ -17,16 +18,16 @@ export type AnswerInfo = {
 type Props = {
     answer: AnswerInfo;
     type: string;
+    classification?: Classification;
 };
 
-const Submit = (inputs: string[]) => {
+const Submit = (classification: Classification) => {
 
-    console.log("INPUTS", inputs);
+    console.log("INPUTS", classification);
     return true;
 };
 
-
-export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
+export const Answer: React.FunctionComponent<Props> = ({answer, type, classification}) => {
 
     const [read, setRead] = React.useState(false);
     const [edit, setEdit ] = React.useState(false);
@@ -61,8 +62,8 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
             </Button>
         </Options>
         <div>
-            {read && <Form answers={["a", "b", "c", "d", "e", "f"]} classified={false} submitForm={Submit}/>}
-            {edit && <p>classify</p>}
+            {edit && <Form classifiedAns={classification} submitForm={Submit}/>}
+            {read && <p>classify</p>}
         </div>
     </Container>)
 };

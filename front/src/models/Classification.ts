@@ -8,5 +8,4 @@ export type Classification = {
     pitfall: string,
     externalReferences: string,
     interesting: string,
-    id: number
 };
