@@ -1,17 +1,13 @@
-import React from 'react';
-import {Question} from "./Question";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import {QData, QAns} from "./dataTemp";
-
-import {AppStyle, Header} from './AppStyles';
+import { AppStyle } from "./AppStyles";
+import PickEvaluator from "./PickEvaluator/index";
 
 function App() {
   return (
     <AppStyle>
-      <Header>
-        ReactApp
-      </Header>
-      <Question question={QData} acceptedAnswer={QAns} classifierName="Andrea"/>
+      <PickEvaluator></PickEvaluator>
     </AppStyle>
   );
 }
