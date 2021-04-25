@@ -10,16 +10,16 @@ router.get("/", (req, res) => {
 });
 
 router.get("/unclassifiedAnswers", (req, res) => {
-  const user = req.body.user;
-  db.unclassifiedAnswers(user).then((questions) => {
-    res.send(questions);
+  const user = req.query.user;
+  db.unclassifiedAnswers(user).then((answers) => {
+    res.send(answers);
   });
 });
 
 router.get("/classifiedAnswers", (req, res) => {
-  const user = req.body.user;
-  db.classifiedAnswers(user).then((questions) => {
-    res.send(questions);
+  const user = req.query.user;
+  db.classifiedAnswers(user).then((answers) => {
+    res.send(answers);
   });
 });
 
@@ -30,10 +30,10 @@ router.get("/getByUserName", (req, res) => {
   });
 });
 
-router.put("/update", (req, res) => {
+router.put("/classificateAQuestion", (req, res) => {
   const classification = req.body.classification;
-  const id = req.body.id;
-  db.updateAnswer(classification, id).then((err) => {
+  const AID = req.body.AID;
+  db.updateAnswer(classification, parseInt(AID)).then((err) => {
     if (err) {
       res.status(500).json({ error: err });
     }
@@ -42,8 +42,11 @@ router.put("/update", (req, res) => {
 });
 
 router.get("/findById", (req, res) => {
-  const id = req.body.id;
-  db.getAnswer(id).then((answer) => {
+  const id = req.query.id;
+  db.getAnswer(parseInt(id)).then((answer) => {
+    if (answer == null) {
+      res.send(400).end();
+    }
     res.send(answer);
   });
 });

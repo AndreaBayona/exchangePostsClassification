@@ -64,7 +64,6 @@ const MongoUtils = () => {
   };
 
   MyMongoLib.getPaginateQuestion = (page, query) => {
-    console.log(query);
     return MyMongoLib.connect(url).then((client) =>
       client
         .db(dbName)
@@ -97,7 +96,7 @@ const MongoUtils = () => {
         .db(dbName)
         .collection(answers)
         .findOneAndUpdate(
-          { _id: ObjectId(id) },
+          { AID: id },
           {
             $set: {
               classification: classification,
