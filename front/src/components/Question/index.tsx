@@ -5,7 +5,7 @@ import {Text, Title} from "../Common/fonts";
 import {Container, Divider, Header, Url} from './styles';
 
 export type QuestionInfo = {
-    id: number
+    id: number;
     title: string;
     bodyText: string;
     score: number;
