@@ -7,6 +7,7 @@ import {Classification} from "../../models/Classification";
 import {Answer as AnswerData} from "../../models/Answer";
 
 import {Container, Option, Options, Url} from "./styles";
+import {classificateAQuestion, ClassificationRequest} from "../../services";
 
 type Props = {
     answer: AnswerData;
@@ -22,6 +23,25 @@ const Submit = (classification: Classification) => {
 export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
 
     const [edit, setEdit ] = React.useState(false);
+
+    React.useEffect(() => {
+        const classificationRequest = {
+            AID: 50259726,
+            classification: {
+                typeOfLearning: "typeOfLearning2",
+                typeOfArchitecture: "typeOfArchitecture",
+                processingModel: "processingModel",
+                mlPipeline: "mlPipeline",
+                goodPractice: "goodPractice",
+                pitfall: "pitfall",
+                externalReferences: "externalReferences",
+                interesting: "interesting",
+            },
+        } as ClassificationRequest;
+        classificateAQuestion(classificationRequest).then((ans) => {
+            console.log(ans);
+        });
+    });
 
     return (<Container>
         <Title>{type + ' ' + answer.AID}</Title>

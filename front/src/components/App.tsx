@@ -24,25 +24,6 @@ function App() {
       console.log(answer); // Aquí se haría la asignación al estado. Si está mal el id lega undefined
     });
   });
-
-  React.useEffect(() => {
-    const classificationRequest = {
-      AID: 50259726,
-      classification: {
-        typeOfLearning: "typeOfLearning2",
-        typeOfArchitecture: "typeOfArchitecture",
-        processingModel: "processingModel",
-        mlPipeline: "mlPipeline",
-        goodPractice: "goodPractice",
-        pitfall: "pitfall",
-        externalReferences: "externalReferences",
-        interesting: "interesting",
-      },
-    } as ClassificationRequest;
-    classificateAQuestion(classificationRequest).then((ans) => {
-      console.log(ans);
-    });
-  });
   return (
     <Router>
       <AppStyle>
