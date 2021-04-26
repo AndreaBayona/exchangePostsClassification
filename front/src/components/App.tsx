@@ -16,21 +16,6 @@ import {
 } from "../services/index";
 
 function App() {
-  React.useEffect(() => {
-    const user = { user: "Valerie" };
-    getClassifiedAnswers(user).then((ans) => {
-      const answers = ans as Answer[];
-      console.log(answers[0].question[0].QTags); // Aquí se haría la asignación al estado
-    });
-  });
-
-  React.useEffect(() => {
-    const user = { user: "Valerie" };
-    getUnclassifiedAnswers(user).then((ans) => {
-      const answers = ans as Answer[];
-      console.log(answers[0].question[0].QTags); // Aquí se haría la asignación al estado
-    });
-  });
 
   React.useEffect(() => {
     const id = { id: 50259726 };
