@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useParams} from "react-router-dom";
 
 import {Answer} from "../Answer";
 import {Text, Title} from "../Common/fonts";
@@ -13,11 +14,10 @@ type Props = {
 };
 
 export const Question: React.FunctionComponent<Props> = ({question, answer, classifierName}) => {
-
     return (
         <Container>
             <Header>
-                <Title inheritColor>Question {question.QID}</Title>
+                <Title inheritColor>Question ID: {question.QID}</Title>
                 <span>
                      <Text>Classifier: {classifierName}</Text>
                      <Text>Score: {question.QScore}</Text>

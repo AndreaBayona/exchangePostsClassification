@@ -38,7 +38,7 @@ export const AnswersPage = () => {
     }, []);
 
     const manageIndex = (value: number) => {
-        console.log("INDEXXX", index)
+        console.log("INDEX", index)
         if(value > 0 && index == size -1){
             setShow(true);
             setMsg("You have reached the end of the list");
@@ -63,7 +63,7 @@ export const AnswersPage = () => {
             }
             <Arrows>
                 <NavButtons onClick={()=> manageIndex(-1)}>Previous</NavButtons>
-                <div> {size} question(s) remaining</div>
+                <div>Question {index + 1} out of {size}</div>
                 <NavButtons onClick={()=> manageIndex(1)}>Next</NavButtons>
             </Arrows>
             {ans &&

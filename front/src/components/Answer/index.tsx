@@ -32,7 +32,8 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
             console.log(ans);
             setShow(true);
             setMsg("Your classification has been saved correctly!");
-            window.location.reload(false);
+            answer.classification = classification;
+            answer.classified = true;
         },
             (ans) => {
             return false;
@@ -54,7 +55,7 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
             </Modal>
         </AlertWrapper>
         }
-        <Title>{type + ' ' + answer.AID}</Title>
+        <Title>{type + ' ID: ' + answer.AID}</Title>
         <Text>Score: {answer.AScore}</Text>
         <br/>
         <Text>
