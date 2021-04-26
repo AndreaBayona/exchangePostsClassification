@@ -12,14 +12,12 @@ export const AnswerPage = () => {
     const [show, setShow] = React.useState(false);
     const [msg, setMsg] = React.useState("");
     const [answerData, setAnswerData] = React.useState<undefined | AnswerData>(undefined);
-    console.log("ENTROOOO", id)
 
     React.useEffect(() => {
         if(!!id) {
             const idObj = { id: id };
             findQuestionById(idObj).then((ans) => {
-                const answer = ans as AnswerData;
-                console.log(answer);
+                const answer = ans[0] as AnswerData;
                 if(!answer){
                     setShow(true);
                     setMsg(`There is no answer with this id ${id}`);
