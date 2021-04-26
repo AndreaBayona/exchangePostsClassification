@@ -31,12 +31,13 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
         classificateAQuestion(classificationRequest).then((ans) => {
             console.log(ans);
             setShow(true);
-            setMsg("Your classification has been saved correctly!")
+            setMsg("Your classification has been saved correctly!");
+            window.location.reload(false);
         },
             (ans) => {
             return false;
                 setShow(true);
-                setMsg("Your form could not not be saved. Try again.")
+                setMsg("Your form could not not be saved. Try again.");
                 console.log(ans);
             }
         );
