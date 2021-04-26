@@ -14,6 +14,7 @@ export type AnswerInfo = {
     type: string;
     classified: boolean;
     classification?: Classification;
+    id: number;
 };
 
 type Props = {
@@ -32,7 +33,8 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
     const [edit, setEdit ] = React.useState(false);
 
     return (<Container>
-        <Title>{type}</Title>
+        <Title>{type + ' ' + answer.id}</Title>
+        <Text>Score: {answer.score}</Text>
         <br/>
         <Text>
             {answer.bodyText}

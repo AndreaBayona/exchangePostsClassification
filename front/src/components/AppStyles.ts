@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const AppStyle = styled.div`
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,14 +9,25 @@ export const AppStyle = styled.div`
 `;
 
 export const Header = styled.header`
-  background-color: #282c34;
+  background-color: #d3d3d4;
   width: 100%;
-  height: 30px;
+  height: 40px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 30px;
   font-size: calc(10px + 2vmin);
   color: white;
   margin-bottom: 20px;
+`;
+
+export const SearchBox = styled.div`
+  margin: 0;
+  width: 300px;
+`;
+
+export const LinkOverride = styled.div`
+  >a{
+    color: #292929;
+  }
 `;

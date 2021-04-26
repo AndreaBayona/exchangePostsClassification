@@ -6,10 +6,8 @@ export const Container = styled.div`
     justify-content: center;
     align-content: center;
     padding: 20px;
-    border: 1px solid lightslategrey;
     height: fit-content;
     flex-direction: column;
-    border-radius: 16px;
 `;
 
 
