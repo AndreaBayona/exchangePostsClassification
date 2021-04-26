@@ -1,20 +1,14 @@
 import * as React from 'react';
 
-import {Answer, AnswerInfo} from "../Answer";
+import {Answer} from "../Answer";
 import {Text, Title} from "../Common/fonts";
 import {Container, Divider, Header, Url} from './styles';
-
-export type QuestionInfo = {
-    id: number;
-    title: string;
-    bodyText: string;
-    score: number;
-    url: string;
-};
+import {Question as QuestionData} from "../../models/Question";
+import {Answer as AnswerData} from "../../models/Answer";
 
 type Props = {
-    question: QuestionInfo;
-    answer: AnswerInfo;
+    question: QuestionData;
+    answer: AnswerData;
     classifierName: string
 };
 
@@ -23,17 +17,17 @@ export const Question: React.FunctionComponent<Props> = ({question, answer, clas
     return (
         <Container>
             <Header>
-                <Title inheritColor>Question {question.id}</Title>
+                <Title inheritColor>Question {question.QID}</Title>
                 <span>
                      <Text>Classifier: {classifierName}</Text>
-                     <Text>Score: {question.score}</Text>
+                     <Text>Score: {question.QScore}</Text>
                 </span>
             </Header>
-            <Title>{question.title}</Title>
+            <Title>{question.Qtitle}</Title>
             <br/>
-            <Text>{question.bodyText}</Text>
+            <Text>{question.QBody}</Text>
             <Url>
-                <a href={question.url}>Original question URL</a>
+                <a href={question.url_question}>Original question URL</a>
             </Url>
             <Divider/>
             <Answer answer={answer} type={answer.type === 'accepted' ? 'Accepted answer' : 'Most voted answer'}/>

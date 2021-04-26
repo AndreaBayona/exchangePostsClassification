@@ -4,21 +4,12 @@ import {Text, Title} from "../Common/fonts";
 import {Button} from "../Common/buttons";
 import {Form} from "../Form";
 import {Classification} from "../../models/Classification";
+import {Answer as AnswerData} from "../../models/Answer";
 
 import {Container, Option, Options, Url} from "./styles";
 
-export type AnswerInfo = {
-    bodyText: string;
-    score: number;
-    url: string;
-    type: string;
-    classified: boolean;
-    classification?: Classification;
-    id: number;
-};
-
 type Props = {
-    answer: AnswerInfo;
+    answer: AnswerData;
     type: string;
 };
 
@@ -33,14 +24,14 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
     const [edit, setEdit ] = React.useState(false);
 
     return (<Container>
-        <Title>{type + ' ' + answer.id}</Title>
-        <Text>Score: {answer.score}</Text>
+        <Title>{type + ' ' + answer.AID}</Title>
+        <Text>Score: {answer.AScore}</Text>
         <br/>
         <Text>
-            {answer.bodyText}
+            {answer.ABody}
         </Text>
         <Url>
-            <a href={answer.url}>Original answer URL</a>
+            <a href={answer.url_AcceptedAns}>Original answer URL</a>
         </Url>
         <Options>
             <Button onClick={()=> setEdit(!edit)}>
