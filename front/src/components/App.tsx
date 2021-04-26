@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {InputGroup, FormControl} from "react-bootstrap";
-import {BrowserRouter as Router, Route, NavLink, Switch, useHistory} from "react-router-dom";
+import {InputGroup, FormControl, Button} from "react-bootstrap";
+import {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from "react-router-dom";
 import PickEvaluator from './PickEvaluator/index';
 import {PickAnswersSet} from "./PickAnswersSet";
 import {AnswersPage} from "./AnswersPage";
@@ -9,8 +9,7 @@ import {AnswerPage} from "./AnswerPage";
 import {AppStyle, Header, LinkOverride, SearchBox} from "./AppStyles";
 
 function App() {
-    const history = useHistory();
-
+    const [search, setSearch] = React.useState("");
     return (
         <Router>
             <AppStyle>
@@ -20,16 +19,20 @@ function App() {
                     </LinkOverride>
                     <SearchBox>
                         <InputGroup size="sm">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id="inputGroup-sizing-sm">Search</InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl onChange={(event) => {
-                                history.push(`/answers/${event.target}`)
-                            }}
+                            <FormControl
                                          aria-label="Small"
                                          aria-describedby="inputGroup-sizing-sm"
                                          placeholder="Write answer id"
+                                         onChange={(e)=> setSearch(e.target.value)}
                             />
+                            <InputGroup.Append>
+                                <Button variant="secondary"
+                                >
+                                    <LinkOverride>
+                                        <NavLink to={`/answer/${search || 0}`}>Search</NavLink>
+                                    </LinkOverride>
+                                </Button>
+                            </InputGroup.Append>
                         </InputGroup>
                     </SearchBox>
                 </Header>
@@ -37,7 +40,7 @@ function App() {
                     <Route exact path="/" component={PickEvaluator}/>
                     <Route exact path="/pickAnswers/:username" component={PickAnswersSet}/>
                     <Route exact path="/answers/:username/:answersGroup" component={AnswersPage}/>
-                    <Route exact path="/answers/:id" component={AnswerPage}/>
+                    <Route exact path="/answer/:id" component={AnswerPage}/>
                 </Switch>
 
             </AppStyle>

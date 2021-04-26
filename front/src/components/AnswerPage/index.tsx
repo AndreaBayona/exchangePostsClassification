@@ -12,6 +12,7 @@ export const AnswerPage = () => {
     const [show, setShow] = React.useState(false);
     const [msg, setMsg] = React.useState("");
     const [answerData, setAnswerData] = React.useState<undefined | AnswerData>(undefined);
+    console.log("ENTROOOO", id)
 
     React.useEffect(() => {
         if(!!id) {
@@ -28,7 +29,7 @@ export const AnswerPage = () => {
                 }
             });
         }
-    });
+    }, []);
 
     return (
         <>
