@@ -113,7 +113,19 @@ const MongoUtils = () => {
       client
         .db(dbName)
         .collection("answers")
-        .findOne({ AID: id })
+        .aggregate([
+          { $match: { AID: id } },
+          {
+            $lookup: {
+              from: "questions",
+              localField: "QID",
+              foreignField: "QID",
+              as: "question",
+            },
+          },
+        ])
+        .limit(1)
+        .toArray()
         .finally(() => client.close())
     );
   };
