@@ -21,7 +21,6 @@ type Id = { id: number };
 
 export const getUnclassifiedAnswers = (user: User) => {
   const QUERY_PARAMS_URL = objectToQueryString(user);
-  console.log(QUERY_PARAMS_URL);
   const UNCLASSSIFIED_ANSWERS_URL =
     URL + UNCLASSSIFIED_ANSWERS + QUERY_PARAMS_URL;
   return fetch(UNCLASSSIFIED_ANSWERS_URL, {
@@ -37,8 +36,8 @@ export const getUnclassifiedAnswers = (user: User) => {
 
 export const getClassifiedAnswers = (user: User) => {
   const QUERY_PARAMS_URL = objectToQueryString(user);
-  console.log(QUERY_PARAMS_URL);
   const CLASSSIFIED_ANSWERS_URL = URL + CLASSSIFIED_ANSWERS + QUERY_PARAMS_URL;
+  console.log("CLASSSIFIED_ANSWERS_URL", CLASSSIFIED_ANSWERS_URL);
   return fetch(CLASSSIFIED_ANSWERS_URL, {
     method: "GET",
     mode: "cors",

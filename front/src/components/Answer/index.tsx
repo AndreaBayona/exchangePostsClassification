@@ -4,41 +4,65 @@ import {Text, Title} from "../Common/fonts";
 import {Button} from "../Common/buttons";
 import {Form} from "../Form";
 import {Classification} from "../../models/Classification";
+import {Answer as AnswerData} from "../../models/Answer";
 
 import {Container, Option, Options, Url} from "./styles";
-
-export type AnswerInfo = {
-    bodyText: string;
-    score: number;
-    url: string;
-    type: string;
-    classified: boolean;
-    classification?: Classification;
-};
+import {classificateAQuestion, ClassificationRequest} from "../../services";
+import {AlertWrapper, Wrapper} from "../AnswersPage/styles";
+import {Modal} from "react-bootstrap";
 
 type Props = {
-    answer: AnswerInfo;
+    answer: AnswerData;
     type: string;
-};
-
-const Submit = (classification: Classification) => {
-
-    console.log("INPUTS", classification);
-    return true;
 };
 
 export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
 
     const [edit, setEdit ] = React.useState(false);
+    const [show, setShow] = React.useState(false);
+    const [msg, setMsg] = React.useState("");
+
+    const Submit = (classification: Classification) => {
+        const classificationRequest = {
+            AID: answer.AID,
+            classification: classification,
+        } as ClassificationRequest;
+        console.log("INPUTS", classification);
+        classificateAQuestion(classificationRequest).then((ans) => {
+            console.log(ans);
+            setShow(true);
+            setMsg("Your classification has been saved correctly!");
+            answer.classification = classification;
+            answer.classified = true;
+        },
+            (ans) => {
+            return false;
+                setShow(true);
+                setMsg("Your form could not not be saved. Try again.");
+                console.log(ans);
+            }
+        );
+    };
 
     return (<Container>
-        <Title>{type}</Title>
+        {show &&
+        <AlertWrapper>
+            <Modal show={show} onHide={()=> setShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Form information</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{msg}</Modal.Body>
+            </Modal>
+        </AlertWrapper>
+        }
+        <Title>{type + ' ID: ' + answer.AID}</Title>
+        <Text>Score: {answer.AScore}</Text>
         <br/>
         <Text>
-            {answer.bodyText}
+            {answer.ABody}
         </Text>
         <Url>
-            <a href={answer.url}>Original answer URL</a>
+            <a href={answer.url_AcceptedAns}>Original answer URL</a>
         </Url>
         <Options>
             <Button onClick={()=> setEdit(!edit)}>

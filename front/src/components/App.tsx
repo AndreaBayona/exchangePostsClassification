@@ -1,79 +1,51 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Answer } from "../models/Answer";
-import { ClassificationRequest } from "../services";
-import PickEvaluator from "./PickEvaluator/index";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-
-import { AppStyle, Header } from "./AppStyles";
-import { PickAnswersSet } from "./PickAnswersSet/index";
-import {
-  getClassifiedAnswers,
-  getUnclassifiedAnswers,
-  findQuestionById,
-  classificateAQuestion,
-} from "../services/index";
+import {InputGroup, FormControl, Button} from "react-bootstrap";
+import {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from "react-router-dom";
+import PickEvaluator from './PickEvaluator/index';
+import {PickAnswersSet} from "./PickAnswersSet";
+import {AnswersPage} from "./AnswersPage";
+import {AnswerPage} from "./AnswerPage";
+import {AppStyle, Header, LinkOverride, SearchBox} from "./AppStyles";
 
 function App() {
-  React.useEffect(() => {
-    const user = { user: "Valerie" };
-    getClassifiedAnswers(user).then((ans) => {
-      const answers = ans as Answer[];
-      console.log(answers[0].question[0].QTags); // Aquí se haría la asignación al estado
-    });
-  });
+    const [search, setSearch] = React.useState("");
+    return (
+        <Router>
+            <AppStyle>
+                <Header>
+                    <LinkOverride>
+                        <NavLink to="/">Home</NavLink>
+                    </LinkOverride>
+                    <SearchBox>
+                        <InputGroup size="sm">
+                            <FormControl
+                                         aria-label="Small"
+                                         aria-describedby="inputGroup-sizing-sm"
+                                         placeholder="Write answer id"
+                                         onChange={(e)=> setSearch(e.target.value)}
+                            />
+                            <InputGroup.Append>
+                                <Button variant="secondary"
+                                >
+                                    <LinkOverride>
+                                        <NavLink to={`/answer/${search || 0}`}>Search</NavLink>
+                                    </LinkOverride>
+                                </Button>
+                            </InputGroup.Append>
+                        </InputGroup>
+                    </SearchBox>
+                </Header>
+                <Switch>
+                    <Route exact path="/" component={PickEvaluator}/>
+                    <Route exact path="/pickAnswers/:username" component={PickAnswersSet}/>
+                    <Route exact path="/answers/:username/:answersGroup" component={AnswersPage}/>
+                    <Route exact path="/answer/:id" component={AnswerPage}/>
+                </Switch>
 
-  React.useEffect(() => {
-    const user = { user: "Valerie" };
-    getUnclassifiedAnswers(user).then((ans) => {
-      const answers = ans as Answer[];
-      console.log(answers[0].question[0].QTags); // Aquí se haría la asignación al estado
-    });
-  });
-
-  React.useEffect(() => {
-    const id = { id: 50259726 };
-    findQuestionById(id).then((ans) => {
-      const answer = ans as Answer;
-      console.log(answer); // Aquí se haría la asignación al estado. Si está mal el id lega undefined
-    });
-  });
-
-  React.useEffect(() => {
-    const classificationRequest = {
-      AID: 50259726,
-      classification: {
-        typeOfLearning: "typeOfLearning2",
-        typeOfArchitecture: "typeOfArchitecture",
-        processingModel: "processingModel",
-        mlPipeline: "mlPipeline",
-        goodPractice: "goodPractice",
-        pitfall: "pitfall",
-        externalReferences: "externalReferences",
-        interesting: "interesting",
-      },
-    } as ClassificationRequest;
-    classificateAQuestion(classificationRequest).then((ans) => {
-      console.log(ans);
-    });
-  });
-  return (
-    <Router>
-      <AppStyle>
-        <Header>
-          <Link to="/">Home</Link>
-        </Header>
-        <Switch>
-          <Route exact path="/" component={PickEvaluator} />
-          <Route
-            exact
-            path="/pickAnswers/:username"
-            component={PickAnswersSet}
-          />
-        </Switch>
-      </AppStyle>
-    </Router>
-  );
+            </AppStyle>
+        </Router>
+    );
 }
 
 export default App;

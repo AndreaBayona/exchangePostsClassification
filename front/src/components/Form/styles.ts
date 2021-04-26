@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 100%;
    margin-top: 5px;
   margin-bottom: 10px;
+  text-align: center;
   
 `;
 

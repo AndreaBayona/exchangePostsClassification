@@ -6,7 +6,7 @@ import {Container, FormWrapper, FormItem, Label, FreeText, Input, FormInput} fro
 
 type Props = {
     classifiedAns?: Classification;
-    submitForm: (classifiedAns: Classification) => boolean;
+    submitForm: (classifiedAns: Classification) => void;
 };
 
 const useFormInputField = (initialValue: string = "") => {
@@ -15,41 +15,43 @@ const useFormInputField = (initialValue: string = "") => {
         (e: any) => setValue(e.target.value),
         []
     );
-    return { value, onChange };
+    return {value, onChange};
 };
 
 function getFormItem(formItemValue: { onChange: (e: any) => void; value: string }, indexQuestion: number) {
-    return <FormItem>
-        <Label>
-            {FORM_QUESTIONS[indexQuestion].label}
-        </Label>
-        <select value={formItemValue.value} onChange={formItemValue.onChange}>
-            <option value="">--Please choose an option--</option>
-            {FORM_QUESTIONS[indexQuestion].options.map(
-                (valueOption, index) =>
-                    <option
-                        key={"q-"+indexQuestion+"-"+index}
-                        value={valueOption}
-                        selected={valueOption === formItemValue.value}
-                    >
-                        {valueOption}
-                    </option>
-            )}
-        </select>
-    </FormItem>;
-}
+    return (
+        <FormItem>
+            <Label>
+                {FORM_QUESTIONS[indexQuestion].label}
+            </Label>
+            <select value={formItemValue.value} onChange={formItemValue.onChange}>
+                <option value="">--Please choose an option--</option>
+                {FORM_QUESTIONS[indexQuestion].options.map(
+                    (valueOption, index) =>
+                        <option
+                            key={"q-" + indexQuestion + "-" + index}
+                            value={valueOption}
+                            selected={valueOption === formItemValue.value}
+                        >
+                            {valueOption}
+                        </option>
+                )}
+            </select>
+        </FormItem>
+    )
+};
 
 export const Form: React.FunctionComponent<Props> = ({classifiedAns, submitForm}) => {
 
-    const relevant = useFormInputField(classifiedAns? classifiedAns.isRelevant : "");
-    const learnings = useFormInputField(classifiedAns? classifiedAns.typeOfLearning : "");
-    const architecture = useFormInputField(classifiedAns? classifiedAns.typeOfArchitecture : "");
-    const processing = useFormInputField(classifiedAns? classifiedAns.processingModel : "");
-    const mlPipeline = useFormInputField(classifiedAns? classifiedAns.mlPipeline : "");
-    const interesting = useFormInputField(classifiedAns? classifiedAns.interesting : "");
-    const goodPractice = useFormInputField(classifiedAns? classifiedAns.goodPractice : "");
-    const pitfall = useFormInputField(classifiedAns? classifiedAns.pitfall : "");
-    const references = useFormInputField(classifiedAns? classifiedAns.externalReferences : "");
+    const relevant = useFormInputField(classifiedAns ? classifiedAns.isRelevant : "");
+    const learnings = useFormInputField(classifiedAns ? classifiedAns.typeOfLearning : "");
+    const architecture = useFormInputField(classifiedAns ? classifiedAns.typeOfArchitecture : "");
+    const processing = useFormInputField(classifiedAns ? classifiedAns.processingModel : "");
+    const mlPipeline = useFormInputField(classifiedAns ? classifiedAns.mlPipeline : "");
+    const interesting = useFormInputField(classifiedAns ? classifiedAns.interesting : "");
+    const goodPractice = useFormInputField(classifiedAns ? classifiedAns.goodPractice : "");
+    const pitfall = useFormInputField(classifiedAns ? classifiedAns.pitfall : "");
+    const references = useFormInputField(classifiedAns ? classifiedAns.externalReferences : "");
 
 
     const handleSubmit = (e: React.FormEvent) => {

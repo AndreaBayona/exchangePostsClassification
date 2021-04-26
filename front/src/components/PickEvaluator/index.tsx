@@ -9,7 +9,7 @@ const PickEvaluator = () => {
     const history = useHistory();
   return (
     <Container>
-      <div>Selecciona un evaluador</div> <br></br>
+      <div>Select evaluator name</div> <br></br>
       <DropdownButton
         id={`dropdown-variants-${"Info"}`}
         variant={"Info".toLowerCase()}
