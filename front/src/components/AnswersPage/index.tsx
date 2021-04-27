@@ -10,19 +10,18 @@ import {Answer} from "../../models/Answer";
 
 export const AnswersPage = () => {
     let { username, answersGroup } : any = useParams();
-    const [ans, setAns] = React.useState<undefined | Answer>(undefined);
+    const [answ, setAnsw] = React.useState<undefined | Answer[]>(undefined);
     const [size, setSize] = React.useState(0);
     const [index, setIndex] = React.useState(0);
     const [show, setShow] = React.useState(false);
     const [msg, setMsg] = React.useState("");
-    console.log(username + " " + answersGroup);
     let answersList: Answer[] = [];
 
     React.useEffect(() => {
         if(answersGroup === "classified"){
             getClassifiedAnswers({user: username}).then((ans) => {
                 answersList = ans as Answer[];
-                setAns(answersList[0]);
+                setAnsw(answersList);
                 setSize(answersList.length);
                 console.log(answersList, answersList.length)
             });
@@ -30,7 +29,7 @@ export const AnswersPage = () => {
         else {
             getUnclassifiedAnswers({user: username}).then((ans) => {
                 answersList = ans as Answer[];
-                setAns(answersList[0]);
+                setAnsw(answersList);
                 setSize(answersList.length);
                 console.log(answersList, answersList.length)
             });
@@ -49,7 +48,7 @@ export const AnswersPage = () => {
         }
         else {
             setIndex(index+value);
-            setAns(answersList[index]);
+            console.log("ARRAY", answ);
         }
     };
     return (
@@ -66,10 +65,10 @@ export const AnswersPage = () => {
                 <div>Question {index + 1} out of {size}</div>
                 <NavButtons onClick={()=> manageIndex(1)}>Next</NavButtons>
             </Arrows>
-            {ans &&
+            {answ &&
             <Question
-                question={ans.question[0]}
-                answer={ans}
+                question={answ[index].question[0]}
+                answer={answ[index]}
                 classifierName={username}/>
             }
         </Wrapper>
