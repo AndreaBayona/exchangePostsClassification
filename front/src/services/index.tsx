@@ -9,7 +9,7 @@ const objectToQueryString = (obj: any) => {
     .join("&");
 };
 
-const URL = "http://localhost:8080/answers";
+const URL = "http://172.24.98.191:8080/answers";
 
 const UNCLASSSIFIED_ANSWERS = "/unclassifiedAnswers?";
 const CLASSSIFIED_ANSWERS = "/classifiedAnswers?";
@@ -28,7 +28,7 @@ export const getUnclassifiedAnswers = (user: User) => {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:8080",
+      "Access-Control-Allow-Origin": "http://172.24.98.191:8080",
       "Access-Control-Allow-Credentials": "true",
     },
   }).then((res) => res.json());
@@ -43,7 +43,7 @@ export const getClassifiedAnswers = (user: User) => {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:8080",
+      "Access-Control-Allow-Origin": "http://172.24.98.191:8080",
       "Access-Control-Allow-Credentials": "true",
     },
   }).then((res) => res.json());
@@ -58,7 +58,7 @@ export const findQuestionById = (id: Id) => {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:8080",
+      "Access-Control-Allow-Origin": "http://172.24.98.191:8080",
       "Access-Control-Allow-Credentials": "true",
     },
   }).then((res) => {
@@ -79,7 +79,7 @@ export const classificateAQuestion = (
     body: JSON.stringify(classification),
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:8080",
+      "Access-Control-Allow-Origin": "http://172.24.98.191:8080",
       "Access-Control-Allow-Credentials": "true",
     },
   }).then((res) => {
