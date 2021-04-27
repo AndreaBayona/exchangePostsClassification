@@ -31,3 +31,9 @@ export const LinkOverride = styled.div`
     color: #292929;
   }
 `;
+
+export const LinkButton = styled.div`
+  >a{
+    color: #f1f1f1;
+  }
+`;
