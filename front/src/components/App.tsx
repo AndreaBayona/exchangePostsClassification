@@ -1,12 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {InputGroup, FormControl, Button} from "react-bootstrap";
-import {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, NavLink, Switch} from "react-router-dom";
 import PickEvaluator from './PickEvaluator/index';
 import {PickAnswersSet} from "./PickAnswersSet";
 import {AnswersPage} from "./AnswersPage";
 import {AnswerPage} from "./AnswerPage";
-import {AppStyle, Header, LinkOverride, SearchBox} from "./AppStyles";
+import {AppStyle, Header, LinkOverride, SearchBox, LinkButton} from "./AppStyles";
 
 function App() {
     const [search, setSearch] = React.useState("");
@@ -28,9 +28,9 @@ function App() {
                             <InputGroup.Append>
                                 <Button variant="secondary"
                                 >
-                                    <LinkOverride>
+                                    <LinkButton>
                                         <NavLink to={`/answer/${search || 0}`}>Search</NavLink>
-                                    </LinkOverride>
+                                    </LinkButton>
                                 </Button>
                             </InputGroup.Append>
                         </InputGroup>
