@@ -59,7 +59,7 @@ export const Answer: React.FunctionComponent<Props> = ({answer, type}) => {
         <Text>Score: {answer.AScore}</Text>
         <br/>
         <Text>
-            {answer.ABody}
+            <span dangerouslySetInnerHTML={{ __html: answer.ABody }} />
         </Text>
         <Url>
             <a href={answer.url_AcceptedAns}>Original answer URL</a>

@@ -25,7 +25,9 @@ export const Question: React.FunctionComponent<Props> = ({question, answer, clas
             </Header>
             <Title>{question.Qtitle}</Title>
             <br/>
-            <Text>{question.QBody}</Text>
+            <Text>
+                <span dangerouslySetInnerHTML={{ __html: question.QBody }} />
+            </Text>
             <Url>
                 <a href={question.url_question}>Original question URL</a>
             </Url>
