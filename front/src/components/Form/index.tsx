@@ -37,8 +37,8 @@ export const Form: React.FunctionComponent<Props> = ({
       <Title>Classification form</Title>
       <form onSubmit={handleSubmit}>
         <FormWrapper>
-          {formItems.getFormItem(state.relevant, 0, dispatch)}
           {formItems.getFormItem(state.interesting, 5, dispatch)}
+          {formItems.getFormItem(state.relevant, 0, dispatch, state.disabled)}
         </FormWrapper>
 
         <input type="submit" value="Submit" />

@@ -12,6 +12,7 @@ const INITIAL_STATE: Form = {
   goodPractice: "",
   pitfall: "",
   references: "",
+  disabled: true,
 };
 
 export const ProgressForm = React.createContext<State>([

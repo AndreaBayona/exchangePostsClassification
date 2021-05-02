@@ -9,6 +9,7 @@ export type Form = {
   goodPractice: string;
   pitfall: string;
   references: string;
+  disabled: boolean;
 };
 type ActionHandlers = typeof actionsForm;
 export type Action = { type: keyof ActionHandlers; payload: any };

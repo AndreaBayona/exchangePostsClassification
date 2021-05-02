@@ -21,7 +21,8 @@ export const setPipeline = (state: State, pipeline: string[]) => {
 };
 
 export const setInteresting = (state: State, interesting: boolean) => {
-  return { ...state, interesting };
+  const disabled = interesting ? false : true;
+  return { ...state, interesting, disabled };
 };
 
 export const setGoodPractices = (state: State, goodPractice: string) => {

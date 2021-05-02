@@ -6,7 +6,8 @@ import { Action } from "../../contexts/form/types";
 export const getFormItem = (
   formItemValue: any,
   indexQuestion: number,
-  dispatch: React.Dispatch<Action>
+  dispatch: React.Dispatch<Action>,
+  disabled?: boolean
 ) => {
   return (
     <FormItem>
@@ -19,6 +20,7 @@ export const getFormItem = (
             payload: newValue.target.value == "Yes" ? true : false,
           })
         }
+        disabled={disabled ? disabled : false}
       >
         <option value="">--Please choose an option--</option>
         {FORM_QUESTIONS[indexQuestion].options.map((valueOption, index) => (
