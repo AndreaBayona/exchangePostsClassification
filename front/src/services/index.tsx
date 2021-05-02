@@ -8,8 +8,8 @@ const objectToQueryString = (obj: any) => {
     .map((key) => key + "=" + obj[key])
     .join("&");
 };
-//localhost
-const SERVER = "172.24.98.191";
+//172.24.98.191
+const SERVER = "localhost";
 const PORT = 8080; //3000
 const URL = `http://${SERVER}:${PORT}/answers`;
 
