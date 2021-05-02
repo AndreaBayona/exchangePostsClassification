@@ -11,6 +11,6 @@ export type Form = {
   references: string;
 };
 type ActionHandlers = typeof actionsForm;
-type Action = { type: keyof ActionHandlers; payload: any };
+export type Action = { type: keyof ActionHandlers; payload: any };
 export type Reducer = React.Reducer<Form, Action>;
 export type State = [Form, React.Dispatch<Action>];
