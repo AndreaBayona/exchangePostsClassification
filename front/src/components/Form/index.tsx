@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Title } from "../Common/fonts";
-import { FORM_QUESTIONS } from "./FormQuestions";
+import { FORM_QUESTIONS } from "./types";
 import { Classification } from "../../models/Classification";
 import {
   Container,
@@ -11,6 +11,7 @@ import {
   Input,
   FormInput,
 } from "./styles";
+import { ProgressForm } from "../../contexts/form/index";
 
 type Props = {
   classifiedAns?: Classification;
@@ -54,6 +55,8 @@ export const Form: React.FunctionComponent<Props> = ({
   classifiedAns,
   submitForm,
 }) => {
+  const [state, dispatch] = React.useContext(ProgressForm);
+
   const relevant = useFormInputField(
     classifiedAns ? classifiedAns.isRelevant : ""
   );

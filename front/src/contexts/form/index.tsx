@@ -14,7 +14,7 @@ const INITIAL_STATE: Form = {
   references: "",
 };
 
-const ProgressForm = React.createContext<State>([
+export const ProgressForm = React.createContext<State>([
   INITIAL_STATE,
   () => undefined,
 ]);
