@@ -1,28 +1,30 @@
 export const FORM_QUESTIONS = [
   {
-    label: "Is it relevant to the project?",
+    label: "It is a false positive?",
     options: ["Yes", "No"],
     freeInput: false,
   },
   {
-    label: "Types of learnings",
+    label: "Types of learning",
     options: [
       "Supervised",
       "Unsupervised",
       "Semi-supervised",
       "Reinforcement learning",
       "Unclear",
+      "General",
+      "Applies to more than one"
     ],
     freeInput: false,
   },
   {
     label: "Types of architecture",
-    options: ["Deep", "Shallow", "unclear"],
+    options: ["Deep", "Shallow", "unclear", "General", "Applies to more than one"],
     freeInput: false,
   },
   {
     label: "Models of  processing",
-    options: ["Batch", "Online", "Unclear"],
+    options: ["Batch", "Online", "Unclear", "General", "Applies to more than one"],
     freeInput: false,
   },
   {
@@ -35,12 +37,14 @@ export const FORM_QUESTIONS = [
       "Model training",
       "Model evaluation",
       "Model deployment",
-      "  Model monitoring",
+      "Model monitoring",
+      "General",
+      "Applies to more than one"
     ],
     freeInput: false,
   },
   {
-    label: "Is it interesting?",
+    label: "Is it an interesting case to discuss?",
     options: ["Yes", "No"],
     freeInput: false,
   },
