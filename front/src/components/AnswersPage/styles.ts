@@ -15,8 +15,12 @@ export const Arrows = styled.div`
   padding: 0 40px;
 `;
 
-export const NavButtons = styled.div`
-  color: dodgerblue;
+export const IconBox = styled.div`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+    color: dodgerblue;
  :hover{
   color: blue;
  }
@@ -38,4 +42,12 @@ export const AlertWrapper = styled.div`
   >div{
   margin-bottom: 0;
   }
+`;
+
+export const ErrorMessage = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  top: 50%;
 `;
