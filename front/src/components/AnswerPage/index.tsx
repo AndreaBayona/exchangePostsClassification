@@ -30,9 +30,7 @@ export const AnswerPage = () => {
                 }
             });
         }
-    }, []);
-
-
+    }, id);
 
     return (
         <>

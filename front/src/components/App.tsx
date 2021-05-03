@@ -26,8 +26,7 @@ function App() {
                                          onChange={(e)=> setSearch(e.target.value)}
                             />
                             <InputGroup.Append>
-                                <Button variant="secondary"
-                                >
+                                <Button variant="secondary">
                                     <LinkButton>
                                         <NavLink to={`/answer/${search || 0}`}>Search</NavLink>
                                     </LinkButton>
