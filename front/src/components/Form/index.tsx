@@ -5,6 +5,7 @@ import { Classification } from "../../models/Classification";
 import { Container, FormWrapper } from "./styles";
 import { ProgressForm } from "../../contexts/form/index";
 import * as formItems from "./functions";
+import { MultipleSelection } from "../MultipleSelection/index";
 
 type Props = {
   classifiedAns?: Classification;
@@ -40,6 +41,7 @@ export const Form: React.FunctionComponent<Props> = ({
           {formItems.getFormItem(state.interesting, 5, dispatch)}
           {formItems.getFormItem(state.relevant, 0, dispatch, state.disabled)}
         </FormWrapper>
+        <MultipleSelection></MultipleSelection>
 
         <input type="submit" value="Submit" />
       </form>
