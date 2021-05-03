@@ -5,7 +5,7 @@ import {Alert} from "react-bootstrap";
 import {getClassifiedAnswers, getUnclassifiedAnswers} from "../../services";
 import {Question} from "../Question";
 
-import {Wrapper, Arrows, NavButtons, AlertWrapper} from './styles';
+import {Wrapper, Arrows, NavButtons, QuestionNumberWrapper} from './styles';
 import {Answer} from "../../models/Answer";
 
 export const AnswersPage = () => {
@@ -13,8 +13,8 @@ export const AnswersPage = () => {
     const [answ, setAnsw] = React.useState<undefined | Answer[]>(undefined);
     const [size, setSize] = React.useState(0);
     const [index, setIndex] = React.useState(0);
-    const [show, setShow] = React.useState(false);
-    const [msg, setMsg] = React.useState("");
+    const [showLeftArrow, setShowLeftArrow] = React.useState(false);
+    const [showRightArrow, setShowRightArrow] = React.useState(false);
     let answersList: Answer[] = [];
 
     React.useEffect(() => {
@@ -23,6 +23,7 @@ export const AnswersPage = () => {
                 answersList = ans as Answer[];
                 setAnsw(answersList);
                 setSize(answersList.length);
+                setShowRightArrow(answersList.length > 1);
                 console.log(answersList, answersList.length)
             });
         }
@@ -31,6 +32,7 @@ export const AnswersPage = () => {
                 answersList = ans as Answer[];
                 setAnsw(answersList);
                 setSize(answersList.length);
+                setShowRightArrow(answersList.length > 1);
                 console.log(answersList, answersList.length)
             });
         }
@@ -39,31 +41,24 @@ export const AnswersPage = () => {
     const manageIndex = (value: number) => {
         console.log("INDEX", index)
         if(value > 0 && index == size -1){
-            setShow(true);
-            setMsg("You have reached the end of the list");
+            setShowRightArrow(false);
         }
         else if(value < 0 && index == 0){
-            setShow(true);
-            setMsg("You have reached the beginning of the list");
+            setShowLeftArrow(false);
         }
         else {
+            setShowRightArrow(true);
+            setShowLeftArrow(true);
             setIndex(index+value);
             console.log("ARRAY", answ);
         }
     };
     return (
         <Wrapper>
-            {show &&
-                <AlertWrapper>
-                    <Alert variant="primary" onClose={() => setShow(false)} dismissible>
-                        <p> {msg}</p>
-                    </Alert>
-                </AlertWrapper>
-            }
             <Arrows>
-                <NavButtons onClick={()=> manageIndex(-1)}>Previous</NavButtons>
-                <div>Question {index + 1} out of {size}</div>
-                <NavButtons onClick={()=> manageIndex(1)}>Next</NavButtons>
+                {showLeftArrow && <NavButtons onClick={()=> manageIndex(-1)}>Previous</NavButtons>}
+                <QuestionNumberWrapper>Question {index + 1} out of {size}</QuestionNumberWrapper>
+                {showRightArrow && <NavButtons onClick={()=> manageIndex(1)}>Next</NavButtons>}
             </Arrows>
             {answ &&
             <Question

@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 
 export const Arrows = styled.div`
   display: flex;
-  width: 100%;
+  width: 800px;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
@@ -20,6 +20,13 @@ export const NavButtons = styled.div`
  :hover{
   color: blue;
  }
+`;
+
+export const QuestionNumberWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const AlertWrapper = styled.div`
