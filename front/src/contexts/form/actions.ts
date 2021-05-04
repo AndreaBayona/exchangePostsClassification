@@ -1,7 +1,8 @@
 import { Form as State } from "./types";
 
 export const setRelevant = (state: State, relevant: boolean) => {
-  return { ...state, relevant };
+  const disabled = relevant ? true : false;
+  return { ...state, relevant, disabled };
 };
 
 export const setLearning = (state: State, learning: string[]) => {
@@ -21,8 +22,7 @@ export const setPipeline = (state: State, pipeline: string[]) => {
 };
 
 export const setInteresting = (state: State, interesting: boolean) => {
-  const disabled = interesting ? false : true;
-  return { ...state, interesting, disabled };
+  return { ...state, interesting };
 };
 
 export const setGoodPractices = (state: State, goodPractice: string) => {

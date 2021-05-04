@@ -44,6 +44,7 @@ export const Form: React.FunctionComponent<Props> = ({
                 key={question.label}
                 formItemValue={index === 0 ? state.relevant : state.interesting}
                 question={question}
+                defaultValue={index === 0 ? "Yes" : ""}
                 dispatch={(newValue) => {
                   dispatch({
                     type: question.dispatch,
@@ -55,11 +56,7 @@ export const Form: React.FunctionComponent<Props> = ({
             );
           })}
         </FormWrapper>
-        <MultipleSelection
-          label={"a label"}
-          options={["Opcion1", "Opcion2"]}
-          disabled={state.disabled}
-        />
+
         <input type="submit" value="Submit" />
       </form>
     </Container>

@@ -12,6 +12,7 @@ type Props = {
   question: Question;
   dispatch: (newValue: boolean) => void;
   disabled?: boolean;
+  defaultValue: string;
 };
 
 export const SingleSelection: React.FC<Props> = ({
@@ -19,27 +20,30 @@ export const SingleSelection: React.FC<Props> = ({
   question,
   dispatch,
   disabled,
+  defaultValue,
 }) => {
   return (
     <FormItem>
       <Label>{question.label}</Label>
       <select
-        value={formItemValue.value}
+        defaultValue={defaultValue}
         onChange={(newValue) =>
           dispatch(newValue.target.value == "Yes" ? true : false)
         }
         disabled={disabled ? disabled : false}
       >
         <option value="">--Please choose an option--</option>
-        {question.options.map((valueOption, index) => (
-          <option
-            key={"q-" + question.label + "-" + index}
-            value={valueOption}
-            selected={valueOption === formItemValue.value}
-          >
-            {valueOption}
-          </option>
-        ))}
+        {question.options.map((valueOption, index) => {
+          return (
+            <option
+              key={"q-" + question.label + "-" + index}
+              value={valueOption}
+              selected={valueOption === formItemValue.value}
+            >
+              {valueOption}
+            </option>
+          );
+        })}
       </select>
     </FormItem>
   );
