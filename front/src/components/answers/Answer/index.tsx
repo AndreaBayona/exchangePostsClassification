@@ -1,17 +1,20 @@
 import * as React from "react";
 
-import { Text, Title } from "../Common/fonts";
-import { Button } from "../Common/buttons";
-import { Form } from "../Form";
-import { Classification } from "../../models/Classification";
-import { Answer as AnswerData } from "../../models/Answer";
+import { Text, Title } from "../../common/fonts";
+import { Button } from "../../common/buttons";
+import { Form } from "../../inputs/Form";
+import { Classification } from "../../../models/Classification";
+import { Answer as AnswerData } from "../../../models/Answer";
 
 import { Container, Option, Options, Url } from "./styles";
-import { classificateAQuestion, ClassificationRequest } from "../../services";
+import {
+  classificateAQuestion,
+  ClassificationRequest,
+} from "../../../services";
 import { AlertWrapper, Wrapper } from "../AnswersPage/styles";
 import { Modal } from "react-bootstrap";
 
-import { FormProvider } from "../../contexts/form/index";
+import { FormProvider } from "../../../contexts/form/index";
 
 type Props = {
   answer: AnswerData;

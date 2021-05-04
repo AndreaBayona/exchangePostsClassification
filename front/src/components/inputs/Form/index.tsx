@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Title } from "../Common/fonts";
-
-import { Classification } from "../../models/Classification";
+import { Title } from "../../common/fonts";
+import { BOOLEAN_QUESTION } from "./types";
+import { Classification } from "../../../models/Classification";
 import { Container, FormWrapper } from "./styles";
-import { ProgressForm } from "../../contexts/form/index";
-import * as formItems from "./functions";
+import { ProgressForm } from "../../../contexts/form/index";
 import { MultipleSelection } from "../MultipleSelection/index";
+import { SingleSelection } from "../SingleSelection/index";
 
 type Props = {
   classifiedAns?: Classification;
@@ -38,11 +38,28 @@ export const Form: React.FunctionComponent<Props> = ({
       <Title>Classification form</Title>
       <form onSubmit={handleSubmit}>
         <FormWrapper>
-          {formItems.getFormItem(state.interesting, 5, dispatch)}
-          {formItems.getFormItem(state.relevant, 0, dispatch, state.disabled)}
+          {BOOLEAN_QUESTION.map((question, index) => {
+            return (
+              <SingleSelection
+                key={question.label}
+                formItemValue={index === 0 ? state.relevant : state.interesting}
+                question={question}
+                dispatch={(newValue) => {
+                  dispatch({
+                    type: question.dispatch,
+                    payload: newValue,
+                  });
+                }}
+                disabled={index == 0 ? false : state.disabled}
+              />
+            );
+          })}
         </FormWrapper>
-        <MultipleSelection></MultipleSelection>
-
+        <MultipleSelection
+          label={"a label"}
+          options={["Opcion1", "Opcion2"]}
+          disabled={state.disabled}
+        />
         <input type="submit" value="Submit" />
       </form>
     </Container>

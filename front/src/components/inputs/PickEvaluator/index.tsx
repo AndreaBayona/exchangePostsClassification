@@ -1,12 +1,12 @@
 import React from "react";
 import { Dropdown, DropdownButton, Button } from "react-bootstrap";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { Container } from "./styles";
 
 const PickEvaluator = () => {
   const [evaluator, setEvaluator] = React.useState("Select one option");
-    const history = useHistory();
+  const history = useHistory();
   return (
     <Container>
       <div>Select evaluator name</div> <br></br>
@@ -31,6 +31,13 @@ const PickEvaluator = () => {
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
+            setEvaluator("Mario");
+          }}
+        >
+          Mario
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
             setEvaluator("Valerie");
           }}
         >
@@ -38,11 +45,12 @@ const PickEvaluator = () => {
         </Dropdown.Item>
       </DropdownButton>
       <br></br>
-
-      <Button variant="info" onClick={() => history.push(`/pickAnswers/${evaluator}`)}>
-            Go
-       </Button>{" "}
-
+      <Button
+        variant="info"
+        onClick={() => history.push(`/pickAnswers/${evaluator}`)}
+      >
+        Go
+      </Button>{" "}
     </Container>
   );
 };
