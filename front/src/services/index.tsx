@@ -64,7 +64,7 @@ export const findQuestionById = (id: Id) => {
       "Access-Control-Allow-Credentials": "true",
     },
   }).then((res) => {
-    if (res.status == 200) {
+    if (res.status === 200) {
       return res.json();
     }
     return undefined;
@@ -85,7 +85,7 @@ export const classificateAQuestion = (
       "Access-Control-Allow-Credentials": "true",
     },
   }).then((res) => {
-    if (res.status == 200) {
+    if (res.status === 200) {
       return "sucesss";
     }
     return "err";

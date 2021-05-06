@@ -14,7 +14,7 @@ export const QAns = {
     classified: true,
     id: 2000,
     classification: {
-        isRelevant: 'Yes',
+        isFalsePositive: 'Yes',
         typeOfLearning: 'Supervised',
         typeOfArchitecture: 'Deep',
         processingModel: 'Batch',

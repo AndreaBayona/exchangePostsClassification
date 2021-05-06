@@ -1,5 +1,5 @@
 export const DISPATCH_TYPES = [
-  "setRelevant",
+  "setFalsePositive",
   "setLearning",
   "setArchitecture",
   "setProcessing",

@@ -54,10 +54,10 @@ export const AnswersPage = () => {
   }, []);
 
   const manageIndex = (value: number) => {
-    if (value > 0 && index == size - 2) {
+    if (value > 0 && index === size - 2) {
       setShowRightArrow(false);
       setIndex(index + value);
-    } else if (value < 0 && index == 1) {
+    } else if (value < 0 && index === 1) {
       setShowLeftArrow(false);
       setIndex(index + value);
     } else {

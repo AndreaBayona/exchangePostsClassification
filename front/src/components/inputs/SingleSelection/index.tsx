@@ -1,14 +1,14 @@
 import * as React from "react";
 import { FormItem, Label } from "./styles";
 
-type Question = {
+type FormQuestion = {
   label: string;
   options: string[];
 };
 
 type Props = {
   formItemValue: any;
-  question: Question;
+  formQuestion: FormQuestion;
   dispatch: (newValue: boolean) => void;
   disabled?: boolean;
   defaultValue: string;
@@ -16,26 +16,26 @@ type Props = {
 
 export const SingleSelection: React.FC<Props> = ({
   formItemValue,
-  question,
+  formQuestion,
   dispatch,
   disabled,
   defaultValue,
 }) => {
   return (
     <FormItem>
-      <Label>{question.label}</Label>
+      <Label>{formQuestion.label}</Label>
       <select
         defaultValue={defaultValue}
         onChange={(newValue) =>
-          dispatch(newValue.target.value === "Yes")
+          dispatch(newValue.target.value !== "Yes")
         }
         disabled={!!disabled}
       >
         <option value="">--Please choose an option--</option>
-        {question.options.map((valueOption, index) => {
+        {formQuestion.options.map((valueOption, index) => {
           return (
             <option
-              key={"q-" + question.label + "-" + index}
+              key={"q-" + formQuestion.label + "-" + index}
               value={valueOption}
               selected={valueOption === formItemValue.value}
             >
