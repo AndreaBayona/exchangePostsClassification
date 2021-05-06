@@ -1,8 +1,7 @@
 import * as React from "react";
-import { useParams } from "react-router-dom";
 
 import { Answer } from "../Answer";
-import { Text, Title } from "../../common/fonts";
+import { Text, Title } from "../../Common/fonts";
 import { Container, Divider, Header, Url } from "./styles";
 import { Question as QuestionData } from "../../../models/Question";
 import { Answer as AnswerData } from "../../../models/Answer";

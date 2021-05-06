@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Title } from "../../common/fonts";
+import { Title } from "../../Common/fonts";
 import { BOOLEAN_QUESTION } from "./types";
 import { Classification } from "../../../models/Classification";
 import { Container, FormWrapper } from "./styles";
-import { ProgressForm } from "../../../contexts/form/index";
-import { MultipleSelection } from "../MultipleSelection/index";
-import { SingleSelection } from "../SingleSelection/index";
+import { ProgressForm } from "../../../contexts/form";
+import { SingleSelection } from "../SingleSelection";
 
 type Props = {
   classifiedAns?: Classification;

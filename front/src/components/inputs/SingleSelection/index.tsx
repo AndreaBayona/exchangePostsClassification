@@ -1,6 +1,5 @@
 import * as React from "react";
 import { FormItem, Label } from "./styles";
-import { Action } from "../../../contexts/form/types";
 
 type Question = {
   label: string;
@@ -28,9 +27,9 @@ export const SingleSelection: React.FC<Props> = ({
       <select
         defaultValue={defaultValue}
         onChange={(newValue) =>
-          dispatch(newValue.target.value == "Yes" ? true : false)
+          dispatch(newValue.target.value === "Yes")
         }
-        disabled={disabled ? disabled : false}
+        disabled={!!disabled}
       >
         <option value="">--Please choose an option--</option>
         {question.options.map((valueOption, index) => {

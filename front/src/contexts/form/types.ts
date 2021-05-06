@@ -1,4 +1,6 @@
+import React from "react";
 import * as actionsForm from "./actions";
+
 export type Form = {
   relevant: boolean;
   learning: string[];
