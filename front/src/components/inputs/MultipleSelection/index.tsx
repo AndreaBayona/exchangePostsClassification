@@ -1,19 +1,23 @@
 import React from "react";
 import { Col, Form } from "react-bootstrap";
+import {FormItem} from "./styles";
 
 type Props = {
   label: string;
   options: string[];
   disabled: boolean;
+  dispatch: (newValue: string[]) => void;
 };
 
 export const MultipleSelection: React.FC<Props> = ({
   label,
   options,
   disabled,
+  dispatch,
 }) => {
   const [field, setField] = React.useState<string[]>([]);
   return (
+   <FormItem>
     <Form.Group as={Col} controlId="my_multiselect_field">
       <Form.Label>{label}</Form.Label>
       <Form.Control
@@ -21,7 +25,7 @@ export const MultipleSelection: React.FC<Props> = ({
         multiple
         disabled={disabled}
         value={field}
-        onChange={() => {}}
+        onChange={() => dispatch(field)}
         onClick={(e: any) => {
           const index = field.indexOf(e.target.value);
           if (index > -1) {
@@ -40,5 +44,6 @@ export const MultipleSelection: React.FC<Props> = ({
         })}
       </Form.Control>
     </Form.Group>
+   </FormItem>
   );
 };

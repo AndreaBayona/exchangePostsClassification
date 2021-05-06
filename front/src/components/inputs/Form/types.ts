@@ -22,6 +22,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "General",
       "Applies to more than one",
     ],
+    dispatch: DISPATCH_TYPES[1],
   },
   {
     label: "Types of architecture",
@@ -32,6 +33,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "General",
       "Applies to more than one",
     ],
+    dispatch: DISPATCH_TYPES[2],
   },
   {
     label: "Models of  processing",
@@ -42,6 +44,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "General",
       "Applies to more than one",
     ],
+    dispatch: DISPATCH_TYPES[3],
   },
   {
     label: "Stages in the ML pipeline ",
@@ -57,6 +60,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "General",
       "Applies to more than one",
     ],
+    dispatch: DISPATCH_TYPES[4],
   },
 ];
 

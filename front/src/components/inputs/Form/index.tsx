@@ -44,6 +44,12 @@ function getMultiSelectionQuestions(state: any, dispatch: (value: Action) => voi
               label={formQuestion.label}
               disabled={state.disabled}
               options={formQuestion.options}
+              dispatch={(newValue) => {
+                dispatch({
+                  type: formQuestion.dispatch,
+                  payload: newValue,
+                });
+              }}
           />
       );
     })}
@@ -78,6 +84,7 @@ export const Form: React.FunctionComponent<Props> = ({
       <form onSubmit={handleSubmit}>
         <FormWrapper>
           {getBooleanFormQuestions(state, dispatch)}
+          {getMultiSelectionQuestions(state, dispatch)}
         </FormWrapper>
 
         <input type="submit" value="Submit"/>

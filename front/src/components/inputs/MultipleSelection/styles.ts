@@ -5,9 +5,4 @@ export const FormItem = styled.span`
   text-align: start;
   flex-direction: column;
   width: 50%;
-  padding: 20px;
-`;
-
-export const Label = styled.label`
-  margin-bottom: 5px;
 `;
