@@ -25,8 +25,15 @@ const MongoUtils = () => {
         .db(dbName)
         .collection("answers")
         .aggregate([
-          { $match: { user: user, classified: null } },
+          { $match: { classification: null } },
           {
+            $lookup: {
+              from: "classifications",
+              localField: "QID",
+              foreignField: "QID",
+              as: "classification",
+            },
+
             $lookup: {
               from: "questions",
               localField: "QID",
@@ -35,7 +42,6 @@ const MongoUtils = () => {
             },
           },
         ])
-        .limit(600)
         .toArray()
         .finally(() => client.close())
     );
