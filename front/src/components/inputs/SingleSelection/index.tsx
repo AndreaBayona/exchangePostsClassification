@@ -27,7 +27,7 @@ export const SingleSelection: React.FC<Props> = ({
       <select
         defaultValue={defaultValue}
         onChange={(newValue) =>
-          dispatch(newValue.target.value !== "Yes")
+          dispatch(newValue.target.value !== "No")
         }
         disabled={!!disabled}
       >

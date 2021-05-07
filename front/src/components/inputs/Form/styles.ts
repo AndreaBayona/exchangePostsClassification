@@ -33,3 +33,7 @@ export const Input = styled.textarea`
   width: 100%;
   min-height: 50px;
 `;
+
+export const Label = styled.label`
+  margin-bottom: 5px;
+`;

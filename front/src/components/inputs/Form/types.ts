@@ -82,12 +82,15 @@ export const BOOLEAN_QUESTION = [
 export const TEXT_AREA_QUESTIONS = [
   {
     label: "Suggested Good practice",
+    dispatch: DISPATCH_TYPES[6],
   },
   {
     label: "Pitfall/mistake/error that is related to good practice",
+    dispatch: DISPATCH_TYPES[7],
   },
   {
     label: "External references",
+    dispatch: DISPATCH_TYPES[8],
   },
 ];
 

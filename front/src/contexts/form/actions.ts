@@ -17,8 +17,8 @@ export const setProcessing = (state: State, processing: string[]) => {
   return { ...state, processing };
 };
 
-export const setPipeline = (state: State, pipeline: string[]) => {
-  return { ...state, pipeline };
+export const setPipeline = (state: State, mlPipeline: string[]) => {
+  return { ...state, mlPipeline };
 };
 
 export const setInteresting = (state: State, interesting: boolean) => {
