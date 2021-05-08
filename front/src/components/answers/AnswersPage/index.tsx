@@ -115,7 +115,7 @@ export const AnswersPage = () => {
       </Arrows>
       {answers && actualAnswer &&(
         <Question
-          key={index}
+          key={"Q"+index}
           question={actualAnswer.question[0]}
           answer={actualAnswer}
           classifierName={username}
