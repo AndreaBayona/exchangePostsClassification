@@ -24,6 +24,7 @@ const ARROWS_SIZE = 16;
 export const AnswersPage = () => {
   let { username, answersGroup }: any = useParams();
   const [answers, setAnswers] = React.useState<undefined | Answer[]>(undefined);
+  const [actualAnswer, setActualAnswer] = React.useState<Answer>();
   const [size, setSize] = React.useState(0);
   const [index, setIndex] = React.useState(0);
   const [showLeftArrow, setShowLeftArrow] = React.useState(false);
@@ -36,6 +37,7 @@ export const AnswersPage = () => {
       getClassifiedAnswers({ user: username }).then((ans) => {
         answersList = ans as Answer[];
         setAnswers(answersList);
+        setActualAnswer(answersList[0]);
         setSize(answersList.length);
         setShowRightArrow(answersList.length > 1);
         setLoading(false);
@@ -45,6 +47,7 @@ export const AnswersPage = () => {
       getUnclassifiedAnswers({ user: username }).then((ans) => {
         answersList = ans as Answer[];
         setAnswers(answersList);
+        setActualAnswer(answersList[0]);
         setSize(answersList.length);
         setShowRightArrow(answersList.length > 1);
         setLoading(false);
@@ -54,7 +57,6 @@ export const AnswersPage = () => {
   }, []);
 
   const manageIndex = (value: number, answers: any) => {
-    setLoading(true);
     if (value > 0 && index === size - 2) {
       setShowRightArrow(false);
       setIndex(index + value);
@@ -66,7 +68,7 @@ export const AnswersPage = () => {
       setShowLeftArrow(true);
       setIndex(index + value);
     }
-    setLoading(false);
+    setActualAnswer(answers[index]);
     console.log(answers[index].question[0]);
   };
 
@@ -111,10 +113,11 @@ export const AnswersPage = () => {
           )}
         </IconBox>
       </Arrows>
-      {answers && !loading &&(
+      {answers && actualAnswer &&(
         <Question
-          question={answers[index].question[0]}
-          answer={answers[index]}
+          key={"Q"+index}
+          question={actualAnswer.question[0]}
+          answer={actualAnswer}
           classifierName={username}
         />
       )}
