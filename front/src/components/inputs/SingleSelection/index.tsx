@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormItem, Label } from "./styles";
+import { FormItem, Label, SelectOverride } from "./styles";
 
 type FormQuestion = {
   label: string;
@@ -24,7 +24,7 @@ export const SingleSelection: React.FC<Props> = ({
   return (
     <FormItem>
       <Label>{formQuestion.label}</Label>
-      <select
+      <SelectOverride
         defaultValue={defaultValue}
         onChange={(newValue) =>
           dispatch(newValue.target.value !== "No")
@@ -43,7 +43,7 @@ export const SingleSelection: React.FC<Props> = ({
             </option>
           );
         })}
-      </select>
+      </SelectOverride>
     </FormItem>
   );
 };

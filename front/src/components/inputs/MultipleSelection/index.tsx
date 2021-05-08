@@ -1,49 +1,59 @@
 import React from "react";
-import { Col, Form } from "react-bootstrap";
-import {FormItem} from "./styles";
+import Select from 'react-select';
+import {FormItem, Title} from "./styles";
+
+type Option = {
+  label: string;
+  value: string;
+  isFixed: boolean;
+};
 
 type Props = {
   label: string;
-  options: string[];
+  optionsLabels: string[];
   disabled: boolean;
   dispatch: (newValue: string[]) => void;
 };
 
+const createSelectOptions = (optionsLabels: string[]) =>
+  optionsLabels.map( (value, index) => {
+    return {
+      label: value,
+      value: value,
+      isFixed: false,
+    }
+  });
+
+const getSelection = (options: Option[]): string[] =>
+    options.map( (value) => {
+      return value.label;
+    });
+
 export const MultipleSelection: React.FC<Props> = ({
   label,
-  options,
+  optionsLabels,
   disabled,
   dispatch,
 }) => {
-  const [field, setField] = React.useState<string[]>([]);
+  const options = React.useMemo(() => createSelectOptions(optionsLabels), [optionsLabels]);
+  const [state, setState] = React.useState<any>([]);
+
+  const onChange = (value: any) => {
+    dispatch(getSelection(value));
+  };
+
   return (
-   <FormItem>
-    <Form.Group as={Col} controlId="my_multiselect_field">
-      <Form.Label>{label}</Form.Label>
-      <Form.Control
-        as="select"
-        multiple
-        disabled={disabled}
-        value={field}
-        onChange={() => dispatch(field)}
-        onClick={(e: any) => {
-          const index = field.indexOf(e.target.value);
-          if (index > -1) {
-            const copyState = field.slice();
-            copyState.splice(index, 1);
-            setField(copyState);
-          } else {
-            const copyState = field.slice();
-            copyState.push(e.target.value);
-            setField(copyState);
-          }
-        }}
-      >
-        {options.map((field) => {
-          return <option value={field}>{field}</option>;
-        })}
-      </Form.Control>
-    </Form.Group>
-   </FormItem>
+      <FormItem>
+        <Title>{label}</Title>
+        <Select
+            isMulti
+            isClearable
+            name="colors"
+            classNamePrefix="select"
+            options={options}
+            isDisabled={disabled}
+            onChange={(value) => onChange(value)}
+        />
+      </FormItem>
   );
 };

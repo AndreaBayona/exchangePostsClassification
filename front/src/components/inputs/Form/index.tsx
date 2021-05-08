@@ -4,10 +4,10 @@ import { BOOLEAN_QUESTION, MULTIPLE_SELECTION_QUESTION, TEXT_AREA_QUESTIONS } fr
 import { Classification } from "../../../models/Classification";
 import { ProgressForm } from "../../../contexts/form";
 import { SingleSelection } from "../SingleSelection";
-import {MultipleSelection} from "../MultipleSelection";
+import {MultipleSelection} from "../MultipleSelection/index";
 import {Action} from "../../../contexts/form/types";
 
-import { Container, FormWrapper, FormInput, FreeText, Label, Input } from "./styles";
+import { Container, FormWrapper, FormInput, FreeText, Label, TextAreaOverride, SubmitButton } from "./styles";
 
 type Props = {
   classifiedAns?: Classification;
@@ -42,7 +42,7 @@ function getAreaTextQuestions(state: any, dispatch: (value: Action) => void) {
       return (
           <FormInput key={formQuestion.label + "" + index }>
             <Label htmlFor="">{formQuestion.label}</Label>
-            <Input
+            <TextAreaOverride
               disabled={state.disabled}
               onChange={( newValue) => {
               dispatch({
@@ -65,7 +65,7 @@ function getMultiSelectionQuestions(state: any, dispatch: (value: Action) => voi
               key={formQuestion.label + '-' + index}
               label={formQuestion.label}
               disabled={state.disabled}
-              options={formQuestion.options}
+              optionsLabels={formQuestion.options}
               dispatch={(newValue) => {
                 dispatch({
                   type: formQuestion.dispatch,
@@ -109,7 +109,7 @@ export const Form: React.FunctionComponent<Props> = ({
           {getMultiSelectionQuestions(state, dispatch)}
           {getAreaTextQuestions(state, dispatch)}
         </FormWrapper>
-        <input type="submit" value="Submit"/>
+        <SubmitButton type="submit" value="Submit"/>
       </form>
     </Container>
   );
