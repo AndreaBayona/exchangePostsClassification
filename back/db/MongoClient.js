@@ -182,15 +182,29 @@ const MongoUtils = () => {
           },
           {
             $lookup: {
-              from: "classification",
+              from: "classifications",
               localField: "AID",
               foreignField: "AID",
-              as: "classifications",
+              as: "classification",
             },
           },
         ])
         .limit(1)
         .toArray()
+        .finally(() => client.close())
+    );
+  };
+
+  MyMongoLib.clasificate = (classification) => {
+    const query = { AID: classification.AID, user: classification.user };
+    const update = { $set: classification };
+    const options = { upsert: true };
+    console.log(classification);
+    return MyMongoLib.connect(url).then((client) =>
+      client
+        .db("exchange-classification")
+        .collection("classifications")
+        .updateOne(query, update, options)
         .finally(() => client.close())
     );
   };

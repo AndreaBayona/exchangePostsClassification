@@ -23,14 +23,10 @@ router.get("/classifiedAnswers", (req, res) => {
   });
 });
 
-router.put("/classificateAQuestion", (req, res) => {
+router.post("/classificate", (req, res) => {
   const classification = req.body.classification;
-  const AID = req.body.AID;
-  db.updateAnswer(classification, parseInt(AID)).then((err) => {
-    if (err) {
-      res.status(500).json({ error: err });
-    }
-    res.status(200).end();
+  db.clasificate(classification).then((answer) => {
+    res.send(answer);
   });
 });
 
