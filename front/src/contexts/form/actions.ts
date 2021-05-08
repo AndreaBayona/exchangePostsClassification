@@ -1,7 +1,7 @@
 import { Form as State } from "./types";
 
-export const setFalsePositive = (state: State, falsePositive: boolean) => {
-  const disabled = falsePositive;
+export const setFalsePositive = (state: State, falsePositive: string) => {
+  const disabled = falsePositive !== "No";
   return { ...state, falsePositive, disabled };
 };
 
@@ -21,7 +21,7 @@ export const setPipeline = (state: State, mlPipeline: string[]) => {
   return { ...state, mlPipeline };
 };
 
-export const setInteresting = (state: State, interesting: boolean) => {
+export const setInteresting = (state: State, interesting: string) => {
   return { ...state, interesting };
 };
 

@@ -1,5 +1,5 @@
 export type Classification = {
-  isFalsePositive: boolean;
+  isFalsePositive: boolean | undefined;
   typeOfLearning: string[];
   typeOfArchitecture: string[];
   processingModel: string[];
@@ -7,5 +7,5 @@ export type Classification = {
   goodPractice: string;
   pitfall: string;
   externalReferences: string;
-  interesting: boolean;
+  interesting: boolean | undefined;
 };

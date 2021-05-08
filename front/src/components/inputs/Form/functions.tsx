@@ -13,7 +13,6 @@ export function getBooleanFormQuestions(state: any, dispatch: (value: Action) =>
                     key={formQuestion.label}
                     formItemValue={index === 0 ? state.falsePositive : state.interesting}
                     formQuestion={formQuestion}
-                    defaultValue={index === 0 ? "Yes" : ""}
                     dispatch={(newValue) => {
                         dispatch({
                             type: formQuestion.dispatch,
