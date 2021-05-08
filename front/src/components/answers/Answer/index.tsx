@@ -1,20 +1,20 @@
 import * as React from "react";
 
-import { Text, Title } from "../../common/fonts";
-import { Button } from "../../common/buttons";
+import { Text, Title} from "../../Common/fonts";
+import { Button } from "../../Common/buttons";
 import { Form } from "../../inputs/Form";
 import { Classification } from "../../../models/Classification";
 import { Answer as AnswerData } from "../../../models/Answer";
 
-import { Container, Option, Options, Url } from "./styles";
+import { Container, Options, Url } from "./styles";
 import {
   classificateAQuestion,
   ClassificationRequest,
 } from "../../../services";
-import { AlertWrapper, Wrapper } from "../AnswersPage/styles";
+import { AlertWrapper } from "../AnswersPage/styles";
 import { Modal } from "react-bootstrap";
 
-import { FormProvider } from "../../../contexts/form/index";
+import { FormProvider } from "../../../contexts/form";
 
 type Props = {
   answer: AnswerData;
@@ -41,7 +41,6 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type }) => {
         answer.classified = true;
       },
       (ans) => {
-        return false;
         setShow(true);
         setMsg("Your form could not not be saved. Try again.");
         console.log(ans);
@@ -78,7 +77,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type }) => {
       <div>
         {edit && (
           <FormProvider>
-            <Form classifiedAns={answer.classification} submitForm={Submit} />
+            <Form submitForm={Submit} />
           </FormProvider>
         )}
       </div>

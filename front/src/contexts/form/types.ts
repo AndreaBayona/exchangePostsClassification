@@ -1,6 +1,8 @@
+import React from "react";
 import * as actionsForm from "./actions";
+
 export type Form = {
-  relevant: boolean;
+  falsePositive: boolean;
   learning: string[];
   architecture: string[];
   processing: string[];

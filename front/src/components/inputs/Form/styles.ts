@@ -29,7 +29,28 @@ export const FreeText = styled.div`
   width: 100%;
 `;
 
-export const Input = styled.textarea`
+export const Label = styled.label`
+  margin-bottom: 5px;
+`;
+
+
+export const TextAreaOverride = styled.textarea`
+  border-radius: 4px;
   width: 100%;
   min-height: 50px;
+  border-color: hsl(0, 0%, 80%);
+  padding: 0 8px 0 8px;
+  
+  &:focus,
+  &:hover{
+    border-color: hsl(0, 0%, 70%);
+  }
+`;
+
+export const SubmitButton = styled.input`
+  border-radius: 4px;
+  border-color: currentColor;
+  min-height: 40px;
+  min-width: 80px;
+
 `;

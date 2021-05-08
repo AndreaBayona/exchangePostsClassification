@@ -1,15 +1,14 @@
 import * as React from "react";
-import { FormItem, Label } from "./styles";
-import { Action } from "../../../contexts/form/types";
+import { FormItem, Label, SelectOverride } from "./styles";
 
-type Question = {
+type FormQuestion = {
   label: string;
   options: string[];
 };
 
 type Props = {
   formItemValue: any;
-  question: Question;
+  formQuestion: FormQuestion;
   dispatch: (newValue: boolean) => void;
   disabled?: boolean;
   defaultValue: string;
@@ -17,26 +16,26 @@ type Props = {
 
 export const SingleSelection: React.FC<Props> = ({
   formItemValue,
-  question,
+  formQuestion,
   dispatch,
   disabled,
   defaultValue,
 }) => {
   return (
     <FormItem>
-      <Label>{question.label}</Label>
-      <select
+      <Label>{formQuestion.label}</Label>
+      <SelectOverride
         defaultValue={defaultValue}
         onChange={(newValue) =>
-          dispatch(newValue.target.value == "Yes" ? true : false)
+          dispatch(newValue.target.value !== "No")
         }
-        disabled={disabled ? disabled : false}
+        disabled={!!disabled}
       >
-        <option value="">--Please choose an option--</option>
-        {question.options.map((valueOption, index) => {
+        <option value="">Select...</option>
+        {formQuestion.options.map((valueOption, index) => {
           return (
             <option
-              key={"q-" + question.label + "-" + index}
+              key={"q-" + formQuestion.label + "-" + index}
               value={valueOption}
               selected={valueOption === formItemValue.value}
             >
@@ -44,7 +43,7 @@ export const SingleSelection: React.FC<Props> = ({
             </option>
           );
         })}
-      </select>
+      </SelectOverride>
     </FormItem>
   );
 };

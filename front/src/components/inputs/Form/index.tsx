@@ -1,27 +1,53 @@
 import * as React from "react";
-import { Title } from "../../common/fonts";
-import { BOOLEAN_QUESTION } from "./types";
+import { Title } from "../../Common/fonts";
 import { Classification } from "../../../models/Classification";
-import { Container, FormWrapper } from "./styles";
-import { ProgressForm } from "../../../contexts/form/index";
-import { MultipleSelection } from "../MultipleSelection/index";
-import { SingleSelection } from "../SingleSelection/index";
+import { ProgressForm } from "../../../contexts/form";
+import {getBooleanFormQuestions, getAreaTextQuestions, getMultiSelectionQuestions} from "./functions";
+
+import { Container, FormWrapper, SubmitButton } from "./styles";
+
+const validateForm = (disabledSubmit: any, state: any, setDisabledSubmit: any) => {
+  console.log("falsePositive", state.falsePositive);
+  if(!state.falsePositive){
+    if(state.learning.length !== 0 &&
+        state.architecture.length !== 0 &&
+        state.processing.length !== 0 &&
+        state.mlPipeline.length !== 0 &&
+        state.goodPractice !== '' &&
+        state.goodPractice !== undefined &&
+        state.pitfall !== '' &&
+        state.pitfall !== undefined &&
+        state.references !== '' &&
+        state.references !== undefined &&
+        state.interesting !== undefined) {
+      setDisabledSubmit(false);
+    }
+    else setDisabledSubmit(true);
+  }
+  else if(state.falsePositive){
+    setDisabledSubmit(false);
+  }
+  else {
+    setDisabledSubmit(true);
+  }
+  console.log("falsePositive", state.falsePositive);
+  console.log("disabledSubmit", disabledSubmit);
+}
 
 type Props = {
-  classifiedAns?: Classification;
   submitForm: (classifiedAns: Classification) => void;
 };
 
 export const Form: React.FunctionComponent<Props> = ({
-  classifiedAns,
   submitForm,
 }) => {
   const [state, dispatch] = React.useContext(ProgressForm);
+  const [disabledSubmit, setDisabledSubmit] = React.useState(true);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     let classification = {
-      isRelevant: state.relevant,
+      isFalsePositive: state.falsePositive,
       typeOfLearning: state.learning,
       typeOfArchitecture: state.architecture,
       processingModel: state.processing,
@@ -31,33 +57,19 @@ export const Form: React.FunctionComponent<Props> = ({
       externalReferences: state.references,
       interesting: state.interesting,
     };
-    //submitForm(classification);
+
+    submitForm(classification);
   };
   return (
     <Container>
       <Title>Classification form</Title>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onChange={() => validateForm(disabledSubmit, state, setDisabledSubmit)}>
         <FormWrapper>
-          {BOOLEAN_QUESTION.map((question, index) => {
-            return (
-              <SingleSelection
-                key={question.label}
-                formItemValue={index === 0 ? state.relevant : state.interesting}
-                question={question}
-                defaultValue={index === 0 ? "Yes" : ""}
-                dispatch={(newValue) => {
-                  dispatch({
-                    type: question.dispatch,
-                    payload: newValue,
-                  });
-                }}
-                disabled={index == 0 ? false : state.disabled}
-              />
-            );
-          })}
+          {getBooleanFormQuestions(state, dispatch)}
+          {getMultiSelectionQuestions(state, dispatch)}
+          {getAreaTextQuestions(state, dispatch)}
         </FormWrapper>
-
-        <input type="submit" value="Submit" />
+        <SubmitButton type="submit" value="Submit" disabled={disabledSubmit}/>
       </form>
     </Container>
   );

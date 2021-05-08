@@ -2,8 +2,9 @@ import * as React from "react";
 import { Form, Reducer, State } from "./types";
 import { createReducer } from "../../hooks/createReducer";
 import * as actionsForm from "./actions";
+
 const INITIAL_STATE: Form = {
-  relevant: false,
+  falsePositive: false,
   learning: [],
   architecture: [],
   processing: [],
