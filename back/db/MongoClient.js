@@ -22,26 +22,71 @@ const MongoUtils = () => {
   MyMongoLib.unclassifiedAnswers = (user) => {
     return MyMongoLib.connect(url).then((client) =>
       client
-        .db(dbName)
-        .collection("answers")
-        .aggregate([
-          { $match: { classification: null } },
+        .db("exchange-classification")
+        .collection("assign")
+        .aggregate(
+          {
+            $match: {
+              user: user,
+            },
+          },
+          {
+            $lookup: {
+              from: "answers",
+              localField: "AID",
+              foreignField: "AID",
+              as: "answer",
+            },
+          },
+          { $unwind: "$answer" },
+          {
+            $unwind: { path: "$answer._id", preserveNullAndEmptyArrays: true },
+          },
           {
             $lookup: {
               from: "classifications",
-              localField: "QID",
-              foreignField: "QID",
-              as: "classification",
+              let: {
+                originalUser: "$user",
+                answerId: "$AID",
+              },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $and: [
+                        {
+                          $eq: ["$user", "$$originalUser"],
+                        },
+                        {
+                          $eq: ["$AID", "$$answerId"],
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              as: "classifications",
             },
-
+          },
+          {
+            $match: {
+              classifications: { $exists: true, $size: 0 },
+            },
+          },
+          {
             $lookup: {
               from: "questions",
-              localField: "QID",
+              localField: "answer.QID",
               foreignField: "QID",
               as: "question",
             },
           },
-        ])
+          {
+            $project: {
+              _id: 1,
+            },
+          }
+        )
         .toArray()
         .finally(() => client.close())
     );
@@ -50,74 +95,80 @@ const MongoUtils = () => {
   MyMongoLib.classifiedAnswers = (user) => {
     return MyMongoLib.connect(url).then((client) =>
       client
-        .db(dbName)
-        .collection("answers")
-        .aggregate([
-          { $match: { user: user, classified: true } },
+        .db("exchange-classification")
+        .collection("assign")
+        .aggregate(
+          {
+            $match: {
+              user: user,
+            },
+          },
+          {
+            $lookup: {
+              from: "answers",
+              localField: "AID",
+              foreignField: "AID",
+              as: "answer",
+            },
+          },
+          { $unwind: "$answer" },
+          {
+            $unwind: { path: "$answer._id", preserveNullAndEmptyArrays: true },
+          },
+          {
+            $lookup: {
+              from: "classifications",
+              let: {
+                originalUser: "$user",
+                answerId: "$AID",
+              },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $and: [
+                        {
+                          $eq: ["$user", "$$originalUser"],
+                        },
+                        {
+                          $eq: ["$AID", "$$answerId"],
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              as: "classifications",
+            },
+          },
+          {
+            $match: {
+              classifications: { $exists: true, $not: { $size: 0 } },
+            },
+          },
           {
             $lookup: {
               from: "questions",
-              localField: "QID",
+              localField: "answer.QID",
               foreignField: "QID",
               as: "question",
             },
           },
-        ])
-        .limit(600)
-        .toArray()
-        .finally(() => client.close())
-    );
-  };
-
-  MyMongoLib.getPaginateQuestion = (page, query) => {
-    return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection(process.env.DB_COLLECTION)
-        .find({})
-        .sort([["_id", -1]])
-        .limit(10)
-        .skip(page)
-        .toArray()
-        .finally(() => client.close())
-    );
-  };
-
-  MyMongoLib.getQuestions = () => {
-    return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection(process.env.DB_COLLECTION)
-        .find()
-        .sort([["_id", -1]])
-        .limit(600)
-        .toArray()
-        .finally(() => client.close())
-    );
-  };
-
-  MyMongoLib.updateAnswer = (classification, id) => {
-    return MyMongoLib.connect(url).then((client) => {
-      client
-        .db(dbName)
-        .collection(answers)
-        .findOneAndUpdate(
-          { AID: id },
           {
-            $set: {
-              classification: classification,
-              classified: true,
+            $project: {
+              _id: 1,
             },
           }
         )
-        .finally(() => client.close());
-    });
+        .toArray()
+        .finally(() => client.close())
+    );
   };
 
   MyMongoLib.getAnswer = (id) => {
     return MyMongoLib.connect(url).then((client) =>
       client
-        .db(dbName)
+        .db("exchange-classification")
         .collection("answers")
         .aggregate([
           { $match: { AID: id } },
@@ -127,6 +178,14 @@ const MongoUtils = () => {
               localField: "QID",
               foreignField: "QID",
               as: "question",
+            },
+          },
+          {
+            $lookup: {
+              from: "classification",
+              localField: "AID",
+              foreignField: "AID",
+              as: "classifications",
             },
           },
         ])

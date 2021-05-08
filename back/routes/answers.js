@@ -23,13 +23,6 @@ router.get("/classifiedAnswers", (req, res) => {
   });
 });
 
-router.get("/getByUserName", (req, res) => {
-  const userName = req.body.userName;
-  db.getQuestionsByUserName(userName).then((questions) => {
-    res.send(questions);
-  });
-});
-
 router.put("/classificateAQuestion", (req, res) => {
   const classification = req.body.classification;
   const AID = req.body.AID;
