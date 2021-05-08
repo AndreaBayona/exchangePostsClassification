@@ -9,7 +9,7 @@ type FormQuestion = {
 type Props = {
   formItemValue: any;
   formQuestion: FormQuestion;
-  dispatch: (newValue: undefined | boolean) => void;
+  dispatch: (newValue: string) => void;
   disabled?: boolean;
 };
 
@@ -24,8 +24,7 @@ export const SingleSelection: React.FC<Props> = ({
       <Label>{formQuestion.label}</Label>
       <SelectOverride
         onChange={(newValue) =>
-          dispatch(newValue.target.value === "Select..." ?
-              undefined : newValue.target.value === "Yes")
+          dispatch( newValue.target.value)
         }
         disabled={!!disabled}
       >

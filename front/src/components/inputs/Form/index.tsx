@@ -4,11 +4,14 @@ import { Classification } from "../../../models/Classification";
 import { ProgressForm } from "../../../contexts/form";
 import {getBooleanFormQuestions, getAreaTextQuestions, getMultiSelectionQuestions} from "./functions";
 
-import { Container, FormWrapper, SubmitButton } from "./styles";
+import { Container, FormWrapper, SubmitButton, ErrorMessage } from "./styles";
 
-const validateForm = (disabledSubmit: any, state: any, setDisabledSubmit: any) => {
-  console.log("falsePositive", state.falsePositive);
-  if(!state.falsePositive){
+type Props = {
+  submitForm: (classifiedAns: Classification) => void;
+};
+
+const validateForm = (state: any) => {
+  if(state.falsePositive === "No"){
     if(state.learning.length > 0 &&
         state.architecture.length > 0 &&
         state.processing.length > 0 &&
@@ -16,31 +19,26 @@ const validateForm = (disabledSubmit: any, state: any, setDisabledSubmit: any) =
         state.goodPractice !== "" &&
         state.pitfall !== "" &&
         state.references !== "" &&
-        state.interesting !== undefined) {
-      setDisabledSubmit(false);
+        state.interesting !== "") {
+      return true;
     }
     else{
-      setDisabledSubmit(true);
-      console.log("ENTOROOO");
+      return false;
     }
   }
-  else if(state.falsePositive){
-    setDisabledSubmit(false);
+  else if(state.falsePositive === "Yes"){
+    return true;
   }
   else {
-    setDisabledSubmit(true);
+    return false;
   }
 }
-
-type Props = {
-  submitForm: (classifiedAns: Classification) => void;
-};
 
 export const Form: React.FunctionComponent<Props> = ({
   submitForm,
 }) => {
   const [state, dispatch] = React.useContext(ProgressForm);
-  const [disabledSubmit, setDisabledSubmit] = React.useState(true);
+  const [disabledSubmit, setDisabledSubmit] = React.useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,18 +54,25 @@ export const Form: React.FunctionComponent<Props> = ({
       interesting: !!state.interesting,
     };
 
-    submitForm(classification);
+    if(validateForm(state)){
+      submitForm(classification);
+    }
+    else {
+      setDisabledSubmit(true);
+    }
+
   };
   return (
     <Container>
       <Title>Classification form</Title>
-      <form onSubmit={handleSubmit} onChange={() => validateForm(disabledSubmit, state, setDisabledSubmit)}>
+      <form onSubmit={handleSubmit} onChange={() => setDisabledSubmit(false)}>
         <FormWrapper>
           {getBooleanFormQuestions(state, dispatch)}
           {getMultiSelectionQuestions(state, dispatch)}
           {getAreaTextQuestions(state, dispatch)}
         </FormWrapper>
         <SubmitButton type="submit" value="Submit" disabled={disabledSubmit}/>
+        {disabledSubmit && <ErrorMessage>There are empty fields</ErrorMessage>}
       </form>
     </Container>
   );

@@ -2,12 +2,12 @@ import React from "react";
 import * as actionsForm from "./actions";
 
 export type Form = {
-  falsePositive: boolean | undefined;
+  falsePositive: string;
   learning: string[];
   architecture: string[];
   processing: string[];
   mlPipeline: string[];
-  interesting: boolean | undefined;
+  interesting: string;
   goodPractice: string;
   pitfall: string;
   references: string;

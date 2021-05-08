@@ -52,5 +52,9 @@ export const SubmitButton = styled.input`
   border-color: currentColor;
   min-height: 40px;
   min-width: 80px;
+`;
 
+export const ErrorMessage = styled.div`
+  color: red;
+  margin: 5px;
 `;
