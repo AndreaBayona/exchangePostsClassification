@@ -16,7 +16,7 @@ const URL = `http://${SERVER}:${PORT}/answers`;
 const UNCLASSSIFIED_ANSWERS = "/unclassifiedAnswers?";
 const CLASSSIFIED_ANSWERS = "/classifiedAnswers?";
 const FIND_BY_ID = "/findById?";
-const CLASSIFICATE_QUESTION = "/classificateAQuestion";
+const CLASSIFICATE_QUESTION = "/classificate";
 
 type User = { user: string };
 type Id = { id: number };
