@@ -2,12 +2,13 @@ import * as React from "react";
 import { Title } from "../../Common/fonts";
 import { Classification } from "../../../models/Classification";
 import { ProgressForm } from "../../../contexts/form";
-import {getBooleanFormQuestions, getAreaTextQuestions, getMultiSelectionQuestions} from "./functions";
+import {getBooleanFormQuestions, getAreaTextQuestions, getMultiSelectionQuestions, updateContext,} from "./functions";
 
 import { Container, FormWrapper, SubmitButton, ErrorMessage } from "./styles";
 
 type Props = {
   submitForm: (classifiedAns: Classification) => void;
+  classification?: Classification;
 };
 
 const validateForm = (state: any) => {
@@ -36,9 +37,15 @@ const validateForm = (state: any) => {
 
 export const Form: React.FunctionComponent<Props> = ({
   submitForm,
+  classification,
 }) => {
   const [state, dispatch] = React.useContext(ProgressForm);
   const [disabledSubmit, setDisabledSubmit] = React.useState(false);
+
+  React.useEffect(() =>{
+    if(classification)
+      updateContext(classification, state, dispatch)
+  }, [classification])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -34,7 +34,7 @@ export const SingleSelection: React.FC<Props> = ({
             <option
               key={"q-" + formQuestion.label + "-" + index}
               value={valueOption}
-              selected={valueOption === formItemValue.value}
+              selected={valueOption === formItemValue}
             >
               {valueOption}
             </option>

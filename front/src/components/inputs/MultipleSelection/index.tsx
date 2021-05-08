@@ -13,6 +13,7 @@ type Props = {
   optionsLabels: string[];
   disabled: boolean;
   dispatch: (newValue: string[]) => void;
+  selectedOptions: string[];
 };
 
 const createSelectOptions = (optionsLabels: string[]) =>
@@ -24,6 +25,13 @@ const createSelectOptions = (optionsLabels: string[]) =>
     }
   });
 
+const filterSelected = (options: Option[], selected: string[], setState: any) => {
+    const filtered = options.filter((value) =>
+        selected.includes(value.label)
+    )
+    setState(filtered);
+};
+
 const getSelection = (options: Option[]): string[] =>
     options.map( (value) => {
       return value.label;
@@ -34,11 +42,14 @@ export const MultipleSelection: React.FC<Props> = ({
   optionsLabels,
   disabled,
   dispatch,
+  selectedOptions,
 }) => {
-  const options = React.useMemo(() => createSelectOptions(optionsLabels), [optionsLabels]);
-  const [state, setState] = React.useState<any>([]);
+ const options = React.useMemo(() => createSelectOptions(optionsLabels), [optionsLabels]);
+ const [state, setState] = React.useState<any>([]);
+ const selected = React.useMemo(() => filterSelected(options, selectedOptions, setState), [selectedOptions]);
 
   const onChange = (value: any) => {
+    setState(value);
     dispatch(getSelection(value));
   };
 
@@ -46,6 +57,7 @@ export const MultipleSelection: React.FC<Props> = ({
       <FormItem>
         <Title>{label}</Title>
         <Select
+            value={state}
             isMulti
             isClearable
             name="colors"
