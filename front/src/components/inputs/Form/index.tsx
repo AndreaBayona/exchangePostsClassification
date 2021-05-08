@@ -43,7 +43,7 @@ export const Form: React.FunctionComponent<Props> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     let classification = {
-      isFalsePositive: !!state.falsePositive,
+      isFalsePositive: state.falsePositive === "Yes",
       typeOfLearning: state.learning,
       typeOfArchitecture: state.architecture,
       processingModel: state.processing,
@@ -51,11 +51,12 @@ export const Form: React.FunctionComponent<Props> = ({
       goodPractice: state.goodPractice,
       pitfall: state.pitfall,
       externalReferences: state.references,
-      interesting: !!state.interesting,
+      interesting: state.interesting === "Yes",
     };
 
     if(validateForm(state)){
       submitForm(classification);
+      console.log(classification);
     }
     else {
       setDisabledSubmit(true);
