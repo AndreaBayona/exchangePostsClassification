@@ -9,9 +9,8 @@ type FormQuestion = {
 type Props = {
   formItemValue: any;
   formQuestion: FormQuestion;
-  dispatch: (newValue: boolean) => void;
+  dispatch: (newValue: undefined | boolean) => void;
   disabled?: boolean;
-  defaultValue: string;
 };
 
 export const SingleSelection: React.FC<Props> = ({
@@ -19,15 +18,14 @@ export const SingleSelection: React.FC<Props> = ({
   formQuestion,
   dispatch,
   disabled,
-  defaultValue,
 }) => {
   return (
     <FormItem>
       <Label>{formQuestion.label}</Label>
       <SelectOverride
-        defaultValue={defaultValue}
         onChange={(newValue) =>
-          dispatch(newValue.target.value !== "No")
+          dispatch(newValue.target.value === "Select..." ?
+              undefined : newValue.target.value === "Yes")
         }
         disabled={!!disabled}
       >

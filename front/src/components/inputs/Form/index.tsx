@@ -9,20 +9,20 @@ import { Container, FormWrapper, SubmitButton } from "./styles";
 const validateForm = (disabledSubmit: any, state: any, setDisabledSubmit: any) => {
   console.log("falsePositive", state.falsePositive);
   if(!state.falsePositive){
-    if(state.learning.length !== 0 &&
-        state.architecture.length !== 0 &&
-        state.processing.length !== 0 &&
-        state.mlPipeline.length !== 0 &&
-        state.goodPractice !== '' &&
-        state.goodPractice !== undefined &&
-        state.pitfall !== '' &&
-        state.pitfall !== undefined &&
-        state.references !== '' &&
-        state.references !== undefined &&
+    if(state.learning.length > 0 &&
+        state.architecture.length > 0 &&
+        state.processing.length > 0 &&
+        state.mlPipeline.length > 0 &&
+        state.goodPractice !== "" &&
+        state.pitfall !== "" &&
+        state.references !== "" &&
         state.interesting !== undefined) {
       setDisabledSubmit(false);
     }
-    else setDisabledSubmit(true);
+    else{
+      setDisabledSubmit(true);
+      console.log("ENTOROOO");
+    }
   }
   else if(state.falsePositive){
     setDisabledSubmit(false);
@@ -30,8 +30,6 @@ const validateForm = (disabledSubmit: any, state: any, setDisabledSubmit: any) =
   else {
     setDisabledSubmit(true);
   }
-  console.log("falsePositive", state.falsePositive);
-  console.log("disabledSubmit", disabledSubmit);
 }
 
 type Props = {
@@ -47,7 +45,7 @@ export const Form: React.FunctionComponent<Props> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     let classification = {
-      isFalsePositive: state.falsePositive,
+      isFalsePositive: !!state.falsePositive,
       typeOfLearning: state.learning,
       typeOfArchitecture: state.architecture,
       processingModel: state.processing,
@@ -55,7 +53,7 @@ export const Form: React.FunctionComponent<Props> = ({
       goodPractice: state.goodPractice,
       pitfall: state.pitfall,
       externalReferences: state.references,
-      interesting: state.interesting,
+      interesting: !!state.interesting,
     };
 
     submitForm(classification);

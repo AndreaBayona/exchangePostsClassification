@@ -5,15 +5,26 @@ import {FormInput, FreeText, Label, TextAreaOverride} from "./styles";
 import {MultipleSelection} from "../MultipleSelection";
 import * as React from "react";
 
+const getYesOrNoString = (value : boolean | undefined) => {
+    if(value === undefined) {
+        return "Select...";
+    }
+    else if (value){
+        return "Yes";
+    }
+    else {
+        return "No";
+    }
+};
+
 export function getBooleanFormQuestions(state: any, dispatch: (value: Action) => void) {
     return <>
         {BOOLEAN_QUESTION.map((formQuestion, index) => {
             return (
                 <SingleSelection
                     key={formQuestion.label}
-                    formItemValue={index === 0 ? state.falsePositive : state.interesting}
+                    formItemValue={index === 0 ? getYesOrNoString(state.falsePositive) : getYesOrNoString(state.interesting)}
                     formQuestion={formQuestion}
-                    defaultValue={index === 0 ? "Yes" : ""}
                     dispatch={(newValue) => {
                         dispatch({
                             type: formQuestion.dispatch,

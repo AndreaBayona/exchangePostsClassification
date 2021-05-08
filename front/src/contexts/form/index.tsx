@@ -4,12 +4,12 @@ import { createReducer } from "../../hooks/createReducer";
 import * as actionsForm from "./actions";
 
 const INITIAL_STATE: Form = {
-  falsePositive: false,
+  falsePositive: undefined,
   learning: [],
   architecture: [],
   processing: [],
   mlPipeline: [],
-  interesting: false,
+  interesting: undefined,
   goodPractice: "",
   pitfall: "",
   references: "",

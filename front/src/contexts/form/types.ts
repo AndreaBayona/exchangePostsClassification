@@ -2,16 +2,16 @@ import React from "react";
 import * as actionsForm from "./actions";
 
 export type Form = {
-  falsePositive: boolean;
+  falsePositive: boolean | undefined;
   learning: string[];
   architecture: string[];
   processing: string[];
   mlPipeline: string[];
-  interesting: boolean;
+  interesting: boolean | undefined;
   goodPractice: string;
   pitfall: string;
   references: string;
-  disabled: boolean;
+  disabled: boolean | undefined;
 };
 type ActionHandlers = typeof actionsForm;
 export type Action = { type: keyof ActionHandlers; payload: any };
