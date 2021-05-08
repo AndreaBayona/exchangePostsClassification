@@ -77,7 +77,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type }) => {
       <div>
         {edit && (
           <FormProvider>
-            <Form classifiedAns={answer.classification} submitForm={Submit} />
+            <Form submitForm={Submit} />
           </FormProvider>
         )}
       </div>

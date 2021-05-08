@@ -31,7 +31,7 @@ export const SingleSelection: React.FC<Props> = ({
         }
         disabled={!!disabled}
       >
-        <option value="">--Please choose an option--</option>
+        <option value="">Select...</option>
         {formQuestion.options.map((valueOption, index) => {
           return (
             <option
