@@ -28,8 +28,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
   const [show, setShow] = React.useState(false);
   const [msg, setMsg] = React.useState("");
   const [classy, setClassy] = React.useState(classification);
-
-  const {list, updateList, index} = React.useContext(AnswersContext);
+  const {list, updateList, index, nextIndex} = React.useContext(AnswersContext);
 
   const Submit = (newClassification: Classification) => {
     console.log("INPUTS", newClassification);
@@ -43,6 +42,11 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
         setShow(true);
         setClassy(newClassification);
         updateList(list[index].classifications[0] = newClassification)
+
+        setTimeout(() => {
+            nextIndex();
+            window.scrollTo(0, 0);
+            }, 3000);
       },
       (ans) => {
         setMsg("Your form could not not be saved. Try again.");

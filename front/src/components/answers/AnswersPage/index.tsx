@@ -25,12 +25,14 @@ type ListContext = {
   list: QuestionAnsElement[];
   updateList: (list: any) => {};
   index: number;
+  nextIndex: () => any;
 };
 
 const InitialAnsState: ListContext = {
   list: [],
   updateList: (list: any) => [],
   index: 0,
+  nextIndex: () => [],
 };
 export const AnswersContext = React.createContext(InitialAnsState);
 
@@ -131,7 +133,8 @@ export const AnswersPage = () => {
         </IconBox>
       </Arrows>
       {answers && actualAnswer &&(
-      <AnswersContext.Provider value={{list: answers, updateList: () => setAnswers, index: index}}>
+      <AnswersContext.Provider
+          value={{list: answers, updateList: () => setAnswers, index: index, nextIndex: () => manageIndex(1)}}>
         <Question
           key={"Q"+index}
           question={actualAnswer.question[0]}
