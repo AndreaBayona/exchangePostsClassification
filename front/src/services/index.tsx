@@ -1,4 +1,7 @@
 import {Classification} from "../models/Classification";
+export type ClassificationRequest = {
+  classification: Classification;
+};
 
 const objectToQueryString = (obj: any) => {
   return Object.keys(obj)
@@ -69,7 +72,7 @@ export const findQuestionById = (id: Id) => {
 };
 
 export const classificateAQuestion = (
-  classification: Classification
+  classification: ClassificationRequest
 ) => {
   const URL_REQUEST = URL + CLASSIFICATE_QUESTION;
   return fetch(URL_REQUEST, {

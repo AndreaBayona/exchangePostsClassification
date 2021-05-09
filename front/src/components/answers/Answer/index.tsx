@@ -8,7 +8,7 @@ import { Answer as AnswerData } from "../../../models/Answer";
 
 import { Container, Options, Url } from "./styles";
 import {
-  classificateAQuestion,
+    classificateAQuestion, ClassificationRequest,
 } from "../../../services";
 import { AlertWrapper } from "../AnswersPage/styles";
 import { Modal } from "react-bootstrap";
@@ -27,14 +27,17 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
   const [show, setShow] = React.useState(false);
   const [msg, setMsg] = React.useState("");
 
-  const Submit = (classSend: Classification) => {
-    console.log("INPUTS", classification);
-    classificateAQuestion(classSend).then(
+  const Submit = (newClassification: Classification) => {
+    console.log("INPUTS", newClassification);
+      const classificationRequest = {
+          classification: newClassification,
+      } as ClassificationRequest;
+    classificateAQuestion(classificationRequest).then(
       (ans) => {
         console.log(ans);
         setMsg("Your classification has been saved correctly!");
         setShow(true);
-        classification = classSend;
+        classification = newClassification;
       },
       (ans) => {
         setMsg("Your form could not not be saved. Try again.");
