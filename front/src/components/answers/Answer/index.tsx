@@ -32,13 +32,13 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
     classificateAQuestion(classSend).then(
       (ans) => {
         console.log(ans);
-        setShow(true);
         setMsg("Your classification has been saved correctly!");
+        setShow(true);
         classification = classSend;
       },
       (ans) => {
-        setShow(true);
         setMsg("Your form could not not be saved. Try again.");
+        setShow(true);
         console.log(ans);
       }
     );

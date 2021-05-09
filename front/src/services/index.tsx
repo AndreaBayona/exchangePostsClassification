@@ -85,6 +85,6 @@ export const classificateAQuestion = (
     if (res.status === 200) {
       return "sucesss";
     }
-    return "err";
+    throw new Error("Backend error "+res.status);
   });
 };
