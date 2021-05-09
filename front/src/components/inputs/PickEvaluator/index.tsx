@@ -24,24 +24,10 @@ const PickEvaluator = () => {
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
-            setEvaluator("Andrea");
-          }}
-        >
-          Andrea
-        </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => {
             setEvaluator("Mario");
           }}
         >
           Mario
-        </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => {
-            setEvaluator("Valerie");
-          }}
-        >
-          Valerie
         </Dropdown.Item>
       </DropdownButton>
       <br></br>
