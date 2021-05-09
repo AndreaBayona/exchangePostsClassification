@@ -9,6 +9,8 @@ import { Container, FormWrapper, SubmitButton, ErrorMessage } from "./styles";
 type Props = {
   submitForm: (classifiedAns: Classification) => void;
   classification?: Classification;
+  username: string;
+  answerID: number;
 };
 
 const validateForm = (state: any) => {
@@ -38,6 +40,8 @@ const validateForm = (state: any) => {
 export const Form: React.FunctionComponent<Props> = ({
   submitForm,
   classification,
+  username,
+  answerID,
 }) => {
   const [state, dispatch] = React.useContext(ProgressForm);
   const [disabledSubmit, setDisabledSubmit] = React.useState(false);
@@ -50,6 +54,8 @@ export const Form: React.FunctionComponent<Props> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     let classification = {
+      user: username,
+      AID: answerID,
       isFalsePositive: state.falsePositive === "Yes",
       typeOfLearning: state.learning,
       typeOfArchitecture: state.architecture,

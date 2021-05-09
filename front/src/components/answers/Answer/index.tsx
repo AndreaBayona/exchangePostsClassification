@@ -9,7 +9,6 @@ import { Answer as AnswerData } from "../../../models/Answer";
 import { Container, Options, Url } from "./styles";
 import {
   classificateAQuestion,
-  ClassificationRequest,
 } from "../../../services";
 import { AlertWrapper } from "../AnswersPage/styles";
 import { Modal } from "react-bootstrap";
@@ -18,27 +17,24 @@ import { FormProvider } from "../../../contexts/form";
 
 type Props = {
   answer: AnswerData;
+  classification?: Classification;
   type: string;
+  userName: string;
 };
 
-export const Answer: React.FunctionComponent<Props> = ({ answer, type }) => {
+export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName, classification }) => {
   const [edit, setEdit] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [msg, setMsg] = React.useState("");
 
-  const Submit = (classification: Classification) => {
-    const classificationRequest = {
-      AID: answer.AID,
-      classification: classification,
-    } as ClassificationRequest;
+  const Submit = (classSend: Classification) => {
     console.log("INPUTS", classification);
-    classificateAQuestion(classificationRequest).then(
+    classificateAQuestion(classSend).then(
       (ans) => {
         console.log(ans);
         setShow(true);
         setMsg("Your classification has been saved correctly!");
-        answer.classification = classification;
-        answer.classified = true;
+        classification = classSend;
       },
       (ans) => {
         setShow(true);
@@ -77,7 +73,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type }) => {
       <div>
         {edit && (
           <FormProvider>
-            <Form submitForm={Submit} classification={answer.classification} />
+            <Form submitForm={Submit} classification={classification} username={userName} answerID={answer.AID} />
           </FormProvider>
         )}
       </div>

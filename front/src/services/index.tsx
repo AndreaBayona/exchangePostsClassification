@@ -1,8 +1,5 @@
-import { Classification } from "../models/Classification";
-export type ClassificationRequest = {
-  AID: number;
-  classification: Classification;
-};
+import {Classification} from "../models/Classification";
+
 const objectToQueryString = (obj: any) => {
   return Object.keys(obj)
     .map((key) => key + "=" + obj[key])
@@ -54,8 +51,8 @@ export const getClassifiedAnswers = (user: User) => {
 export const findQuestionById = (id: Id) => {
   const QUERY_PARAMS_URL = objectToQueryString(id);
   console.log(QUERY_PARAMS_URL);
-  const FIND_QUESTION_BY_ID_URL = URL + FIND_BY_ID + QUERY_PARAMS_URL;
-  return fetch(FIND_QUESTION_BY_ID_URL, {
+  const URL_REQUEST = URL + FIND_BY_ID + QUERY_PARAMS_URL;
+  return fetch(URL_REQUEST, {
     method: "GET",
     mode: "cors",
     headers: {
@@ -72,10 +69,10 @@ export const findQuestionById = (id: Id) => {
 };
 
 export const classificateAQuestion = (
-  classification: ClassificationRequest
+  classification: Classification
 ) => {
-  const FIND_QUESTION_BY_ID_URL = URL + CLASSIFICATE_QUESTION;
-  return fetch(FIND_QUESTION_BY_ID_URL, {
+  const URL_REQUEST = URL + CLASSIFICATE_QUESTION;
+  return fetch(URL_REQUEST, {
     method: "PUT",
     mode: "cors",
     body: JSON.stringify(classification),

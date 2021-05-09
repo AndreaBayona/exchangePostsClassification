@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { ReactComponent as LeftArrow } from "../../../icons/chevron-left-solid.svg";
 import { ReactComponent as RightArrow } from "../../../icons/chevron-right-solid.svg";
+import { Answer } from "../../../models/Answer";
+import {QuestionAnsElement} from "../../../models/QuestionAnsElement";
 
 import {
   getClassifiedAnswers,
@@ -17,25 +19,24 @@ import {
   IconBox,
   ErrorMessage,
 } from "./styles";
-import { Answer } from "../../../models/Answer";
 
 const ARROWS_SIZE = 16;
 
 export const AnswersPage = () => {
   let { username, answersGroup }: any = useParams();
-  const [answers, setAnswers] = React.useState<undefined | Answer[]>(undefined);
-  const [actualAnswer, setActualAnswer] = React.useState<Answer>();
+  const [answers, setAnswers] = React.useState<undefined | QuestionAnsElement[]>(undefined);
+  const [actualAnswer, setActualAnswer] = React.useState<QuestionAnsElement>();
   const [size, setSize] = React.useState(0);
   const [index, setIndex] = React.useState(0);
   const [showLeftArrow, setShowLeftArrow] = React.useState(false);
   const [showRightArrow, setShowRightArrow] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
-  let answersList: Answer[] = [];
+  let answersList: QuestionAnsElement[] = [];
 
   React.useEffect(() => {
     if (answersGroup === "classified") {
       getClassifiedAnswers({ user: username }).then((ans) => {
-        answersList = ans as Answer[];
+        answersList = ans as QuestionAnsElement[];
         setAnswers(answersList);
         setActualAnswer(answersList[0]);
         setSize(answersList.length);
@@ -45,7 +46,7 @@ export const AnswersPage = () => {
       });
     } else {
       getUnclassifiedAnswers({ user: username }).then((ans) => {
-        answersList = ans as Answer[];
+        answersList = ans as QuestionAnsElement[];
         setAnswers(answersList);
         setActualAnswer(answersList[0]);
         setSize(answersList.length);
@@ -117,8 +118,9 @@ export const AnswersPage = () => {
         <Question
           key={"Q"+index}
           question={actualAnswer.question[0]}
-          answer={actualAnswer}
+          answer={actualAnswer.answer}
           classifierName={username}
+          classification={actualAnswer.classifications[0]}
         />
       )}
     </Wrapper>

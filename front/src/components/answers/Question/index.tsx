@@ -5,17 +5,20 @@ import { Text, Title } from "../../Common/fonts";
 import { Container, Divider, Header, Url } from "./styles";
 import { Question as QuestionData } from "../../../models/Question";
 import { Answer as AnswerData } from "../../../models/Answer";
+import {Classification} from "../../../models/Classification";
 
 type Props = {
   question: QuestionData;
   answer: AnswerData;
   classifierName: string;
+  classification?: Classification;
 };
 
 export const Question: React.FunctionComponent<Props> = ({
   question,
   answer,
   classifierName,
+  classification,
 }) => {
   return (
     <Container>
@@ -37,6 +40,8 @@ export const Question: React.FunctionComponent<Props> = ({
       <Divider />
       <Answer
         answer={answer}
+        userName={classifierName}
+        classification={classification}
         type={
           answer.type === "accepted" ? "Accepted answer" : "Most voted answer"
         }
