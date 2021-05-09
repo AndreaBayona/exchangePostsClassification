@@ -2,15 +2,16 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { Alert, Spinner } from "react-bootstrap";
 import { findQuestionById } from "../../../services";
-import { Answer as AnswerData } from "../../../models/Answer";
 import { AlertWrapper, ErrorMessage } from "../AnswersPage/styles";
+import {QuestionAnsElement} from "../../../models/QuestionAnsElement";
 import { Question } from "../Question";
+
 
 export const AnswerPage = () => {
   let { id }: any = useParams();
   const [show, setShow] = React.useState(false);
   const [msg, setMsg] = React.useState("");
-  const [answerData, setAnswerData] = React.useState<undefined | AnswerData>(
+  const [answerData, setAnswerData] = React.useState<undefined | QuestionAnsElement>(
     undefined
   );
   const [loading, setLoading] = React.useState(true);
@@ -19,7 +20,7 @@ export const AnswerPage = () => {
     if (!!id) {
       const idObj = { id: id };
       findQuestionById(idObj).then((ans) => {
-        const answer = ans[0] as AnswerData;
+        const answer = ans[0] as QuestionAnsElement;
         if (!answer) {
           setLoading(false);
           setShow(true);
@@ -48,9 +49,11 @@ export const AnswerPage = () => {
       )}
       {answerData && (
         <Question
-          question={answerData.question[0]}
-          answer={answerData}
-          classifierName={answerData.user}
+            key={answerData._id}
+            question={answerData.question[0]}
+            answer={answerData.answer}
+            classifierName={answerData.user}
+            classification={answerData.classifications[0]}
         />
       )}
     </>

@@ -73,7 +73,7 @@ export const classificateAQuestion = (
 ) => {
   const URL_REQUEST = URL + CLASSIFICATE_QUESTION;
   return fetch(URL_REQUEST, {
-    method: "PUT",
+    method: "POST",
     mode: "cors",
     body: JSON.stringify(classification),
     headers: {

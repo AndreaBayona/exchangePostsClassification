@@ -73,7 +73,11 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
       <div>
         {edit && (
           <FormProvider>
-            <Form submitForm={Submit} classification={classification} username={userName} answerID={answer.AID} />
+            <Form
+                submitForm={Submit}
+                classification={classification}
+                username={userName}
+                answerID={answer.AID} />
           </FormProvider>
         )}
       </div>
