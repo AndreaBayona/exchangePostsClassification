@@ -14,6 +14,7 @@ import { AlertWrapper } from "../AnswersPage/styles";
 import { Modal } from "react-bootstrap";
 
 import { FormProvider } from "../../../contexts/form";
+import {AnswersContext} from "../AnswersPage";
 
 type Props = {
   answer: AnswerData;
@@ -28,6 +29,8 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
   const [msg, setMsg] = React.useState("");
   const [classy, setClassy] = React.useState(classification);
 
+  const {list, updateList, index} = React.useContext(AnswersContext);
+
   const Submit = (newClassification: Classification) => {
     console.log("INPUTS", newClassification);
       const classificationRequest = {
@@ -39,6 +42,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
         setMsg("Your classification has been saved correctly!");
         setShow(true);
         setClassy(newClassification);
+        updateList(list[index].classifications[0] = newClassification)
       },
       (ans) => {
         setMsg("Your form could not not be saved. Try again.");

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { ReactComponent as LeftArrow } from "../../../icons/chevron-left-solid.svg";
 import { ReactComponent as RightArrow } from "../../../icons/chevron-right-solid.svg";
-import { Answer } from "../../../models/Answer";
 import {QuestionAnsElement} from "../../../models/QuestionAnsElement";
 
 import {
@@ -21,6 +20,19 @@ import {
 } from "./styles";
 
 const ARROWS_SIZE = 16;
+
+type ListContext = {
+  list: QuestionAnsElement[];
+  updateList: (list: any) => {};
+  index: number;
+};
+
+const InitialAnsState: ListContext = {
+  list: [],
+  updateList: (list: any) => [],
+  index: 0,
+};
+export const AnswersContext = React.createContext(InitialAnsState);
 
 export const AnswersPage = () => {
   let { username, answersGroup }: any = useParams();
@@ -119,6 +131,7 @@ export const AnswersPage = () => {
         </IconBox>
       </Arrows>
       {answers && actualAnswer &&(
+      <AnswersContext.Provider value={{list: answers, updateList: () => setAnswers, index: index}}>
         <Question
           key={"Q"+index}
           question={actualAnswer.question[0]}
@@ -126,6 +139,7 @@ export const AnswersPage = () => {
           classifierName={username}
           classification={actualAnswer.classifications[0]}
         />
+      </AnswersContext.Provider>
       )}
     </Wrapper>
   );
