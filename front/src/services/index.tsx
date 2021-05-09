@@ -1,4 +1,4 @@
-import {Classification} from "../models/Classification";
+import { Classification } from "../models/Classification";
 export type ClassificationRequest = {
   classification: Classification;
 };
@@ -9,7 +9,7 @@ const objectToQueryString = (obj: any) => {
     .join("&");
 };
 //172.24.98.191
-const SERVER = "localhost";
+const SERVER = "172.24.98.191";
 const PORT = 8080; //3000
 const URL = `http://${SERVER}:${PORT}/answers`;
 
@@ -88,6 +88,6 @@ export const classificateAQuestion = (
     if (res.status === 200) {
       return "sucesss";
     }
-    throw new Error("Backend error "+res.status);
+    throw new Error("Backend error " + res.status);
   });
 };
