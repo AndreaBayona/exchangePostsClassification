@@ -57,20 +57,24 @@ export const AnswersPage = () => {
     }
   }, []);
 
-  const manageIndex = (value: number, answers: any) => {
+  const manageIndex = (value: number) => {
     if (value > 0 && index === size - 2) {
       setShowRightArrow(false);
+      setShowLeftArrow(true);
       setIndex(index + value);
     } else if (value < 0 && index === 1) {
       setShowLeftArrow(false);
+      setShowRightArrow(true);
       setIndex(index + value);
     } else {
       setShowRightArrow(true);
       setShowLeftArrow(true);
       setIndex(index + value);
     }
-    setActualAnswer(answers[index]);
-    console.log(answers[index].question[0]);
+    if(answers && index+value >= 0 && index+value <= size) {
+      setActualAnswer(answers[index+value]);
+      console.log(answers[index+value].question[0]);
+    }
   };
 
   if (size === 0) {
@@ -93,7 +97,7 @@ export const AnswersPage = () => {
         <IconBox>
           {showLeftArrow && (
             <LeftArrow
-              onClick={() => manageIndex(-1, answers)}
+              onClick={() => manageIndex(-1)}
               fill="currentColor"
               width={ARROWS_SIZE}
               height={ARROWS_SIZE}
@@ -106,7 +110,7 @@ export const AnswersPage = () => {
         <IconBox>
           {showRightArrow && (
             <RightArrow
-              onClick={() => manageIndex(1, answers)}
+              onClick={() => manageIndex(1)}
               fill="currentColor"
               width={ARROWS_SIZE}
               height={ARROWS_SIZE}

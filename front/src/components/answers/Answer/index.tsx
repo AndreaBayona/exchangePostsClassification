@@ -26,6 +26,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
   const [edit, setEdit] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [msg, setMsg] = React.useState("");
+  const [classy, setClassy] = React.useState(classification);
 
   const Submit = (newClassification: Classification) => {
     console.log("INPUTS", newClassification);
@@ -37,7 +38,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
         console.log(ans);
         setMsg("Your classification has been saved correctly!");
         setShow(true);
-        classification = newClassification;
+        setClassy(newClassification);
       },
       (ans) => {
         setMsg("Your form could not not be saved. Try again.");
@@ -77,8 +78,9 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
         {edit && (
           <FormProvider>
             <Form
+                key={"Classification" + answer.AID}
                 submitForm={Submit}
-                classification={classification}
+                classification={classy}
                 username={userName}
                 answerID={answer.AID} />
           </FormProvider>

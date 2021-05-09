@@ -39,6 +39,7 @@ export const Question: React.FunctionComponent<Props> = ({
       </Url>
       <Divider />
       <Answer
+        key={"AnswerID"+answer._id}
         answer={answer}
         userName={classifierName}
         classification={classification}
