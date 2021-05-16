@@ -9,7 +9,7 @@ const objectToQueryString = (obj: any) => {
     .join("&");
 };
 //172.24.98.191
-const SERVER = "172.24.98.191";
+const SERVER = "localhost";
 const PORT = 8080; //3000
 const URL = `http://${SERVER}:${PORT}/answers`;
 

@@ -26,6 +26,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
     ],
     dispatch: DISPATCH_TYPES[1],
     getActualVal: (state: any): string[] => state.learning,
+    mandatory: true,
   },
   {
     label: "Types of architecture",
@@ -38,6 +39,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
     ],
     dispatch: DISPATCH_TYPES[2],
     getActualVal: (state: any): string[] => state.architecture,
+    mandatory: true,
   },
   {
     label: "Models of  processing",
@@ -50,6 +52,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
     ],
     dispatch: DISPATCH_TYPES[3],
     getActualVal: (state: any): string[] => state.processing,
+    mandatory: true,
   },
   {
     label: "Stages in the ML pipeline ",
@@ -67,6 +70,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
     ],
     dispatch: DISPATCH_TYPES[4],
     getActualVal: (state: any): string[] => state.mlPipeline,
+    mandatory: true,
   },
 ];
 
@@ -77,6 +81,7 @@ export const BOOLEAN_QUESTION = [
     dispatch: DISPATCH_TYPES[0],
     disabled: false,
     getActualVal: (state: any) => state.falsePositive,
+    mandatory: true,
   },
 
   {
@@ -84,6 +89,7 @@ export const BOOLEAN_QUESTION = [
     options: ["Yes", "No"],
     dispatch: DISPATCH_TYPES[5],
     getActualVal: (state: any) => state.interesting,
+    mandatory: true,
   },
 ];
 
@@ -92,16 +98,19 @@ export const TEXT_AREA_QUESTIONS = [
     label: "Suggested Good practice",
     dispatch: DISPATCH_TYPES[6],
     getActualVal: (state: any) => state.goodPractice,
+    mandatory: true,
   },
   {
     label: "Pitfall/mistake/error that is related to good practice",
     dispatch: DISPATCH_TYPES[7],
     getActualVal: (state: any) => state.pitfall,
+    mandatory: false,
   },
   {
     label: "External references",
     dispatch: DISPATCH_TYPES[8],
     getActualVal: (state: any) => state.references,
+    mandatory: false,
   },
 ];
 

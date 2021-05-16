@@ -5,7 +5,7 @@ export const AppStyle = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: Calibri;
+  font-family: "Fira Sans",sans-serif;
 `;
 
 export const Header = styled.header`
@@ -17,6 +17,7 @@ export const Header = styled.header`
   justify-content: space-between;
   padding: 0 30px;
   font-size: calc(10px + 2vmin);
+  font-family: "Fira Sans",sans-serif;
   color: white;
   margin-bottom: 20px;
 `;

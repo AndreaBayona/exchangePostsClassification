@@ -11,3 +11,7 @@ export const Text = styled.p<{inheritColor?: boolean}>`
   color: ${({inheritColor}) => !!inheritColor ? `inherit` : `black`};
   margin: 0;
 `;
+
+export const Error = styled.div`
+  color: red;
+`;

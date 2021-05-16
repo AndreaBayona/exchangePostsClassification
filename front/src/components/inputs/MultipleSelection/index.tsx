@@ -1,6 +1,9 @@
 import React from "react";
 import Select from 'react-select';
-import {FormItem, Title} from "./styles";
+import { Modal } from "react-bootstrap";
+import { ReactComponent as InfoIcon } from "../../../icons/info-circle-solid.svg";
+import {Error} from "../../Common/fonts";
+import {FormItem, Title, Info, IconBox} from "./styles";
 
 type Option = {
   label: string;
@@ -14,6 +17,8 @@ type Props = {
   disabled: boolean;
   dispatch: (newValue: string[]) => void;
   selectedOptions: string[];
+  mandatory?: boolean;
+  information?: JSX.Element;
 };
 
 const createSelectOptions = (optionsLabels: string[]) =>
@@ -43,29 +48,51 @@ export const MultipleSelection: React.FC<Props> = ({
   disabled,
   dispatch,
   selectedOptions,
+                                                       mandatory,
+    information,
 }) => {
  const options = React.useMemo(() => createSelectOptions(optionsLabels), [optionsLabels]);
  const [state, setState] = React.useState<any>([]);
  const selected = React.useMemo(() => filterSelected(options, selectedOptions, setState), [selectedOptions]);
-
+ const [showInfo, setShowInfo] = React.useState(false);
   const onChange = (value: any) => {
     setState(value);
     dispatch(getSelection(value));
   };
 
   return (
-      <FormItem>
-        <Title>{label}</Title>
-        <Select
-            value={state}
-            isMulti
-            isClearable
-            name="colors"
-            classNamePrefix="select"
-            options={options}
-            isDisabled={disabled}
-            onChange={(value) => onChange(value)}
-        />
-      </FormItem>
+      <>
+          {showInfo && information &&
+          <Modal show={showInfo} onHide={() => setShowInfo(false)}>
+              <Modal.Header closeButton>
+                  <Modal.Title>{label}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>{information}</Modal.Body>
+          </Modal>
+          }
+          <FormItem>
+              <Info>
+                  <Title>
+                      {label}
+                      {mandatory && <Error>*</Error>}
+                  </Title>
+                  {information &&
+                  <IconBox>
+                      <InfoIcon width={16} height={16} fill="currentColor" onClick={() => setShowInfo(true)}/>
+                  </IconBox>}
+              </Info>
+              <Select
+                  value={state}
+                  isMulti
+                  isClearable
+                  name="colors"
+                  classNamePrefix="select"
+                  options={options}
+                  isDisabled={disabled}
+                  onChange={(value) => onChange(value)}
+              />
+          </FormItem>
+      </>
+
   );
 };

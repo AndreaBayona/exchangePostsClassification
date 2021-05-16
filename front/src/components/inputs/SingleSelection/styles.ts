@@ -14,7 +14,7 @@ export const Label = styled.label`
 
 export const SelectOverride = styled.select`
   border-radius: 4px;
-  min-height: 38px;
+  height: 38px;
   border-color: hsl(0, 0%, 80%);
   padding: 0 8px 0 8px;
   
@@ -31,4 +31,8 @@ export const SelectOverride = styled.select`
   &:hover{
     border-color: hsl(0, 0%, 70%);
   }
+`;
+
+export const Info = styled.div`
+  display: flex;
 `;

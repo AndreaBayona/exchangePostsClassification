@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Title } from "../../Common/fonts";
+import { Title, Text } from "../../Common/fonts";
 import { Classification } from "../../../models/Classification";
 import { ProgressForm } from "../../../contexts/form";
 import {getBooleanFormQuestions, getAreaTextQuestions, getMultiSelectionQuestions, updateContext,} from "./functions";
 
-import { Container, FormWrapper, SubmitButton, ErrorMessage } from "./styles";
+import { Container, FormWrapper, SubmitButton, ErrorMessage, MandatoryFields } from "./styles";
 
 type Props = {
   submitForm: (classifiedAns: Classification) => void;
@@ -20,8 +20,6 @@ const validateForm = (state: any) => {
         state.processing.length > 0 &&
         state.mlPipeline.length > 0 &&
         state.goodPractice !== "" &&
-        state.pitfall !== "" &&
-        state.references !== "" &&
         state.interesting !== "") {
       return true;
     }
@@ -85,6 +83,9 @@ export const Form: React.FunctionComponent<Props> = ({
           {getMultiSelectionQuestions(state, dispatch)}
           {getAreaTextQuestions(state, dispatch)}
         </FormWrapper>
+        <MandatoryFields>
+          <Text inheritColor>All fields marked with an asterisk (*) are required.</Text>
+        </MandatoryFields>
         <SubmitButton type="submit" value="Submit" disabled={disabledSubmit}/>
         {disabledSubmit && <ErrorMessage>There are empty fields</ErrorMessage>}
       </form>

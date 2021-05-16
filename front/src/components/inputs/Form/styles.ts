@@ -30,6 +30,7 @@ export const FreeText = styled.div`
 `;
 
 export const Label = styled.label`
+  display: flex;
   margin-bottom: 5px;
 `;
 
@@ -57,4 +58,11 @@ export const SubmitButton = styled.input`
 export const ErrorMessage = styled.div`
   color: red;
   margin: 5px;
+  font-size: small;
+`;
+
+export const MandatoryFields = styled.div`
+  color: red;
+  margin-left: 20px;
+  margin-bottom: 10px;
 `;

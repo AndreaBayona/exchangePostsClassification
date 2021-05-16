@@ -15,7 +15,7 @@ export const Option = styled.span<{open: boolean}>`
 export const Options = styled.div`
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-start;
   width: 100%;
 `;
 

@@ -1,10 +1,17 @@
-import {Action} from "../../../contexts/form/types";
-import {BOOLEAN_QUESTION, MULTIPLE_SELECTION_QUESTION, TEXT_AREA_QUESTIONS} from "./types";
-import {SingleSelection} from "../SingleSelection";
-import {FormInput, FreeText, Label, TextAreaOverride} from "./styles";
-import {MultipleSelection} from "../MultipleSelection";
 import * as React from "react";
+
+import {Action} from "../../../contexts/form/types";
 import {Classification} from "../../../models/Classification";
+
+import {Error} from "../../Common/fonts";
+import {DescriptionList} from "../../descriptionList";
+
+import {MultipleSelection} from "../MultipleSelection";
+import {SingleSelection} from "../SingleSelection";
+
+import {BOOLEAN_QUESTION, MULTIPLE_SELECTION_QUESTION, TEXT_AREA_QUESTIONS} from "./types";
+import {PIPELINE_EXPLANATIONS} from "./descriptions";
+import {FormInput, FreeText, Label, TextAreaOverride} from "./styles";
 
 export function getBooleanFormQuestions(state: any, dispatch: (value: Action) => void) {
     return <>
@@ -21,6 +28,7 @@ export function getBooleanFormQuestions(state: any, dispatch: (value: Action) =>
                         });
                     }}
                     disabled={index === 0 ? false : state.disabled}
+                    mandatory={formQuestion.mandatory}
                 />
             );
         })}
@@ -32,7 +40,10 @@ export function getAreaTextQuestions(state: any, dispatch: (value: Action) => vo
         {TEXT_AREA_QUESTIONS.map((formQuestion, index) => {
             return (
                 <FormInput key={formQuestion.label + "" + index}>
-                    <Label htmlFor="">{formQuestion.label}</Label>
+                    <Label htmlFor="">
+                        {formQuestion.label}
+                        {formQuestion.mandatory && <Error>*</Error>}
+                    </Label>
                     <TextAreaOverride
                         value={formQuestion.getActualVal(state)}
                         disabled={state.disabled}
@@ -65,6 +76,11 @@ export function getMultiSelectionQuestions(state: any, dispatch: (value: Action)
                             payload: newValue,
                         });
                     }}
+                    mandatory={formQuestion.mandatory}
+                    information={formQuestion.dispatch ==='setPipeline' ?
+                    <DescriptionList descriptions={PIPELINE_EXPLANATIONS}/> :
+                        undefined
+                    }
                 />
             );
         })}
