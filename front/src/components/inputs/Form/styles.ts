@@ -65,4 +65,5 @@ export const MandatoryFields = styled.div`
   color: red;
   margin-left: 20px;
   margin-bottom: 10px;
+  font-size: 12px;
 `;

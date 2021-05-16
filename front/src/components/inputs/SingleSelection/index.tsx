@@ -1,6 +1,8 @@
 import * as React from "react";
+import Select from 'react-select';
 import {Error} from "../../Common/fonts";
 import {FormItem, Label, SelectOverride, Info} from "./styles";
+import {createSelectOptions} from "../MultipleSelection";
 
 type FormQuestion = {
     label: string;
@@ -22,31 +24,22 @@ export const SingleSelection: React.FC<Props> = ({
                                                      disabled,
                                                      mandatory,
                                                  }) => {
+    const [state, setState] = React.useState<any>([]);
+    const options = React.useMemo(() => createSelectOptions(formQuestion.options), [formQuestion]);
+
+
     return (
         <FormItem>
             <Info>
               <Label>{formQuestion.label}</Label>
                 {mandatory && <Error>*</Error>}
             </Info>
-            <SelectOverride
+            <Select
+                options={options}
+                isDisabled={!!disabled}
                 onChange={(newValue) =>
-                    dispatch(newValue.target.value)
-                }
-                disabled={!!disabled}
-            >
-                <option value="">Select...</option>
-                {formQuestion.options.map((valueOption, index) => {
-                    return (
-                        <option
-                            key={"q-" + formQuestion.label + "-" + index}
-                            value={valueOption}
-                            selected={valueOption === formItemValue}
-                        >
-                            {valueOption}
-                        </option>
-                    );
-                })}
-            </SelectOverride>
+                {dispatch(newValue!.label)}}
+            />
         </FormItem>
     );
 };

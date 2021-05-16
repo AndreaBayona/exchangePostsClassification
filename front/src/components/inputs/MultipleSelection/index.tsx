@@ -21,7 +21,7 @@ type Props = {
   information?: JSX.Element;
 };
 
-const createSelectOptions = (optionsLabels: string[]) =>
+export const createSelectOptions = (optionsLabels: string[]) =>
   optionsLabels.map( (value, index) => {
     return {
       label: value,
