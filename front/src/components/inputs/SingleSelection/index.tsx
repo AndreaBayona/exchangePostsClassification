@@ -1,7 +1,7 @@
 import * as React from "react";
 import Select from 'react-select';
 import {Error} from "../../Common/fonts";
-import {FormItem, Label, SelectOverride, Info} from "./styles";
+import {FormItem, Label, Info} from "./styles";
 import {createSelectOptions} from "../MultipleSelection";
 
 type FormQuestion = {
@@ -24,7 +24,6 @@ export const SingleSelection: React.FC<Props> = ({
                                                      disabled,
                                                      mandatory,
                                                  }) => {
-    const [state, setState] = React.useState<any>([]);
     const options = React.useMemo(() => createSelectOptions(formQuestion.options), [formQuestion]);
 
 

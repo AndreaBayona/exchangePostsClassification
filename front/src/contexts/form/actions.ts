@@ -36,3 +36,7 @@ export const setPitfall = (state: State, pitfall: string) => {
 export const setReferences = (state: State, references: string) => {
   return { ...state, references };
 };
+
+export const setTransferLearning = (state: State, transferLearning: string) => {
+  return { ...state, transferLearning };
+};

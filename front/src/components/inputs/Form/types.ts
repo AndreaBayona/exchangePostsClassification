@@ -10,6 +10,7 @@ export const DISPATCH_TYPES = [
   "setGoodPractices",
   "setPitfall",
   "setReferences",
+  "setTransferLearning",
 ] as const;
 
 export const MULTIPLE_SELECTION_QUESTION = [
@@ -74,7 +75,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
   },
 ];
 
-export const BOOLEAN_QUESTION = [
+export const SINGLE_SELECTION_QUESTION = [
   {
     label: "It is a false positive?",
     options: ["Yes", "No"],
@@ -83,12 +84,18 @@ export const BOOLEAN_QUESTION = [
     getActualVal: (state: any) => state.falsePositive,
     mandatory: true,
   },
-
   {
     label: "Is it an interesting case to discuss?",
     options: ["Yes", "No"],
     dispatch: DISPATCH_TYPES[5],
     getActualVal: (state: any) => state.interesting,
+    mandatory: true,
+  },
+  {
+    label: "Is transfer learning?",
+    options: ["Yes", "No", "Not clear"],
+    dispatch: DISPATCH_TYPES[9],
+    getActualVal: (state: any) => state.transferLearning,
     mandatory: true,
   },
 ];

@@ -12,6 +12,7 @@ export type Form = {
   pitfall: string;
   references: string;
   disabled: boolean | undefined;
+  transferLearning: string;
 };
 type ActionHandlers = typeof actionsForm;
 export type Action = { type: keyof ActionHandlers; payload: any };

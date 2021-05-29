@@ -9,13 +9,13 @@ import {DescriptionList} from "../../descriptionList";
 import {MultipleSelection} from "../MultipleSelection";
 import {SingleSelection} from "../SingleSelection";
 
-import {BOOLEAN_QUESTION, MULTIPLE_SELECTION_QUESTION, TEXT_AREA_QUESTIONS} from "./types";
+import {SINGLE_SELECTION_QUESTION, MULTIPLE_SELECTION_QUESTION, TEXT_AREA_QUESTIONS} from "./types";
 import {PIPELINE_EXPLANATIONS} from "./descriptions";
 import {FormInput, FreeText, Label, TextAreaOverride} from "./styles";
 
 export function getBooleanFormQuestions(state: any, dispatch: (value: Action) => void) {
     return <>
-        {BOOLEAN_QUESTION.map((formQuestion, index) => {
+        {SINGLE_SELECTION_QUESTION.map((formQuestion, index) => {
             return (
                 <SingleSelection
                     key={formQuestion.label}
@@ -97,4 +97,5 @@ export function updateContext(classification: Classification, state: any, dispat
     dispatch({type: "setPitfall", payload: classification.pitfall,});
     dispatch({type: "setProcessing", payload: classification.processingModel,});
     dispatch({type: "setReferences", payload: classification.externalReferences,});
+    dispatch({type: "setTransferLearning", payload: classification.transferLearning,});
 };

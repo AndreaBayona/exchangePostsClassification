@@ -14,6 +14,7 @@ const INITIAL_STATE: Form = {
   pitfall: "",
   references: "",
   disabled: true,
+  transferLearning: "",
 };
 
 export const ProgressForm = React.createContext<State>([

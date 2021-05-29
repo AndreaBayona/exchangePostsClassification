@@ -20,7 +20,9 @@ const validateForm = (state: any) => {
         state.processing.length > 0 &&
         state.mlPipeline.length > 0 &&
         state.goodPractice !== "" &&
-        state.interesting !== "") {
+        state.interesting !== "" &&
+        state.transferLearning !== ""
+    ) {
       return true;
     }
     else{
@@ -63,6 +65,7 @@ export const Form: React.FunctionComponent<Props> = ({
       pitfall: state.pitfall,
       externalReferences: state.references,
       interesting: state.interesting === "Yes",
+      transferLearning: state.transferLearning,
     };
 
     if(validateForm(state)){

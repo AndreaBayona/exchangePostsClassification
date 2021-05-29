@@ -11,4 +11,5 @@ export type Classification = {
   pitfall: string;
   externalReferences: string;
   interesting: boolean | undefined;
+  transferLearning: string;
 };
