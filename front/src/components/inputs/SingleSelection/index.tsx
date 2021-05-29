@@ -10,7 +10,7 @@ type FormQuestion = {
 };
 
 type Props = {
-    formItemValue: any;
+    formItemValue: string;
     formQuestion: FormQuestion;
     dispatch: (newValue: string) => void;
     disabled?: boolean;
@@ -25,7 +25,20 @@ export const SingleSelection: React.FC<Props> = ({
                                                      mandatory,
                                                  }) => {
     const options = React.useMemo(() => createSelectOptions(formQuestion.options), [formQuestion]);
+    const [state, setState] = React.useState<any>();
 
+    React.useEffect(() => {
+        setState({
+            label: formItemValue,
+            value: formItemValue,
+            isFixed: false,
+        })
+    }, [formItemValue]);
+
+    const onChange = (value: any) => {
+        setState(value);
+        dispatch(value!.label);
+    };
 
     return (
         <FormItem>
@@ -34,10 +47,10 @@ export const SingleSelection: React.FC<Props> = ({
                 {mandatory && <Error>*</Error>}
             </Info>
             <Select
+                value={state}
                 options={options}
                 isDisabled={!!disabled}
-                onChange={(newValue) =>
-                {dispatch(newValue!.label)}}
+                onChange={(newValue) => onChange(newValue)}
             />
         </FormItem>
     );
