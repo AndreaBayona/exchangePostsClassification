@@ -92,7 +92,7 @@ export const SINGLE_SELECTION_QUESTION = [
     mandatory: true,
   },
   {
-    label: "Is transfer learning?",
+    label: "Is it related to transfer learning?",
     options: ["Yes", "No", "Not clear"],
     dispatch: DISPATCH_TYPES[9],
     getActualVal: (state: any) => state.transferLearning,
