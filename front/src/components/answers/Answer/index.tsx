@@ -44,7 +44,7 @@ export const Answer: React.FunctionComponent<Props> = ({ answer, type, userName,
         updateList(list[index].classifications[0] = newClassification)
 
         setTimeout(() => {
-            nextIndex();
+            if(index < list.length - 1) nextIndex();
             window.scrollTo(0, 0);
             }, 3000);
       },
