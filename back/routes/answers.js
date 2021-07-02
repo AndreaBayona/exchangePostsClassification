@@ -40,4 +40,21 @@ router.get("/findById", (req, res) => {
   });
 });
 
+router.post("/updateOption", (req, res) => {
+  const option = req.body.formOption;
+  db.updateFormOptions(option).then((answer) => {
+    res.send(answer);
+  });
+});
+
+router.get("/getOptions", (req, res) => {
+  const question = req.query;
+  db.getFormOptions(question).then((answer) => {
+    if (answer == null) {
+      res.send(400).end();
+    }
+    res.send(answer);
+  });
+});
+
 module.exports = router;

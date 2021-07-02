@@ -213,7 +213,32 @@ const MongoUtils = () => {
     );
   };
 
+  MyMongoLib.updateFormOptions = (formOption) => {
+    const query = { _id: formOption._id };
+    const update = { $set: formOption };
+    const options = { upsert: true };
+    console.log(formOption);
+    return MyMongoLib.connect(url).then((client) =>
+        client
+            .db("exchange-classification")
+            .collection("options")
+            .updateOne(query, update, options)
+            .finally(() => client.close())
+    );
+  };
+
+  MyMongoLib.getFormOptions = (question) => {
+    return MyMongoLib.connect(url).then((client) =>
+        client
+            .db("exchange-classification")
+            .collection("options")
+            .findOne(question)
+            .finally(() => client.close())
+    );
+  };
+
   return MyMongoLib;
 };
+
 
 module.exports = MongoUtils();

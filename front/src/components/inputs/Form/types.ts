@@ -11,8 +11,8 @@ export const DISPATCH_TYPES = [
   "setPitfall",
   "setReferences",
   "setTransferLearning",
+  "setTechniqueOptions",
 ] as const;
-
 export const MULTIPLE_SELECTION_QUESTION = [
   {
     label: "Types of learning",
@@ -23,6 +23,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "Reinforcement learning",
       "Unclear",
       "General",
+      "Does not apply",
     ],
     dispatch: DISPATCH_TYPES[1],
     getActualVal: (state: any): string[] => state.learning,
@@ -35,6 +36,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "Shallow",
       "unclear",
       "General",
+      "Does not apply",
     ],
     dispatch: DISPATCH_TYPES[2],
     getActualVal: (state: any): string[] => state.architecture,
@@ -47,6 +49,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "Online",
       "Unclear",
       "General",
+      "Does not apply",
     ],
     dispatch: DISPATCH_TYPES[3],
     getActualVal: (state: any): string[] => state.processing,
@@ -71,6 +74,18 @@ export const MULTIPLE_SELECTION_QUESTION = [
   },
 ];
 
+export const CREATABLE_SELECTION_QUESTION = [
+  {
+    label: "Associated machine learning technique?",
+    options: ["Adversarial learning", "Transfer learning", "Does not apply"],
+    dispatch: DISPATCH_TYPES[9],
+    optionsDispatch: DISPATCH_TYPES[10],
+    getActualVal: (state: any) => state.transferLearning,
+    getActualValOption: (state: any) => state.techniqueOptions,
+    mandatory: true,
+  },
+];
+
 export const SINGLE_SELECTION_QUESTION = [
   {
     label: "It is a false positive?",
@@ -85,13 +100,6 @@ export const SINGLE_SELECTION_QUESTION = [
     options: ["Yes", "No"],
     dispatch: DISPATCH_TYPES[5],
     getActualVal: (state: any) => state.interesting,
-    mandatory: true,
-  },
-  {
-    label: "Is it related to transfer learning?",
-    options: ["Yes", "No", "Not clear"],
-    dispatch: DISPATCH_TYPES[9],
-    getActualVal: (state: any) => state.transferLearning,
     mandatory: true,
   },
 ];
