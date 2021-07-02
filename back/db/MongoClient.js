@@ -210,7 +210,7 @@ const MongoUtils = () => {
   };
 
   MyMongoLib.updateFormOptions = (formOption) => {
-    const query = { question: formOption.formQuestion, options: formOption.options };
+    const query = { _id: formOption._id };
     const update = { $set: formOption };
     const options = { upsert: true };
     console.log(formOption);
