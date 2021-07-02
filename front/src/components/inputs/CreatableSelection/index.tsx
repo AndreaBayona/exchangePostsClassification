@@ -3,6 +3,7 @@ import CreatableSelect from 'react-select/creatable'
 import { Modal } from "react-bootstrap";
 import { ReactComponent as InfoIcon } from "../../../icons/info-circle-solid.svg";
 import {Error} from "../../Common/fonts";
+import { Message } from "../Form/styles";
 import {FormItem, Title, Info, IconBox} from "./styles";
 import {OptionForm} from "../../../models/OptionForm";
 type Option = {
@@ -106,6 +107,7 @@ export const CreatableSelection: React.FC<Props> = ({
                         <InfoIcon width={16} height={16} fill="currentColor" onClick={() => setShowInfo(true)}/>
                     </IconBox>}
                 </Info>
+                <Message>To insert a new option, write it on the box and type ENTER. The new option will appear in the list.</Message>
                 <CreatableSelect
                     isMulti
                     value={state}
