@@ -2,9 +2,14 @@ import * as React from "react";
 import { Title, Text } from "../../Common/fonts";
 import { Classification } from "../../../models/Classification";
 import { ProgressForm } from "../../../contexts/form";
-import {getBooleanFormQuestions, getAreaTextQuestions, getMultiSelectionQuestions, updateContext,} from "./functions";
+import {getCreatableSelectionQuestions, getBooleanFormQuestions, getAreaTextQuestions, getMultiSelectionQuestions, updateContext,} from "./functions";
 
 import { Container, FormWrapper, SubmitButton, ErrorMessage, MandatoryFields } from "./styles";
+import {
+  getFormOptionsFromQuestionName,
+  updateFormQuestionOptions
+} from "../../../services";
+import {OptionForm} from "../../../models/OptionForm";
 
 type Props = {
   submitForm: (classifiedAns: Classification) => void;
@@ -37,6 +42,19 @@ const validateForm = (state: any) => {
   }
 }
 
+const updateOptions = (newOptionForm: OptionForm) => {
+  console.log("INPUTS", newOptionForm);
+
+  updateFormQuestionOptions({formOption: newOptionForm}).then(
+      (ans) => {
+        console.log(ans);
+      },
+      (ans) => {
+        console.log(ans);
+      }
+  );
+};
+
 export const Form: React.FunctionComponent<Props> = ({
   submitForm,
   classification,
@@ -45,11 +63,26 @@ export const Form: React.FunctionComponent<Props> = ({
 }) => {
   const [state, dispatch] = React.useContext(ProgressForm);
   const [disabledSubmit, setDisabledSubmit] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() =>{
-    if(classification)
-      updateContext(classification, state, dispatch)
+    if(classification) updateContext(classification, state, dispatch)
   }, [classification])
+
+  React.useEffect( () => {
+    async function update() {
+      await getFormOptionsFromQuestionName({question: "techniqueOptions"}).then((ans) => {
+        const techniqueOptions = ans as OptionForm;
+        console.log(techniqueOptions)
+        dispatch({
+          type: "setTechniqueOptions",
+          payload: techniqueOptions,
+        });
+        setLoading(false);
+      });
+    }
+    update();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,6 +117,7 @@ export const Form: React.FunctionComponent<Props> = ({
         <FormWrapper>
           {getBooleanFormQuestions(state, dispatch)}
           {getMultiSelectionQuestions(state, dispatch)}
+          {!loading && getCreatableSelectionQuestions(state, dispatch, updateOptions)}
           {getAreaTextQuestions(state, dispatch)}
         </FormWrapper>
         <MandatoryFields>

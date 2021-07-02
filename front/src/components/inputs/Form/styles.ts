@@ -67,3 +67,8 @@ export const MandatoryFields = styled.div`
   margin-bottom: 10px;
   font-size: 12px;
 `;
+
+export const Message = styled.div`
+  font-size: 10px;
+  color: #4e555b;
+`;

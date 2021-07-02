@@ -1,4 +1,5 @@
 import { Form as State } from "./types";
+import {OptionForm} from "../../models/OptionForm";
 
 export const setFalsePositive = (state: State, falsePositive: string) => {
   const disabled = falsePositive !== "No";
@@ -39,4 +40,8 @@ export const setReferences = (state: State, references: string) => {
 
 export const setTransferLearning = (state: State, transferLearning: string) => {
   return { ...state, transferLearning };
+};
+
+export const setTechniqueOptions = (state: State, techniqueOptions: OptionForm) => {
+  return { ...state, techniqueOptions };
 };

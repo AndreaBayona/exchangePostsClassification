@@ -8,10 +8,11 @@ import {DescriptionList} from "../../descriptionList";
 
 import {MultipleSelection} from "../MultipleSelection";
 import {SingleSelection} from "../SingleSelection";
+import {CreatableSelection} from "../CreatableSelection";
 
-import {SINGLE_SELECTION_QUESTION, MULTIPLE_SELECTION_QUESTION, TEXT_AREA_QUESTIONS} from "./types";
+import {SINGLE_SELECTION_QUESTION, MULTIPLE_SELECTION_QUESTION, TEXT_AREA_QUESTIONS, CREATABLE_SELECTION_QUESTION} from "./types";
 import {PIPELINE_EXPLANATIONS} from "./descriptions";
-import {FormInput, FreeText, Label, TextAreaOverride} from "./styles";
+import {FormInput, FreeText, Label, TextAreaOverride, Message} from "./styles";
 
 export function getBooleanFormQuestions(state: any, dispatch: (value: Action) => void) {
     return <>
@@ -44,6 +45,7 @@ export function getAreaTextQuestions(state: any, dispatch: (value: Action) => vo
                         {formQuestion.label}
                         {formQuestion.mandatory && <Error>*</Error>}
                     </Label>
+                    <Message>All entries must be written in separate lines</Message>
                     <TextAreaOverride
                         value={formQuestion.getActualVal(state)}
                         disabled={state.disabled}
@@ -81,6 +83,32 @@ export function getMultiSelectionQuestions(state: any, dispatch: (value: Action)
                     <DescriptionList descriptions={PIPELINE_EXPLANATIONS}/> :
                         undefined
                     }
+                />
+            );
+        })}
+    </>;
+};
+
+export function getCreatableSelectionQuestions(state: any, dispatch: (value: Action) => void, updateOptions: (value: any) => void) {
+    console.log(state)
+    return <>
+        {CREATABLE_SELECTION_QUESTION.map((formQuestion, index) => {
+            return (
+                <CreatableSelection
+                    key={formQuestion.label + '-' + index}
+                    label={formQuestion.label}
+                    disabled={state.disabled}
+                    optionsForm={formQuestion.getActualValOption(state)}
+                    selectedOptions={formQuestion.getActualVal(state)}
+                    dispatch={(newValue) => {
+                        dispatch({
+                            type: formQuestion.dispatch,
+                            payload: newValue,
+                        });
+                    }}
+                    mandatory={formQuestion.mandatory}
+                    information={undefined}
+                    updateOptions={updateOptions}
                 />
             );
         })}

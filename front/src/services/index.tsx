@@ -1,6 +1,12 @@
 import { Classification } from "../models/Classification";
+import {OptionForm} from "../models/OptionForm";
+
 export type ClassificationRequest = {
   classification: Classification;
+};
+
+export type OptionFormRequest = {
+  formOption: OptionForm;
 };
 
 const objectToQueryString = (obj: any) => {
@@ -17,9 +23,12 @@ const UNCLASSSIFIED_ANSWERS = "/unclassifiedAnswers?";
 const CLASSSIFIED_ANSWERS = "/classifiedAnswers?";
 const FIND_BY_ID = "/findById?";
 const CLASSIFICATE_QUESTION = "/classificate";
+const GET_FORM_OPTIONS = "/getOptions?";
+const UPDATE_FORM_OPTIONS = "/updateOption";
 
 type User = { user: string };
 type Id = { id: number };
+type FormQuestion = {question: string};
 
 export const getUnclassifiedAnswers = (user: User) => {
   const QUERY_PARAMS_URL = objectToQueryString(user);
@@ -91,3 +100,44 @@ export const classificateAQuestion = (
     throw new Error("Backend error " + res.status);
   });
 };
+
+export const updateFormQuestionOptions = (
+    option: OptionFormRequest
+) => {
+  const URL_REQUEST = URL + UPDATE_FORM_OPTIONS;
+  return fetch(URL_REQUEST, {
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(option),
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": `http://${SERVER}:${PORT}`,
+      "Access-Control-Allow-Credentials": "true",
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      return "sucesss";
+    }
+    throw new Error("Backend error " + res.status);
+  });
+};
+
+export const getFormOptionsFromQuestionName = (question : FormQuestion) => {
+  const QUERY_PARAMS_URL = objectToQueryString(question);
+  console.log(QUERY_PARAMS_URL);
+  const URL_REQUEST = URL + GET_FORM_OPTIONS + QUERY_PARAMS_URL;
+  return fetch(URL_REQUEST, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": `http://${SERVER}:${PORT}`,
+      "Access-Control-Allow-Credentials": "true",
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      return res.json();
+    }
+    return undefined;
+  });
+}
