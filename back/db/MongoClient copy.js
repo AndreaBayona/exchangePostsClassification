@@ -6,27 +6,25 @@ const answers = "answers";
 
 const MongoUtils = () => {
   const MyMongoLib = this || {};
-  const url = 'mongodb://127.0.0.1:27017';
-  const dbName = "MLStack";
+  const url = process.env.MONGO_DB;
+  const dbName = process.env.DB_NAME;
   let db;
 
   MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then((client) => {
-
     db = client.db(dbName);
     console.log(`Connected MongoDB: ${url}`)
     console.log(`Database: ${dbName}`)
-
   });
 
-  MyMongoLib.connect = (url) => {
-    const client = new MongoClient(url, { useUnifiedTopology: true });
-    return client.connect();
-  };
+  // MyMongoLib.connect = (url) => {
+  //   const client = new MongoClient(url, { useUnifiedTopology: true });
+  //   return client.connect();
+  // };
 
   MyMongoLib.unclassifiedAnswers = (user) => {
     return MyMongoLib.connect(url).then((client) =>
       client
-        .db(dbName)
+        .db(db)
         .collection("assign")
         .aggregate(
           {
@@ -99,7 +97,7 @@ const MongoUtils = () => {
   MyMongoLib.classifiedAnswers = (user) => {
     return MyMongoLib.connect(url).then((client) =>
       client
-        .db(dbName)
+        .db(db)
         .collection("assign")
         .aggregate(
           {
@@ -172,7 +170,7 @@ const MongoUtils = () => {
   MyMongoLib.getAnswer = (id) => {
     return MyMongoLib.connect(url).then((client) =>
       client
-        .db(dbName)
+        .db(db)
         .collection("answers")
         .aggregate([
           { $match: { AID: id } },
@@ -206,7 +204,7 @@ const MongoUtils = () => {
     console.log(classification);
     return MyMongoLib.connect(url).then((client) =>
       client
-        .db(dbName)
+        .db(db)
         .collection("classifications")
         .updateOne(query, update, options)
         .finally(() => client.close())
