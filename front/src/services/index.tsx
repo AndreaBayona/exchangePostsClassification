@@ -15,7 +15,7 @@ const objectToQueryString = (obj: any) => {
     .join("&");
 };
 //172.24.98.191
-const SERVER = "172.24.98.191";
+const SERVER = "localhost";
 const PORT = 8080; //3000
 const URL = `http://${SERVER}:${PORT}/answers`;
 
@@ -116,7 +116,7 @@ export const updateFormQuestionOptions = (
     },
   }).then((res) => {
     if (res.status === 200) {
-      return "sucesss";
+      return option;
     }
     throw new Error("Backend error " + res.status);
   });

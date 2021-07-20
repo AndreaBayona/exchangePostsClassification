@@ -26,11 +26,11 @@ export const setInteresting = (state: State, interesting: string) => {
   return { ...state, interesting };
 };
 
-export const setGoodPractices = (state: State, goodPractice: string) => {
+export const setGoodPractices = (state: State, goodPractice: string[]) => {
   return { ...state, goodPractice };
 };
 
-export const setPitfall = (state: State, pitfall: string) => {
+export const setPitfall = (state: State, pitfall: string[]) => {
   return { ...state, pitfall };
 };
 
@@ -44,4 +44,12 @@ export const setTransferLearning = (state: State, transferLearning: string) => {
 
 export const setTechniqueOptions = (state: State, techniqueOptions: OptionForm) => {
   return { ...state, techniqueOptions };
+};
+
+export const setPitfallOptions = (state: State, pitfallOptions: OptionForm) => {
+  return { ...state, pitfallOptions };
+};
+
+export const setGoodPracticeOptions = (state: State, goodPracticeOptions: OptionForm) => {
+  return { ...state, goodPracticeOptions };
 };

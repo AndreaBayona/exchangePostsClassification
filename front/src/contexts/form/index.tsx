@@ -2,8 +2,6 @@ import * as React from "react";
 import { Form, Reducer, State } from "./types";
 import { createReducer } from "../../hooks/createReducer";
 import * as actionsForm from "./actions";
-import {OptionForm} from "../../models/OptionForm";
-import {getFormOptionsFromQuestionName} from "../../services";
 
 const INITIAL_STATE: Form = {
   falsePositive: "",
@@ -12,12 +10,14 @@ const INITIAL_STATE: Form = {
   processing: [],
   mlPipeline: [],
   interesting: "",
-  goodPractice: "",
-  pitfall: "",
+  goodPractice: [],
+  pitfall: [],
   references: "",
   disabled: true,
   transferLearning: "",
   techniqueOptions: undefined,
+  pitfallOptions: undefined,
+  goodPracticeOptions: undefined,
 };
 
 export const ProgressForm = React.createContext<State>([

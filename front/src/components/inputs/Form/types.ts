@@ -12,6 +12,8 @@ export const DISPATCH_TYPES = [
   "setReferences",
   "setTransferLearning",
   "setTechniqueOptions",
+  "setPitfallOptions",
+  "setGoodPracticeOptions",
 ] as const;
 export const MULTIPLE_SELECTION_QUESTION = [
   {
@@ -85,6 +87,24 @@ export const CREATABLE_SELECTION_QUESTION = [
     getActualValOption: (state: any) => state.techniqueOptions,
     mandatory: true,
   },
+  {
+    label: "Pitfall/mistake/error that is related to good practice",
+    options: [],
+    dispatch: DISPATCH_TYPES[7],
+    optionsDispatch: DISPATCH_TYPES[11],
+    getActualVal: (state: any) => state.pitfall,
+    getActualValOption: (state: any) => state.pitfallOptions,
+    mandatory: false,
+  },
+  {
+    label: "Suggested Good practice",
+    options: [],
+    dispatch: DISPATCH_TYPES[6],
+    optionsDispatch: DISPATCH_TYPES[12],
+    getActualVal: (state: any) => state.goodPractice,
+    getActualValOption: (state: any) => state.goodPracticeOptions,
+    mandatory: true,
+  },
 ];
 
 export const SINGLE_SELECTION_QUESTION = [
@@ -106,18 +126,6 @@ export const SINGLE_SELECTION_QUESTION = [
 ];
 
 export const TEXT_AREA_QUESTIONS = [
-  {
-    label: "Suggested Good practice",
-    dispatch: DISPATCH_TYPES[6],
-    getActualVal: (state: any) => state.goodPractice,
-    mandatory: true,
-  },
-  {
-    label: "Pitfall/mistake/error that is related to good practice",
-    dispatch: DISPATCH_TYPES[7],
-    getActualVal: (state: any) => state.pitfall,
-    mandatory: false,
-  },
   {
     label: "External references",
     dispatch: DISPATCH_TYPES[8],

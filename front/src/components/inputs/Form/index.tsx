@@ -24,7 +24,7 @@ const validateForm = (state: any) => {
         state.architecture.length > 0 &&
         state.processing.length > 0 &&
         state.mlPipeline.length > 0 &&
-        state.goodPractice !== "" &&
+        state.goodPractice.length > 0 &&
         state.interesting !== "" &&
         state.transferLearning !== ""
     ) {
@@ -77,6 +77,24 @@ export const Form: React.FunctionComponent<Props> = ({
         dispatch({
           type: "setTechniqueOptions",
           payload: techniqueOptions,
+        });
+      });
+
+      await getFormOptionsFromQuestionName({question: "pitfallOptions"}).then((ans) => {
+        const pitfallOptions = ans as OptionForm;
+        console.log(pitfallOptions)
+        dispatch({
+          type: "setPitfallOptions",
+          payload: pitfallOptions,
+        });
+      });
+
+      await getFormOptionsFromQuestionName({question: "goodPracticeOptions"}).then((ans) => {
+        const goodPracticeOptions = ans as OptionForm;
+        console.log(goodPracticeOptions)
+        dispatch({
+          type: "setGoodPracticeOptions",
+          payload: goodPracticeOptions,
         });
         setLoading(false);
       });
