@@ -220,7 +220,7 @@ const MongoUtils = () => {
     console.log(formOption);
     return MyMongoLib.connect(url).then((client) =>
         client
-            .db("exchange-classification")
+            .db(dbName)
             .collection("options")
             .updateOne(query, update, options)
             .finally(() => client.close())
@@ -230,7 +230,7 @@ const MongoUtils = () => {
   MyMongoLib.getFormOptions = (question) => {
     return MyMongoLib.connect(url).then((client) =>
         client
-            .db("exchange-classification")
+            .db(dbName)
             .collection("options")
             .findOne(question)
             .finally(() => client.close())

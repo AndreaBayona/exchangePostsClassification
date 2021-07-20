@@ -66,6 +66,7 @@ export const MULTIPLE_SELECTION_QUESTION = [
       "Model evaluation",
       "Model deployment",
       "Model monitoring",
+      "Documentation",
       "General",
     ],
     dispatch: DISPATCH_TYPES[4],
