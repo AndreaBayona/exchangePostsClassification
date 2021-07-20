@@ -6,8 +6,8 @@ const answers = "answers";
 
 const MongoUtils = () => {
   const MyMongoLib = this || {};
-  const url = process.env.MONGO_DB;
-  const dbName = process.env.DB_NAME;
+  const url = 'mongodb://127.0.0.1:27017';
+  const dbName = "MLStack";
   let db;
 
   MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then((client) => {
@@ -25,177 +25,177 @@ const MongoUtils = () => {
 
   MyMongoLib.unclassifiedAnswers = (user) => {
     return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection("assign")
-        .aggregate(
-          {
-            $match: {
-              user: user,
-            },
-          },
-          {
-            $lookup: {
-              from: "answers",
-              localField: "AID",
-              foreignField: "AID",
-              as: "answer",
-            },
-          },
-          { $unwind: "$answer" },
-          {
-            $unwind: { path: "$answer._id", preserveNullAndEmptyArrays: true },
-          },
-          {
-            $lookup: {
-              from: "classifications",
-              let: {
-                originalUser: "$user",
-                answerId: "$AID",
-              },
-              pipeline: [
+        client
+            .db(dbName)
+            .collection("assign")
+            .aggregate(
                 {
                   $match: {
-                    $expr: {
-                      $and: [
-                        {
-                          $eq: ["$user", "$$originalUser"],
-                        },
-                        {
-                          $eq: ["$AID", "$$answerId"],
-                        },
-                      ],
-                    },
+                    user: user,
                   },
                 },
-              ],
-              as: "classifications",
-            },
-          },
-          {
-            $match: {
-              classifications: { $exists: true, $size: 0 },
-            },
-          },
-          {
-            $lookup: {
-              from: "questions",
-              localField: "answer.QID",
-              foreignField: "QID",
-              as: "question",
-            },
-          },
-          {
-            $project: {
-              _id: 1,
-            },
-          }
-        )
-        .toArray()
-        .finally(() => client.close())
+                {
+                  $lookup: {
+                    from: "answers",
+                    localField: "AID",
+                    foreignField: "AID",
+                    as: "answer",
+                  },
+                },
+                { $unwind: "$answer" },
+                {
+                  $unwind: { path: "$answer._id", preserveNullAndEmptyArrays: true },
+                },
+                {
+                  $lookup: {
+                    from: "classifications",
+                    let: {
+                      originalUser: "$user",
+                      answerId: "$AID",
+                    },
+                    pipeline: [
+                      {
+                        $match: {
+                          $expr: {
+                            $and: [
+                              {
+                                $eq: ["$user", "$$originalUser"],
+                              },
+                              {
+                                $eq: ["$AID", "$$answerId"],
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    ],
+                    as: "classifications",
+                  },
+                },
+                {
+                  $match: {
+                    classifications: { $exists: true, $size: 0 },
+                  },
+                },
+                {
+                  $lookup: {
+                    from: "questions",
+                    localField: "answer.QID",
+                    foreignField: "QID",
+                    as: "question",
+                  },
+                },
+                {
+                  $project: {
+                    _id: 1,
+                  },
+                }
+            )
+            .toArray()
+            .finally(() => client.close())
     );
   };
 
   MyMongoLib.classifiedAnswers = (user) => {
     return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection("assign")
-        .aggregate(
-          {
-            $match: {
-              user: user,
-            },
-          },
-          {
-            $lookup: {
-              from: "answers",
-              localField: "AID",
-              foreignField: "AID",
-              as: "answer",
-            },
-          },
-          { $unwind: "$answer" },
-          {
-            $unwind: { path: "$answer._id", preserveNullAndEmptyArrays: true },
-          },
-          {
-            $lookup: {
-              from: "classifications",
-              let: {
-                originalUser: "$user",
-                answerId: "$AID",
-              },
-              pipeline: [
+        client
+            .db(dbName)
+            .collection("assign")
+            .aggregate(
                 {
                   $match: {
-                    $expr: {
-                      $and: [
-                        {
-                          $eq: ["$user", "$$originalUser"],
-                        },
-                        {
-                          $eq: ["$AID", "$$answerId"],
-                        },
-                      ],
-                    },
+                    user: user,
                   },
                 },
-              ],
-              as: "classifications",
-            },
-          },
-          {
-            $match: {
-              classifications: { $exists: true, $not: { $size: 0 } },
-            },
-          },
-          {
-            $lookup: {
-              from: "questions",
-              localField: "answer.QID",
-              foreignField: "QID",
-              as: "question",
-            },
-          },
-          {
-            $project: {
-              _id: 1,
-            },
-          }
-        )
-        .toArray()
-        .finally(() => client.close())
+                {
+                  $lookup: {
+                    from: "answers",
+                    localField: "AID",
+                    foreignField: "AID",
+                    as: "answer",
+                  },
+                },
+                { $unwind: "$answer" },
+                {
+                  $unwind: { path: "$answer._id", preserveNullAndEmptyArrays: true },
+                },
+                {
+                  $lookup: {
+                    from: "classifications",
+                    let: {
+                      originalUser: "$user",
+                      answerId: "$AID",
+                    },
+                    pipeline: [
+                      {
+                        $match: {
+                          $expr: {
+                            $and: [
+                              {
+                                $eq: ["$user", "$$originalUser"],
+                              },
+                              {
+                                $eq: ["$AID", "$$answerId"],
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    ],
+                    as: "classifications",
+                  },
+                },
+                {
+                  $match: {
+                    classifications: { $exists: true, $not: { $size: 0 } },
+                  },
+                },
+                {
+                  $lookup: {
+                    from: "questions",
+                    localField: "answer.QID",
+                    foreignField: "QID",
+                    as: "question",
+                  },
+                },
+                {
+                  $project: {
+                    _id: 1,
+                  },
+                }
+            )
+            .toArray()
+            .finally(() => client.close())
     );
   };
 
   MyMongoLib.getAnswer = (id) => {
     return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection("answers")
-        .aggregate([
-          { $match: { AID: id } },
-          {
-            $lookup: {
-              from: "questions",
-              localField: "QID",
-              foreignField: "QID",
-              as: "question",
-            },
-          },
-          {
-            $lookup: {
-              from: "classifications",
-              localField: "AID",
-              foreignField: "AID",
-              as: "classification",
-            },
-          },
-        ])
-        .limit(1)
-        .toArray()
-        .finally(() => client.close())
+        client
+            .db(dbName)
+            .collection("answers")
+            .aggregate([
+              { $match: { AID: id } },
+              {
+                $lookup: {
+                  from: "questions",
+                  localField: "QID",
+                  foreignField: "QID",
+                  as: "question",
+                },
+              },
+              {
+                $lookup: {
+                  from: "classifications",
+                  localField: "AID",
+                  foreignField: "AID",
+                  as: "classification",
+                },
+              },
+            ])
+            .limit(1)
+            .toArray()
+            .finally(() => client.close())
     );
   };
 
@@ -205,11 +205,11 @@ const MongoUtils = () => {
     const options = { upsert: true };
     console.log(classification);
     return MyMongoLib.connect(url).then((client) =>
-      client
-        .db(dbName)
-        .collection("classifications")
-        .updateOne(query, update, options)
-        .finally(() => client.close())
+        client
+            .db(dbName)
+            .collection("classifications")
+            .updateOne(query, update, options)
+            .finally(() => client.close())
     );
   };
 
