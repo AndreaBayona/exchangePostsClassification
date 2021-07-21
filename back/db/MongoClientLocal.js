@@ -1,4 +1,4 @@
-const MongoClient = require("mongodb").MongoClient;
+const MongoClientLocal = require("mongodb").MongoClient;
 const { ObjectId } = require("mongodb");
 require("dotenv").config();
 
@@ -10,7 +10,7 @@ const MongoUtils = () => {
   const dbName = process.env.DB_NAME;
   let db;
 
-  MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then((client) => {
+  MongoClientLocal.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then((client) => {
 
     db = client.db(dbName);
     console.log(`Connected MongoDB: ${url}`)
@@ -19,7 +19,7 @@ const MongoUtils = () => {
   });
 
   MyMongoLib.connect = (url) => {
-    const client = new MongoClient(url, { useUnifiedTopology: true });
+    const client = new MongoClientLocal(url, { useUnifiedTopology: true });
     return client.connect();
   };
 

@@ -26,12 +26,20 @@ export const setInteresting = (state: State, interesting: string) => {
   return { ...state, interesting };
 };
 
-export const setGoodPractices = (state: State, goodPractice: string[]) => {
+export const setGoodPractices = (state: State, goodPractice: string) => {
   return { ...state, goodPractice };
 };
 
-export const setPitfall = (state: State, pitfall: string[]) => {
+export const setGoodPracticesArray = (state: State, goodPracticeArray: string[]) => {
+  return { ...state, goodPracticeArray };
+};
+
+export const setPitfall = (state: State, pitfall: string) => {
   return { ...state, pitfall };
+};
+
+export const setPitfallArray = (state: State, pitfallArray: string[]) => {
+  return { ...state, pitfallArray };
 };
 
 export const setReferences = (state: State, references: string) => {
@@ -53,3 +61,21 @@ export const setPitfallOptions = (state: State, pitfallOptions: OptionForm) => {
 export const setGoodPracticeOptions = (state: State, goodPracticeOptions: OptionForm) => {
   return { ...state, goodPracticeOptions };
 };
+
+export const setRelatedMlMethod = (state: State, relatedMlMethod: string[]) => {
+  return { ...state, relatedMlMethod };
+};
+
+export const setApplicationArea = (state: State, applicationArea: string[]) => {
+  return { ...state, applicationArea };
+};
+
+export const setRelatedMlMethodOptions = (state: State, relatedMlMethodOptions: OptionForm) => {
+  return { ...state, relatedMlMethodOptions };
+};
+
+
+export const setApplicationAreaOptions = (state: State, applicationAreaOptions: OptionForm) => {
+  return { ...state, applicationAreaOptions };
+};
+

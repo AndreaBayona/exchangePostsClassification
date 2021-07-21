@@ -10,14 +10,20 @@ const INITIAL_STATE: Form = {
   processing: [],
   mlPipeline: [],
   interesting: "",
-  goodPractice: [],
-  pitfall: [],
+  goodPractice: "",
+  goodPracticeArray: [],
+  pitfall: "",
+  pitfallArray: [],
   references: "",
   disabled: true,
   transferLearning: "",
   techniqueOptions: undefined,
   pitfallOptions: undefined,
   goodPracticeOptions: undefined,
+  relatedMlMethod: [],
+  applicationArea: [],
+  relatedMlMethodOptions: undefined,
+  applicationAreaOptions: undefined,
 };
 
 export const ProgressForm = React.createContext<State>([

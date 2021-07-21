@@ -108,6 +108,7 @@ export function getCreatableSelectionQuestions(state: any, dispatch: (value: Act
                     }}
                     mandatory={formQuestion.mandatory}
                     information={undefined}
+                    history={formQuestion.getOldVal ? formQuestion.getOldVal(state) : undefined}
                     updateOptions={updateOptions}
                 />
             );
@@ -118,12 +119,16 @@ export function getCreatableSelectionQuestions(state: any, dispatch: (value: Act
 export function updateContext(classification: Classification, state: any, dispatch: (value: Action) => void) {
     dispatch({type: "setFalsePositive", payload: classification.isFalsePositive ? "Yes" : "No",});
     dispatch({type: "setArchitecture",payload: classification.typeOfArchitecture,});
+    dispatch({type: "setGoodPracticesArray", payload: classification.goodPracticeArray || [],});
     dispatch({type: "setGoodPractices", payload: classification.goodPractice,});
     dispatch({type: "setInteresting", payload: classification.interesting ? "Yes" : "No",});
     dispatch({type: "setLearning", payload: classification.typeOfLearning,});
     dispatch({type: "setPipeline", payload: classification.mlPipeline,});
+    dispatch({type: "setPitfallArray", payload: classification.pitfallArray || [],});
     dispatch({type: "setPitfall", payload: classification.pitfall,});
     dispatch({type: "setProcessing", payload: classification.processingModel,});
     dispatch({type: "setReferences", payload: classification.externalReferences,});
     dispatch({type: "setTransferLearning", payload: classification.transferLearning,});
+    dispatch({type: "setRelatedMlMethod", payload: classification.relatedMlMethod || [],});
+    dispatch({type: "setApplicationArea", payload: classification.applicationArea || [],});
 };

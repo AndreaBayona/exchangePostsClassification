@@ -7,9 +7,13 @@ export type Classification = {
   typeOfArchitecture: string[];
   processingModel: string[];
   mlPipeline: string[];
-  goodPractice: string[];
-  pitfall: string[];
+  goodPractice?: string;
+  goodPracticeArray: string[];
+  pitfall?: string;
+  pitfallArray: string[];
   externalReferences: string;
   interesting: boolean | undefined;
   transferLearning: string;
+  relatedMlMethod: string[];
+  applicationArea: string[];
 };

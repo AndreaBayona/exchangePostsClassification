@@ -9,14 +9,20 @@ export type Form = {
   processing: string[];
   mlPipeline: string[];
   interesting: string;
-  goodPractice: string[];
-  pitfall: string[];
+  goodPractice: string;
+  goodPracticeArray: string[];
+  pitfall: string;
+  pitfallArray: string[];
   references: string;
   disabled: boolean | undefined;
   transferLearning: string;
-  techniqueOptions: OptionForm | undefined,
-  pitfallOptions: OptionForm | undefined,
-  goodPracticeOptions: OptionForm | undefined,
+  techniqueOptions: OptionForm | undefined;
+  pitfallOptions: OptionForm | undefined;
+  goodPracticeOptions: OptionForm | undefined;
+  relatedMlMethod: string[];
+  applicationArea: string[];
+  relatedMlMethodOptions: OptionForm | undefined;
+  applicationAreaOptions: OptionForm | undefined;
 };
 type ActionHandlers = typeof actionsForm;
 export type Action = { type: keyof ActionHandlers; payload: any };

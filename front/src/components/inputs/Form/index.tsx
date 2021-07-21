@@ -24,7 +24,7 @@ const validateForm = (state: any) => {
         state.architecture.length > 0 &&
         state.processing.length > 0 &&
         state.mlPipeline.length > 0 &&
-        state.goodPractice.length > 0 &&
+        state.goodPracticeArray.length > 0 &&
         state.interesting !== "" &&
         state.transferLearning !== ""
     ) {
@@ -96,6 +96,24 @@ export const Form: React.FunctionComponent<Props> = ({
           type: "setGoodPracticeOptions",
           payload: goodPracticeOptions,
         });
+      });
+
+      await getFormOptionsFromQuestionName({question: "relatedMlMethodOptions"}).then((ans) => {
+        const relatedMlMethodOptions = ans as OptionForm;
+        console.log(relatedMlMethodOptions)
+        dispatch({
+          type: "setRelatedMlMethodOptions",
+          payload: relatedMlMethodOptions,
+        });
+      });
+
+      await getFormOptionsFromQuestionName({question: "applicationAreaOptions"}).then((ans) => {
+        const applicationAreaOptions = ans as OptionForm;
+        console.log(applicationAreaOptions)
+        dispatch({
+          type: "setApplicationAreaOptions",
+          payload: applicationAreaOptions,
+        });
         setLoading(false);
       });
     }
@@ -113,10 +131,14 @@ export const Form: React.FunctionComponent<Props> = ({
       processingModel: state.processing,
       mlPipeline: state.mlPipeline,
       goodPractice: state.goodPractice,
+      goodPracticeArray: state.goodPracticeArray,
+      pitfallArray: state.pitfallArray,
       pitfall: state.pitfall,
       externalReferences: state.references,
       interesting: state.interesting === "Yes",
       transferLearning: state.transferLearning,
+      applicationArea: state.applicationArea,
+      relatedMlMethod: state.relatedMlMethod,
     };
 
     if(validateForm(state)){
