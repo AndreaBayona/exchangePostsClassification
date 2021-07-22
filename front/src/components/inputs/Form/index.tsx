@@ -24,9 +24,11 @@ const validateForm = (state: any) => {
         state.architecture.length > 0 &&
         state.processing.length > 0 &&
         state.mlPipeline.length > 0 &&
-        state.goodPracticeArray.length > 0 &&
+        (state.goodPracticeArray.length > 0 || state.goodPractice !== "") &&
         state.interesting !== "" &&
-        state.transferLearning !== ""
+        state.transferLearning !== "" &&
+        state.relatedMlMethod.length > 0 &&
+        state.applicationArea.length > 0
     ) {
       return true;
     }
