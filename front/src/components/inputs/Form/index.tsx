@@ -71,6 +71,10 @@ export const Form: React.FunctionComponent<Props> = ({
     if(classification) updateContext(classification, state, dispatch)
   }, [classification])
 
+  React.useEffect(() =>{
+   setDisabledSubmit(false);
+  }, [state])
+
   React.useEffect( () => {
     async function update() {
       await getFormOptionsFromQuestionName({question: "techniqueOptions"}).then((ans) => {
